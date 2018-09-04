@@ -21,17 +21,20 @@
 				<th>No.</th>
 				<th>Name</th>
 				<th>Alt Name</th>
+				<th>Stages</th>
 			</tr>
 		</thead>
 		<tbody>
 	<?php foreach($levels as $id=>$R) { ?>
 		<tr>
 			<td nowrap style="width:120px">
-				<a href="#" onclick="openWindow('?module=masters&action=level_edit&id=<?=$R['id']?>')"><span class="mif-pencil"></a>
+				<a href="#" onclick="openWindow('?module=masters&action=level_edit&id=<?=$R['id']?>')" <?=displayHint('Edit')?> ><span class="mif-pencil"></a>
+				<a href="#" onclick="openWindow('?module=masters&action=level_stage_edit&id=<?=$R['id']?>')" <?=displayHint('Stages')?> ><span class="mif-stack"></a>
 			</td>
 			<td style="width:80px"><?=$R['sortno']?></td>
 			<td><?=$R['name']?></td>
 			<td><?=$R['altname']?></td>
+			<td><?=$R['stages']?></td>
 		</tr>
 	<?php } ?>
 		</tbody>

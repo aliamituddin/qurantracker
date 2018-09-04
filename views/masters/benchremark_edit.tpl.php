@@ -2,7 +2,7 @@
 <form enctype="multipart/form-data" method="post" <?=createValidator()?>  <?=windowOnSubmit('masters','benchremark_save')?>>
 	<?=insertHiddenInput('gbid',$gbench['id'])?>
 	
-	<table class='table border bordered'>
+	<table class='table table-border cell-border'>
 		<thead>
 			<tr>
 				<th>Variance</th>

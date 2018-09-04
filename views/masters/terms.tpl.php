@@ -26,7 +26,7 @@
 	<?php foreach($terms as $id=>$R) { ?>
 		<tr>
 			<td nowrap style="width:120px">
-				<a href="#" onclick="openWindow('?module=masters&action=term_edit&id=<?=$R['id']?>')"><span class="mif-pencil"></a>
+				<a href="#" onclick="openWindow('?module=masters&action=term_edit&id=<?=$R['id']?>')" <?=displayHint('Edit')?> ><span class="mif-pencil"></a>
 			</td>
 			<td style="width:80px"><?=$id+1?></td>
 			<td><?=$R['name']?></td>

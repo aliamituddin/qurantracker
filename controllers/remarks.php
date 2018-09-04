@@ -4,7 +4,11 @@ $folder = 'remarks/';
 
 if ( $action == 'modifications' ) {
 	
-	$tData['remarks'] = $StudentRemarks->search();
+	if (USERTYPE == 'admin') {
+		$tData['remarks'] = $StudentRemarks->search();
+	} else {
+		$tData['remarks'] = $StudentRemarks->search('','',USER_ID);
+	}
 	
 	$data['content'] = loadTemplate($folder.'modifications.tpl.php',$tData);
 }
@@ -33,7 +37,9 @@ if ( $action == 'modification_save' ) {
 	
 	$enrollids = $_POST['enrollid'];
 	$flevelids = $_POST['flevelid'];
+	$fstageids = $_POST['fstageid'];
 	$tlevelids = $_POST['tlevelid'];
+	$tstageids = $_POST['tstageid'];
 	$remarks = $_POST['remarks'];
 	$comments = $_POST['comments'];
 	
@@ -47,7 +53,9 @@ if ( $action == 'modification_save' ) {
 	foreach ($tlevelids as $v=>$tli) {
 		$miniData['enrollid'] = $enrollids[$v];
 		$miniData['flevelid'] = $flevelids[$v];
+		$miniData['fstageid'] = $fstageids[$v];
 		$miniData['tlevelid'] = $tli;
+		$miniData['tstageid'] = $tstageids[$v];
 		$miniData['remarks'] = $remarks[$v];
 		$miniData['comments'] = $comments[$v];
 	
@@ -74,7 +82,7 @@ if ( $action == 'process_remarks' ) {
 	
 	$remarks = $StudentRemarks->search(0,1); //unprocessed
 	foreach ($remarks as $v=>$r) {
-		$sql = 'update students set levelid = '.$r['nlevelid'].' where id = (select studentid from enrollments where id = '.$r['enrollid'].')';
+		$sql = 'update students set levelid = '.$r['nlevelid'].', stageid = '.$r['nstageid'].' where id = (select studentid from enrollments where id = '.$r['enrollid'].')';
 		executeQueryi($sql);
 		
 		$uData['process'] = 1;

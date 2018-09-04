@@ -29,8 +29,8 @@
 	<?php foreach($benchmarks as $id=>$R) { ?>
 		<tr>
 			<td nowrap style="width:120px">
-				<a href="#" onclick="openWindow('?module=masters&action=benchmark_edit&id=<?=$R['id']?>')"><span class="mif-pencil"></a>
-				<a href="#" onclick="openWindow('?module=masters&action=benchremark_edit&id=<?=$R['id']?>')"><span class="mif-folder"></a>
+				<a href="#" onclick="openWindow('?module=masters&action=benchmark_edit&id=<?=$R['id']?>')" <?=displayHint('Edit')?> ><span class="mif-pencil"></a>
+				<a href="#" onclick="openWindow('?module=masters&action=benchremark_edit&id=<?=$R['id']?>')" <?=displayHint('Variance')?>><span class="mif-folder"></a>
 			</td>
 			<td class="" style="width:80px"><?=$id+1?></td>
 			<td><?=$R['grade']?></td>

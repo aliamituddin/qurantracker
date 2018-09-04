@@ -338,6 +338,51 @@ if ( $action == 'ajax_level_save' ) {
 	$data['content'] = $response;
 }
 
+if ( $action == 'level_stage_edit' ) {
+	$data['layout'] = 'layout_iframe.tpl.php';
+	
+	$tData['id'] = $_GET['id'];
+	$tData['stages'] = $LevelStages->search($tData['id']);
+	
+	$data['content'] = loadTemplate($folder.'level_stage_edit.tpl.php',$tData);
+}
+
+if ( $action == 'ajax_level_stage_save' ) {
+	
+	$obj = null;
+	
+	$levelid = intval($_POST['levelid']);
+	$lsid = $_POST['lsid'];
+	$stage = $_POST['stage'];
+	$sortno = $_POST['sortno'];
+	
+	$lsData['levelid'] = $levelid;
+	foreach ($lsid as $v=>$sid) {
+		if ($sid) {
+			$lsData['modifiedby'] = USER_ID;
+			$lsData['name'] = $stage[$v];
+			$lsData['sortno'] = $sortno[$v];
+
+			$LevelStages->update($sid,$lsData);
+		} else {
+			$lsData['createdby'] = USER_ID;
+			$lsData['name'] = $stage[$v];
+			$lsData['sortno'] = $sortno[$v];
+
+			if ($stage[$v]) $LevelStages->insert($lsData);
+		}
+
+	}
+	
+	$obj->msg='Stages Updated';
+	$obj->status=1;
+	$obj->redirect='?module=masters&action=level_stage_edit&id='.$levelid;
+	$obj->mainredirect='?module=masters&action=levels';
+	
+	$response[]=$obj;
+	$data['content'] = $response;
+}
+
 if ( $action == 'benchmarks' ) {
 	
 	$tData['name'] = $_GET['name'];
@@ -443,4 +488,20 @@ if ( $action == 'ajax_benchremark_save' ) {
 	
 	$response[]=$obj;
 	$data['content'] = $response;
+}
+
+
+if ($action == 'ajax_getLevelStages' ) {
+	$levelid = $_GET['levelid'];
+	
+	$stages = $LevelStages->search($levelid);
+	$response = array();
+	
+	foreach ($stages as $v=>$r) {
+		$obj=null;
+		$obj->id=$r['id'];
+		$obj->name=$r['name'];
+		$response[]=$obj;
+	}
+	$data['content']=$response;
 }

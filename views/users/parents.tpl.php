@@ -30,8 +30,10 @@
 	<?php foreach($users as $id=>$R) { ?>
 		<tr>
 			<td nowrap style="width:120px">
-				<a href="#" onclick="openWindow('?module=users&action=parent_edit&id=<?=$R['id']?>')"><span class="mif-pencil"></a>
-				<? if ($R['admin']) { ?><a href="#" onclick="openWindow('?module=users&action=user_rights_edit&id=<?=$R['id']?>')"><span class="mif-user"></a> <? } ?>
+				<a href="#" onclick="openWindow('?module=users&action=parent_edit&id=<?=$R['id']?>')" <?=displayHint('Edit')?> ><span class="mif-pencil"></a>
+				<? if (USERTYPE=='admin') { ?>
+					<a href="#" onclick="openWindow('?module=users&action=user_rights_edit&id=<?=$R['userid']?>')" <?=displayHint('User Rights')?>><span class="mif-user"></a>
+				 <? } ?>
 			</td>
 			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$id+1?></td>
 			<td><?=$R['name']?></td>

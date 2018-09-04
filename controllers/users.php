@@ -148,20 +148,6 @@ if ( $action == 'ajax_parent_save' ) {
 	$data['content'] = $response;
 }
 
-if ( $action == 'user_rights_edit' ) {
-	$data['layout'] = 'layout_iframe.tpl.php';
-	
-	$tData['id'] = $_GET['id'];
-	$rights = $UserRights->getUserRights($tData['id']);
-	foreach ($rights as $r) {
-		if ($r['sname']) $tData['rights'][$r['mname']]['subs'][$r['sname']] = $r;
-		$tData['rights'][$r['mname']]['menuid'] = $r['menuid'];
-		if ($r['umid']) $tData['rights'][$r['mname']]['checked'] = 'checked';
-	}
-	
-	$data['content'] = loadTemplate($folder.'user_rights_edit.tpl.php',$tData);
-}
-
 if ( $action == 'teachers' ) {
 	
 	$tData['name'] = $_GET['name'];
@@ -305,6 +291,23 @@ if ( $action == 'ajax_admin_save' ) {
 	$data['content'] = $response;
 }
 
+if ( $action == 'user_rights_edit' ) {
+	$data['layout'] = 'layout_iframe.tpl.php';
+	
+	$tData['id'] = $_GET['id'];
+	$rights = $UserRights->getUserRights($tData['id']);
+	foreach ($rights as $r) {
+		if ($r['sname']) $tData['rights'][$r['mname']]['subs'][$r['sname']] = $r;
+		$tData['rights'][$r['mname']]['menuid'] = $r['menuid'];
+		if ($r['ulrid']) $tData['rights'][$r['mname']]['ulrid'] = $r['ulrid'];
+		if ($r['umid']) $tData['rights'][$r['mname']]['checked'] = 'checked';
+		
+		if ($r['usid']) $tData['rights'][$r['mname']]['indeterminate'] = 'true';
+	}
+	
+	$data['content'] = loadTemplate($folder.'user_rights_edit.tpl.php',$tData);
+}
+
 if ( $action == 'ajax_user_rights_save' ) {
 	
 	$obj = null;
@@ -312,8 +315,9 @@ if ( $action == 'ajax_user_rights_save' ) {
 	$rights = $_POST['rights'];
 	$miniData['userid'] = intval($_POST['id']);
 	$UserRights->deleteWhere($miniData);
-	
 	$miniData['createdby'] = USER_ID;
+	
+	$user = $Users->getPerson($_POST['id']);
 
 	foreach ($rights as $menuid=>$sids) {
 		$miniData['menuid'] = $menuid;
@@ -326,7 +330,7 @@ if ( $action == 'ajax_user_rights_save' ) {
 	$obj->msg='User Rights Modified';
 	$obj->status=1;
 	$obj->redirect='?module=users&action=user_rights_edit&id='.$miniData['userid'];
-	$obj->mainredirect='?module=users&action=index';
+	$obj->mainredirect='?module=users&action='.$user['type'].'s';
 					
 	$response[]=$obj;
 	$data['content'] = $response;

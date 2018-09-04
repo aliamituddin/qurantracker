@@ -1,47 +1,40 @@
 <h3> User Rights </h3>
-<form enctype="multipart/form-data" <?=createValidator()?> >
+<form enctype="multipart/form-data" <?=createValidator()?>>
 	
 	<input type="hidden" name="id" value="<?=$id?>">
-	<div class="treeview" id="tree" data-role="">
-		<ul>
-			<? foreach ($rights as $mname=>$right) { 
-				if ($right['subs']) { ?>
-			<li data-mode="checkbox" data-name="" class="node collapsed">
-				<span class="leaf"><?=$mname?></span>
-				<span class="node-toggle"></span>
-				<ul>
-					<? foreach ($right['subs'] as $sname=>$sub) { 
+	
+	<ul data-role="treeview" id="tree" data-on-treeview-create=''>
+		<? foreach ($rights as $mname=>$right) { 
+			if ($right['subs']) { ?>
+		<li>
+			<input data-role="checkbox" data-caption="<?=$mname?>" <?=(!is_numeric($right['ulrid']))?'disabled':'';?> data-indeterminate='<?=$right['indeterminate']?>'>
+			<ul class="">
+				<? foreach ($right['subs'] as $sname=>$sub) { 
 						if ($sub['usid']) $checked = 'checked';
 						else $checked = '';
 					?>
-					<li data-mode="checkbox" data-name="rights[<?=$right['menuid']?>][<?=$sub['submenuid']?>]" data-value="1" data-checked="<?=$checked?>">
-						<span class="leaf"><?=$sname?></span>
-					</li>
-					<? } ?>
-				</ul>
-			</li>
-			<? 	} else { 
-				$checked = $right['checked'];
-			?>
-			<li data-mode="checkbox" data-name="rights[<?=$right['menuid']?>][0]" data-value="1" data-checked="<?=$checked?>">
-				<span class="leaf"><?=$mname?></span>
-			</li>
-			<? } 
-			} ?>
-		</ul>
-	</div>
+				<li>
+					<input data-role="checkbox" name='rights[<?=$right['menuid']?>][<?=$sub['submenuid']?>]' value=1 <?=$checked?> <?=(!is_numeric($sub['ulrid']))?'disabled':'';?> data-caption="<?=$sname?>">
+				</li>
+				<? } ?>
+			</ul>
+		</li>
+		<?	} else { 
+			$checked = $right['checked']; ?>
+		<li>
+			<input data-role="checkbox" data-caption="<?=$mname?>" name='rights[<?=$right['menuid']?>][0]' value=1 <?=$checked?> <?=(!is_numeric($right['ulrid']))?'disabled':'';?> >
+		</li>
+		<? 	} ?>
+		<? } ?>
+	</ul>
 
 	<?=insertSaveButton('Save','users','user_rights_save','place-right');?>
 </form>
 
 <script>
-	$( function() {  
-		$('#tree').treeview();
-		$('#tree').find('li').each ( function() {
-			if ($(this).data('checked')=='checked') {
-				$(this).find('input').click();
-				$(this).find('input').click();
-			}
+	$( function() {
+		$('#tree li').find('.node-toggle').each( function() {
+			$(this).click();
 		})
 	})
 </script>

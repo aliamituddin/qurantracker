@@ -19,6 +19,7 @@
 	$Terms = new Terms();
 	$Years = new Years();
 	$Levels = new Levels();
+	$LevelStages = new LevelStages();
 	
 	$GradeBenchmarks = new GradeBenchmarks();
 	$GradeBenchLevels = new GradeBenchLevels();

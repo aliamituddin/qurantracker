@@ -20,8 +20,8 @@
 				<th>&nbsp;</th>
 				<th>No.</th>
 				<th>Student</th>
-				<th>Prev Level</th>
-				<th>New Level</th>
+				<th>Prev</th>
+				<th>New</th>
 				<th>Modified On</th>
 				<th>Modified By</th>
 				<th>Approved By</th>
@@ -37,8 +37,8 @@
 			</td>
 			<td style="width:80px"><?=$id+1?></td>
 			<td><?=$R['student']?></td>
-			<td><?=$R['plevel']?></td>
-			<td><?=$R['nlevel']?></td>
+			<td><?=$R['plevel']?> <?=$R['pstage']?></td>
+			<td><?=$R['pstage']?> <?=$R['nstage']?></td>
 			<td><?=fDate($R['doc'])?></td>
 			<td><?=$R['creator']?></td>
 			<td><?=$R['approver']?></td>
