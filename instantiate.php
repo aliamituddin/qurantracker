@@ -7,6 +7,7 @@
 	$Submenus = new Submenus();
 	$Settings = new Settings();
 	$Colors = new Colors();
+	$Letters = new Letters();
 	
 	$Students = new Students();
 	$Parents = new Parents();
@@ -30,3 +31,8 @@
 	$TeacherAllocations = new TeacherAllocations();
 	
 	$StudentRemarks = new StudentRemarks();
+	$StudentReports = new StudentReports();
+	$StudentPartners = new StudentPartners();
+	$StudentWeaknesses = new StudentWeaknesses();
+	$StudentMakhrajs = new StudentMakhrajs();
+	$StudentTajweeds = new StudentTajweeds();

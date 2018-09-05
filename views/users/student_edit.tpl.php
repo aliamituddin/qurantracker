@@ -10,8 +10,7 @@
 	
 	<?=insertSelect('Mother','student[mparentid]','','Select the mother',1,1,$females,'name|id','id|'.$student['mparentid'],'','data-role="select2"')?><br>
 	
-	<?=insertSelect('Madrasah','student[madrasahid]','','Select the madrasah',1,1
-	,$madrasahs,'name|id','id|'.$student['madrasahid'],'','data-role="select2"')?><br>
+	<?=insertSelect('Madrasah','student[madrasahid]','','Select the madrasah',1,1,$madrasahs,'name|id','id|'.$student['madrasahid'],'','data-role="select2"')?><br>
 	
 	<?=insertCheckboxInput('Active','user[status]',1,'','Is an active user','switch',$student['status'].'|1','place-right')?><br>
 

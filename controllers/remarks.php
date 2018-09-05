@@ -92,6 +92,38 @@ if ( $action == 'process_remarks' ) {
 	redirect('remarks','modifications');
 }
 
+if ( $action == 'yearly_reports' ) {
+
+	$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
+}
+
+if ( $action == 'yearly_report_edit') {
+	
+	$action = 'yearly_report_add';
+}
+
+if ( $action == 'yearly_report_add' ) {
+	
+	$tData['settings'] = $Settings->get(1);
+	$tData['years'] = $Years->search();
+	$tData['teachers'] = $Teachers->search();
+	$tData['levels'] = $Levels->search();
+	$tData['stages'] = $LevelStages->search();
+	$tData['letters'] = $Letters->search();
+	
+	$data['content'] = loadTemplate($folder.'yearly_report_edit.tpl.php',$tData);
+}
+
+if ( $action == 'yearly_report_save' ) {
+	
+	$miniData = $_POST['report'];
+	$miniData['createdby'] = USER_ID;
+	
+	$_SESSION['message'] = 'Yearly Reports Saved';
+	
+	redirectBack();
+}
+
 if ( $action == 'getStudents' ) {
 	$data['layout'] = 'layout_iframe.tpl.php';
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100134
 File Encoding         : 65001
 
-Date: 2018-09-03 22:30:39
+Date: 2018-09-06 01:02:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -326,6 +326,52 @@ INSERT INTO `groups` VALUES ('2', 'Teens', '2', '3', '1', '2018-09-03 22:11:12',
 INSERT INTO `groups` VALUES ('3', 'Extra Class', '1', '3', '1', '2018-09-03 22:11:40', null, '1', null);
 
 -- ----------------------------
+-- Table structure for letters
+-- ----------------------------
+DROP TABLE IF EXISTS `letters`;
+CREATE TABLE `letters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of letters
+-- ----------------------------
+INSERT INTO `letters` VALUES ('1', 'ا', '2018-09-06 00:26:21', '2018-09-06 00:26:46', null, null);
+INSERT INTO `letters` VALUES ('2', 'ب', '2018-09-06 00:26:48', null, null, null);
+INSERT INTO `letters` VALUES ('3', 'ت', '2018-09-06 00:26:49', null, null, null);
+INSERT INTO `letters` VALUES ('4', 'ث', '2018-09-06 00:26:50', null, null, null);
+INSERT INTO `letters` VALUES ('5', 'ج', '2018-09-06 00:26:52', null, null, null);
+INSERT INTO `letters` VALUES ('6', 'ح', '2018-09-06 00:26:52', null, null, null);
+INSERT INTO `letters` VALUES ('7', 'خ', '2018-09-06 00:26:54', null, null, null);
+INSERT INTO `letters` VALUES ('8', 'د', '2018-09-06 00:26:55', null, null, null);
+INSERT INTO `letters` VALUES ('9', 'ذ', '2018-09-06 00:26:55', null, null, null);
+INSERT INTO `letters` VALUES ('10', 'ر', '2018-09-06 00:26:56', null, null, null);
+INSERT INTO `letters` VALUES ('11', 'ز', '2018-09-06 00:26:57', null, null, null);
+INSERT INTO `letters` VALUES ('12', 'س', '2018-09-06 00:26:58', null, null, null);
+INSERT INTO `letters` VALUES ('13', 'ش', '2018-09-06 00:26:58', null, null, null);
+INSERT INTO `letters` VALUES ('14', 'ص', '2018-09-06 00:26:59', null, null, null);
+INSERT INTO `letters` VALUES ('15', 'ض', '2018-09-06 00:26:59', null, null, null);
+INSERT INTO `letters` VALUES ('16', 'ط', '2018-09-06 00:27:00', null, null, null);
+INSERT INTO `letters` VALUES ('17', 'ظ', '2018-09-06 00:27:01', null, null, null);
+INSERT INTO `letters` VALUES ('18', 'ع', '2018-09-06 00:27:02', null, null, null);
+INSERT INTO `letters` VALUES ('19', 'غ', '2018-09-06 00:27:02', null, null, null);
+INSERT INTO `letters` VALUES ('20', 'ف', '2018-09-06 00:27:04', null, null, null);
+INSERT INTO `letters` VALUES ('21', 'ق', '2018-09-06 00:27:04', null, null, null);
+INSERT INTO `letters` VALUES ('22', 'ك', '2018-09-06 00:27:16', null, null, null);
+INSERT INTO `letters` VALUES ('23', 'ل', '2018-09-06 00:27:17', null, null, null);
+INSERT INTO `letters` VALUES ('24', 'م', '2018-09-06 00:27:18', null, null, null);
+INSERT INTO `letters` VALUES ('25', 'ن', '2018-09-06 00:27:18', null, null, null);
+INSERT INTO `letters` VALUES ('26', 'و', '2018-09-06 00:27:20', null, null, null);
+INSERT INTO `letters` VALUES ('27', 'ه', '2018-09-06 00:27:20', null, null, null);
+INSERT INTO `letters` VALUES ('28', 'ی', '2018-09-06 00:27:22', null, null, null);
+
+-- ----------------------------
 -- Table structure for levels
 -- ----------------------------
 DROP TABLE IF EXISTS `levels`;
@@ -349,6 +395,31 @@ INSERT INTO `levels` VALUES ('1', '0', 'Beginners', '', '0', '2017-12-03 00:37:0
 INSERT INTO `levels` VALUES ('2', '1', 'Small Quran', '', '1', '2017-12-03 00:37:15', '2018-08-25 00:10:24', '1', '1');
 INSERT INTO `levels` VALUES ('3', '2', 'Big Quran Beginner', '', '2', '2017-12-03 00:37:24', '2018-08-25 00:10:54', '1', '1');
 INSERT INTO `levels` VALUES ('4', '3', 'Big Quran Advanced', '', '3', '2017-12-03 00:37:29', '2018-08-25 00:11:00', '1', '1');
+
+-- ----------------------------
+-- Table structure for levelstages
+-- ----------------------------
+DROP TABLE IF EXISTS `levelstages`;
+CREATE TABLE `levelstages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `sortno` int(11) DEFAULT NULL,
+  `levelid` int(11) DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of levelstages
+-- ----------------------------
+INSERT INTO `levelstages` VALUES ('1', '10 Suras', '0', '2', '2018-09-03 23:05:05', '2018-09-03 23:07:39', '1', '1');
+INSERT INTO `levelstages` VALUES ('2', '20 Suras', '1', '2', '2018-09-03 23:05:10', '2018-09-03 23:07:40', '1', '1');
+INSERT INTO `levelstages` VALUES ('3', '30 Suras', '2', '2', '2018-09-03 23:05:51', '2018-09-03 23:07:40', '1', '1');
+INSERT INTO `levelstages` VALUES ('4', 'Basic', '0', '1', '2018-09-04 23:07:21', '2018-09-04 23:07:25', '1', '1');
+INSERT INTO `levelstages` VALUES ('5', 'Simpler', '1', '1', '2018-09-04 23:07:25', null, '1', '1');
 
 -- ----------------------------
 -- Table structure for madrasahs
@@ -443,6 +514,44 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` VALUES ('1', 'HMGS Quran', 'Husayni Madrasah Girls Section', 'logo.png', '3', '1', '2017-07-13 17:07:51', '2018-09-03 22:25:11', '1', '1');
 
 -- ----------------------------
+-- Table structure for studentmakhrajs
+-- ----------------------------
+DROP TABLE IF EXISTS `studentmakhrajs`;
+CREATE TABLE `studentmakhrajs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sreportid` int(11) DEFAULT NULL,
+  `makhraj` varchar(255) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of studentmakhrajs
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for studentpartners
+-- ----------------------------
+DROP TABLE IF EXISTS `studentpartners`;
+CREATE TABLE `studentpartners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sreportid` int(11) DEFAULT NULL,
+  `partner` varchar(255) DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of studentpartners
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for studentremarks
 -- ----------------------------
 DROP TABLE IF EXISTS `studentremarks`;
@@ -454,6 +563,8 @@ CREATE TABLE `studentremarks` (
   `enrollid` int(11) DEFAULT NULL,
   `flevelid` int(11) DEFAULT NULL,
   `tlevelid` int(11) DEFAULT NULL,
+  `fstageid` int(11) DEFAULT NULL,
+  `tstageid` int(11) DEFAULT NULL,
   `remarks` text,
   `comments` text,
   `approvedby` int(11) DEFAULT '0',
@@ -463,14 +574,45 @@ CREATE TABLE `studentremarks` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studentremarks
 -- ----------------------------
-INSERT INTO `studentremarks` VALUES ('1', '1', '1', '1', '274', '1', '2', 'Can proceed to next level', '', '2', '1', '2018-08-25 00:26:24', '2018-08-25 00:26:24', '2', null);
-INSERT INTO `studentremarks` VALUES ('2', '1', '3', '1', '1', '0', '2', '', '', '1', '1', '2018-09-03 22:28:35', '2018-09-03 22:29:09', '1', null);
-INSERT INTO `studentremarks` VALUES ('3', '1', '3', '1', '3', '0', '3', '', '', '1', '1', '2018-09-03 22:28:36', '2018-09-03 22:29:09', '1', null);
+INSERT INTO `studentremarks` VALUES ('1', '1', '3', '1', '1', '0', '2', '0', '1', '', '', '1', '1', '2018-09-04 23:11:24', '2018-09-04 23:11:24', '1', null);
+INSERT INTO `studentremarks` VALUES ('2', '1', '3', '1', '2', '0', '1', '0', '4', '', '', '1', '1', '2018-09-04 23:11:24', '2018-09-04 23:11:25', '1', null);
+INSERT INTO `studentremarks` VALUES ('3', '1', '3', '1', '2', '1', '1', '4', '5', 'Not bad', 'Starting', '1', '1', '2018-09-04 23:15:39', '2018-09-04 23:15:40', '1', null);
+INSERT INTO `studentremarks` VALUES ('4', '1', '3', '1', '3', '0', '2', '0', '1', '', '', '2', '1', '2018-09-04 23:19:37', '2018-09-04 23:19:38', '2', null);
+
+-- ----------------------------
+-- Table structure for studentreports
+-- ----------------------------
+DROP TABLE IF EXISTS `studentreports`;
+CREATE TABLE `studentreports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enrollid` int(11) DEFAULT NULL,
+  `teacherid` int(11) DEFAULT NULL,
+  `yearid` int(11) DEFAULT NULL,
+  `levelid` int(11) DEFAULT '0',
+  `stageid` int(11) DEFAULT '0',
+  `frequency` int(11) DEFAULT NULL,
+  `makhraj` int(11) DEFAULT NULL,
+  `fluency` int(11) DEFAULT NULL,
+  `tajweed` int(11) DEFAULT NULL,
+  `accuracy` int(11) DEFAULT NULL,
+  `discipline` varchar(255) DEFAULT NULL,
+  `improvement` varchar(255) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of studentreports
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for students
@@ -484,6 +626,7 @@ CREATE TABLE `students` (
   `madrasahid` int(11) DEFAULT '0',
   `userid` int(11) DEFAULT NULL,
   `levelid` int(11) DEFAULT '0',
+  `stageid` int(11) DEFAULT '0',
   `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `createdby` int(11) DEFAULT NULL,
@@ -494,10 +637,48 @@ CREATE TABLE `students` (
 -- ----------------------------
 -- Records of students
 -- ----------------------------
-INSERT INTO `students` VALUES ('1', 'Mohammad Abbas Moledina', '1', '2', '1', '7', '0', '2018-09-03 21:38:04', null, '1', null);
-INSERT INTO `students` VALUES ('2', 'Husayn Moledina', '3', '4', '1', '8', '3', '2018-09-03 21:39:17', '2018-09-03 22:29:09', '1', null);
-INSERT INTO `students` VALUES ('3', 'Alireza Moledina', '3', '4', '2', '10', '0', '2018-09-03 21:41:10', '2018-09-03 21:41:34', '1', '1');
-INSERT INTO `students` VALUES ('4', 'Ali Akbar Moledina', '1', '2', '2', '11', '2', '2018-09-03 21:41:25', '2018-09-03 22:29:09', '1', null);
+INSERT INTO `students` VALUES ('1', 'Mohammad Abbas Moledina', '1', '2', '1', '7', '0', '0', '2018-09-03 21:38:04', '2018-09-04 22:56:51', '1', null);
+INSERT INTO `students` VALUES ('2', 'Husayn Moledina', '3', '4', '1', '8', '2', '1', '2018-09-03 21:39:17', '2018-09-04 23:19:37', '1', null);
+INSERT INTO `students` VALUES ('3', 'Alireza Moledina', '3', '4', '2', '10', '1', '5', '2018-09-03 21:41:10', '2018-09-04 23:15:39', '1', '1');
+INSERT INTO `students` VALUES ('4', 'Ali Akbar Moledina', '1', '2', '2', '11', '2', '1', '2018-09-03 21:41:25', '2018-09-04 23:11:24', '1', null);
+
+-- ----------------------------
+-- Table structure for studenttajweeds
+-- ----------------------------
+DROP TABLE IF EXISTS `studenttajweeds`;
+CREATE TABLE `studenttajweeds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sreportid` int(11) DEFAULT NULL,
+  `tajweed` varchar(255) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of studenttajweeds
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for studentweaknesses
+-- ----------------------------
+DROP TABLE IF EXISTS `studentweaknesses`;
+CREATE TABLE `studentweaknesses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sreportid` int(11) DEFAULT NULL,
+  `weakness` varchar(255) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of studentweaknesses
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for submenus
@@ -512,7 +693,7 @@ CREATE TABLE `submenus` (
   `sortno` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of submenus
@@ -531,6 +712,7 @@ INSERT INTO `submenus` VALUES ('11', '3', 'Benchmarks', 'masters', 'benchmarks',
 INSERT INTO `submenus` VALUES ('12', '4', 'Student Enrollments', 'allocations', 'enrollments', '1', '1');
 INSERT INTO `submenus` VALUES ('13', '4', 'Teacher Allocations', 'allocations', 'allocations', '2', '1');
 INSERT INTO `submenus` VALUES ('14', '5', 'Modify Level', 'remarks', 'modifications', '1', '1');
+INSERT INTO `submenus` VALUES ('15', '5', 'Yearly Report', 'remarks', 'yearly_reports', '2', '1');
 
 -- ----------------------------
 -- Table structure for teacherallocations
@@ -618,30 +800,32 @@ CREATE TABLE `userlevelrights` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of userlevelrights
 -- ----------------------------
-INSERT INTO `userlevelrights` VALUES ('1', '1', '1', null, '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('2', '1', '3', '5', '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('3', '1', '3', '6', '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('4', '1', '3', '7', '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('5', '1', '3', '8', '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('6', '1', '3', '9', '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('7', '1', '3', '10', '2018-09-03 21:02:30', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('8', '1', '3', '11', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('9', '1', '4', '12', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('10', '1', '4', '13', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('11', '1', '5', '14', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('12', '1', '2', '1', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('13', '1', '2', '2', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('14', '1', '2', '3', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('15', '1', '2', '4', '2018-09-03 21:02:31', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('16', '2', '1', null, '2018-09-03 21:04:08', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('17', '2', '5', '14', '2018-09-03 21:04:08', null, null, null);
 INSERT INTO `userlevelrights` VALUES ('18', '3', '1', null, '2018-09-03 21:04:19', null, null, null);
 INSERT INTO `userlevelrights` VALUES ('19', '4', '1', null, '2018-09-03 21:04:25', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('20', '1', '1', null, '2018-09-05 23:17:20', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('21', '1', '3', '5', '2018-09-05 23:17:20', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('22', '1', '3', '6', '2018-09-05 23:17:20', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('23', '1', '3', '7', '2018-09-05 23:17:20', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('24', '1', '3', '8', '2018-09-05 23:17:20', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('25', '1', '3', '9', '2018-09-05 23:17:20', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('26', '1', '3', '10', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('27', '1', '3', '11', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('28', '1', '4', '12', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('29', '1', '4', '13', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('30', '1', '5', '14', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('31', '1', '5', '15', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('32', '1', '2', '1', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('33', '1', '2', '2', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('34', '1', '2', '3', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('35', '1', '2', '4', '2018-09-05 23:17:21', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('36', '2', '1', null, '2018-09-05 23:17:27', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('37', '2', '5', '14', '2018-09-05 23:17:27', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('38', '2', '5', '15', '2018-09-05 23:17:27', null, null, null);
 
 -- ----------------------------
 -- Table structure for userrights
@@ -657,11 +841,15 @@ CREATE TABLE `userrights` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of userrights
 -- ----------------------------
+INSERT INTO `userrights` VALUES ('8', '2', '1', '0', '2018-09-03 22:46:00', null, '1', null);
+INSERT INTO `userrights` VALUES ('9', '2', '5', '14', '2018-09-03 22:46:00', null, '1', null);
+INSERT INTO `userrights` VALUES ('10', '9', '1', '0', '2018-09-03 22:46:04', null, '1', null);
+INSERT INTO `userrights` VALUES ('11', '9', '5', '14', '2018-09-03 22:46:05', null, '1', null);
 
 -- ----------------------------
 -- Table structure for users
