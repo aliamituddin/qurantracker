@@ -5,7 +5,7 @@
 		
 	<?=insertCheckboxInput('Active','group[status]',1,'','Is an active group','switch',$group['status'].'|1','','place-right')?> <br>
 	
-	<?=insertTextInput('Group Name','group[name]',$group['name'],'','Enter the group name','text',1,'required||Name is required')?> <br>
+	<?=insertTextInput('Group Name','group[name]',$group['name'],'','Enter the group name','text',1,'required|Name is required')?> <br>
 
 	<?=insertSelect('Year','group[yearid]','yearid','Select the year',1,1,$years,'name|id','id|'.$group['yearid'])?> <br>
 	

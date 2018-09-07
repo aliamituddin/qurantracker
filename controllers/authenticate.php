@@ -39,7 +39,11 @@
 					
 					$_SESSION['message'] = 'Successfully Logged In';
 					
-					redirect('home','index');
+					if ($person['type'] == 'teacher') {
+						redirect('remarks','yearly_report_add');
+					} else {
+						redirect('home','index');
+					}
 				} else {
 					$_SESSION['error'] = 'Your account has been deactivated';
 					

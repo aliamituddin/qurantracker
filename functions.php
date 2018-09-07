@@ -183,13 +183,20 @@
 		return $code;
 	}
 	
-	function insertRadioInput($label,$name,$value,$class,$title,$small,$matchdatavalue,$other='',$otherclass="") {
+	function insertRadioInput($label,$name,$value,$class,$title,$small,$matchdatavalue,$validate='',$other='',$otherclass="") {
 		if ($small) $small = 'small-check';
 		$mdv = explode('|',$matchdatavalue);
 		$matchvalue = $mdv[0]; $datavalue = $mdv[1];
+
+		$validate = explode('|',$validate);
+		if ($validate[0]) $valcode = $validate[0];
+		if ($validate[1]) $valhint = $validate[1];
 				
 		$code = "<label class='input-control radio $small $otherclass'>
-		<input type='radio' name='$name' value=\"$value\" class='$class' ".selected($matchvalue,$datavalue,'checked')." title=\"$title\" $other>
+		<input type='radio' name='$name' value=\"$value\" class='$class' data-validate='$valcode' ".selected($matchvalue,$datavalue,'checked')." title=\"$title\" $other>
+		<span class='invalid_feedback'>
+			$valhint
+		</span>
 		<span class='check'></span>
 		<span class='caption'>$label</span>
 		</label>";
@@ -197,17 +204,27 @@
 		return $code;
 	}
 	
-	function insertCheckboxInput($label,$name,$value,$class,$title,$type,$matchdatavalue,$other='',$otherclass="") {
+	function insertCheckboxInput($label,$name,$value,$class,$title,$type,$matchdatavalue,$validate='',$other='',$otherclass="") {
 		$mdv = explode('|',$matchdatavalue);
 		$matchvalue = $mdv[0]; $datavalue = $mdv[1];		
-	
+				
+		$validate = explode('|',$validate);
+		if ($validate[0]) $valcode = $validate[0];
+		if ($validate[1]) $valhint = $validate[1];
+
 		if ($type=='switch') {		
 			$code = "<div class='$otherclass'>
-			<input type='checkbox' data-role='switch' data-caption='$label' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
+			<input type='checkbox' data-role='switch' data-caption='$label' data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
+			<span class='invalid_feedback'>
+				$valhint
+			</span>
 			</div>";
 		} else if ($type=='normal') {
 			$code = "<div class='$otherclass'>
-			<input type='checkbox' data-role='checkbox' data-caption='$label' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
+			<input type='checkbox' data-role='checkbox' data-caption='$label' data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
+			<span class='invalid_feedback'>
+				$valhint
+			</span>
 			</div>";
 		}
 		

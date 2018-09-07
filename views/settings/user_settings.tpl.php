@@ -3,6 +3,10 @@
 	
 	<?=insertTextInput('Your Name','',USERFULLNAME,'','Your name','text',1,'','readonly')?><br>
 	
+	<? if (USERTYPE == 'teacher') { ?>
+	<?=insertTextInput('Email','teacher[email]',$teacher['email'],'','Email','email',1,'required email|Enter your email')?><br>
+	<? } ?>
+	
 	<?=insertSelect('System Color','user[color]','color','Select your system color',0,'',$colors,'name|name','name|'.$user['color'])?><br>
 	
 	<? if ($_SESSION['member']['type'] == 'staff'){

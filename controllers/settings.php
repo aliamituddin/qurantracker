@@ -36,6 +36,9 @@ if ( $action == 'user_settings' ) {
 	
 	$tData['user'] = $_SESSION['member'];
 	$tData['colors'] = $Colors->getAll('name');
+	if (USERTYPE == 'teacher') {
+		$tData['teacher'] = $Teachers->get($_SESSION['member']['sysid']);
+	}
 	
 	$data['content'] = loadTemplate($folder.'user_settings.tpl.php',$tData);
 }
@@ -43,9 +46,11 @@ if ( $action == 'user_settings' ) {
 if ( $action == 'user_settings_save' ) {
 	
 	$uData = $_POST['user'];
+	$tData = $_POST['teacher'];
 	
-	$_SESSION['message'] = 'Settings Saved';
 	$Users->update(USER_ID,$uData);
+	$Teachers->update($_SESSION['member']['sysid'],$tData);
+	$_SESSION['message'] = 'Settings Saved';
 	
 	redirectBack();
 }

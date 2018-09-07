@@ -4,10 +4,11 @@
 	{ 
 		var $table = "studentpartners";
 		
-		function search($name='') {
-			$sql = "Select * from " . $this->table . " where 1 = 1";
-			if ( $name ) $sql .= " and name like '%" . $name . "%'";
-			
+		function search($sreportid='') {
+			$sql = "Select sp.* from " . $this->table . " as sp
+					where 1 = 1";
+			if ( $sreportid ) $sql .= " and sp.sreportid = $sreportid";
+			// echo $sql;
 			return $this->fetchRows($sql);
 		}
 		

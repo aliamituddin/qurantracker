@@ -4,9 +4,11 @@
 	{ 
 		var $table = "studenttajweeds";
 		
-		function search($name='') {
-			$sql = "Select * from " . $this->table . " where 1 = 1";
-			if ( $name ) $sql .= " and name like '%" . $name . "%'";
+		function search($sreportid='') {
+			$sql = "select st.* from studenttajweeds as st
+					where 1=1 ";
+					
+			if ($sreportid) $sql .= " and st.sreportid = $sreportid";
 			
 			return $this->fetchRows($sql);
 		}

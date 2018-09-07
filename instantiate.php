@@ -8,6 +8,8 @@
 	$Settings = new Settings();
 	$Colors = new Colors();
 	$Letters = new Letters();
+	$Disciplines = new Disciplines();
+	$Improvements = new Improvements();
 	
 	$Students = new Students();
 	$Parents = new Parents();

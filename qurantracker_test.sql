@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100134
 File Encoding         : 65001
 
-Date: 2018-09-08 01:22:02
+Date: 2018-09-08 01:11:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -151,7 +151,7 @@ INSERT INTO `colors` VALUES ('69', 'darkGrayBlue', '2018-07-08 23:33:37', null, 
 DROP TABLE IF EXISTS `disciplines`;
 CREATE TABLE `disciplines` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` text,
+  `description` varchar(50) DEFAULT NULL,
   `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `createdby` int(11) DEFAULT NULL,
@@ -162,29 +162,29 @@ CREATE TABLE `disciplines` (
 -- ----------------------------
 -- Records of disciplines
 -- ----------------------------
-INSERT INTO `disciplines` VALUES ('1', 'Is an enthusiastic learner who has shown great progress throughout the term.', '2018-09-08 01:21:20', null, null, null);
-INSERT INTO `disciplines` VALUES ('2', 'Is a cheerful and capable student and has demonstrated good progress this year.', '2018-09-08 01:21:20', null, null, null);
-INSERT INTO `disciplines` VALUES ('3', 'Is a determined learner who takes keen effort while reciting the Holy Quran.', '2018-09-08 01:21:20', null, null, null);
-INSERT INTO `disciplines` VALUES ('4', 'Is a disciplined student who consistently works hard to improve recitation.', '2018-09-08 01:21:20', null, null, null);
-INSERT INTO `disciplines` VALUES ('5', 'Is an active and cheerful learner and has demonstrated good progress this year.', '2018-09-08 01:21:20', null, null, null);
-INSERT INTO `disciplines` VALUES ('6', 'Is an enthusiastic student and has demonstrated excellent progress.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('7', 'Is a very hardworking and calm student and has shown remarkable progress.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('8', 'Grasps new concepts quickly and recites very fluently. A great achievement mashA!', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('9', 'Is a polite and disciplined student.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('10', 'Is a cheerful and well-behaved learner who enjoys reciting the Qur’an.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('11', 'Is a well behaved child and recites the Quran very carefully.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('12', 'I see great potential in this learner to recite very well!', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('13', 'Is a well-mannered student who has shown good progress.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('14', 'Has worked tremendously to improve letter recognition, reading fluently, and pronounciation of heavy letters.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('15', 'The student grasps concepts quickly and recites very fluently and implements all the rules of level 3/4 and will soon be ready to start the big Quran.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('16', 'The student shows great interest and affection for the recitation of the Holy Quran and recites well and carefully.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('17', 'Is a cooperative child who enjoys socializing with peers.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('18', 'Is a keen student who enjoys reading Quran.', '2018-09-08 01:21:21', null, null, null);
-INSERT INTO `disciplines` VALUES ('19', 'The student is an active group member and enjoys participating in discussions with peers.', '2018-09-08 01:21:22', null, null, null);
-INSERT INTO `disciplines` VALUES ('20', 'Is a well-mannered and hard working child and can recognize all the Arabic letters very well.', '2018-09-08 01:21:22', null, null, null);
-INSERT INTO `disciplines` VALUES ('21', 'Is a calm and enthusiastic learner who enjoys learning the Arabic letters.', '2018-09-08 01:21:22', null, null, null);
-INSERT INTO `disciplines` VALUES ('22', 'Is an active and cheerful student who puts in good effort to read Quran and recognize the letters.', '2018-09-08 01:21:22', null, null, null);
-INSERT INTO `disciplines` VALUES ('23', 'Is an enthusiastic learner who enjoys Quran recitation and has made great progress.', '2018-09-08 01:21:22', null, null, null);
+INSERT INTO `disciplines` VALUES ('1', 'Is an enthusiastic learner who has shown great pro', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('2', 'Is a cheerful and capable student and has demonstr', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('3', 'Is a determined learner who takes keen effort whil', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('4', 'Is a disciplined student who consistently works ha', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('5', 'Is an active and cheerful learner and has demonstr', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('6', 'Is an enthusiastic student and has demonstrated ex', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('7', 'Is a very hardworking and calm student and has sho', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('8', 'Grasps new concepts quickly and recites very fluen', '2018-09-07 23:02:38', null, null, null);
+INSERT INTO `disciplines` VALUES ('9', 'Is a polite and disciplined student.', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('10', 'Is a cheerful and well-behaved learner who enjoys ', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('11', 'Is a well behaved child and recites the Quran very', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('12', 'I see great potential in this learner to recite ve', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('13', 'Is a well-mannered student who has shown good prog', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('14', 'Has worked tremendously to improve letter recognit', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('15', 'The student grasps concepts quickly and recites ve', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('16', 'The student shows great interest and affection for', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('17', 'Is a cooperative child who enjoys socializing with', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('18', 'Is a keen student who enjoys reading Quran.', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('19', 'The student is an active group member and enjoys p', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('20', 'Is a well-mannered and hard working child and can ', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('21', 'Is a calm and enthusiastic learner who enjoys lear', '2018-09-07 23:02:39', null, null, null);
+INSERT INTO `disciplines` VALUES ('22', 'Is an active and cheerful student who puts in good', '2018-09-07 23:02:40', null, null, null);
+INSERT INTO `disciplines` VALUES ('23', 'Is an enthusiastic learner who enjoys Quran recita', '2018-09-07 23:02:40', null, null, null);
 
 -- ----------------------------
 -- Table structure for dummy
@@ -1196,7 +1196,7 @@ CREATE TABLE `groups` (
 DROP TABLE IF EXISTS `improvements`;
 CREATE TABLE `improvements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` text,
+  `description` varchar(50) DEFAULT NULL,
   `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `createdby` int(11) DEFAULT NULL,
@@ -1207,26 +1207,26 @@ CREATE TABLE `improvements` (
 -- ----------------------------
 -- Records of improvements
 -- ----------------------------
-INSERT INTO `improvements` VALUES ('1', 'Practicing regularly at home will enable the student to make a swift progress in Quran recitation. Thank you for your ongoing support and effort.', '2018-09-08 01:21:34', null, null, null);
-INSERT INTO `improvements` VALUES ('2', 'Regular practice will enable the student to improve on fluency and progress to the next level.', '2018-09-08 01:21:34', null, null, null);
-INSERT INTO `improvements` VALUES ('3', 'Regular practice will enable the student to improve on fluency and excel in recitation. Keep up the determined spirit!', '2018-09-08 01:21:34', null, null, null);
-INSERT INTO `improvements` VALUES ('4', 'The student finds it difficult to stay focused on recitation and prefers working with hands-on Quran activities. With more practice and encouragement, the student will be able to achieve even more.', '2018-09-08 01:21:34', null, null, null);
-INSERT INTO `improvements` VALUES ('5', 'Tends to confuse some letters but with more practice will be able to learn the letters fluently. I see great potential in the student. All the best!', '2018-09-08 01:21:34', null, null, null);
-INSERT INTO `improvements` VALUES ('6', 'Practicing regularly at home will greatly improve recognition and fluency skills as the student has the potential to do well in Quran.', '2018-09-08 01:21:34', null, null, null);
-INSERT INTO `improvements` VALUES ('7', 'The student has good fluency and has worked on improving makharij but struggles with the pronounciation of some heavy letters. Please continue practice at home to excel at Quran recitation.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('8', 'Performs better when recites on one to one basis. With regular practice and encouragement, the student will be able to achieve even more.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('9', 'Due to frequent absenteeism, the student has missed out on many Quran lessons. Please encourage the child to attend madressa regularly and to practice at home to excel at Quran recitation.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('10', 'Due to frequent absenteeism, it has been difficult to track the students progress. With more practice and encouragement, the student will be able to achieve even more.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('11', 'The student has improved makharij and needs to work on long/short vowels and maddahs. Please continue encouraging practice at home to excel at Quran recitation.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('12', 'The student has good fluency and letter recognition and has worked on improving makharij and needs to now work on the application of tajweed rules. Please continue encouraging practice at home to excel at Quran recitation.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('13', 'The student finds words with shaddah slightly challenging and needs to practice to overcome this. With continuous practice, the student can become an excellent reciter!', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('14', 'With more practice and encouragement, the student can learn the letters fluently. I see great potential to learn the Qur’an in the best way possible.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('15', 'With continuous practice, the student can excel in recitation and avoid occasional mistakes in accuracy. All the best!', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('16', 'Regular practice will build fluency and help improve on heavy letters. Please encourage your child to practice daily at home for enhancing Quran recitation.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('17', 'With more practice and encouragement, the student will be able to achieve even more.', '2018-09-08 01:21:35', null, null, null);
-INSERT INTO `improvements` VALUES ('18', 'Additional practice will enable the student to achieve even more. All the best!', '2018-09-08 01:21:36', null, null, null);
-INSERT INTO `improvements` VALUES ('19', 'With regular practice, the student has great potential to learn the Qur’an in the best way possible.', '2018-09-08 01:21:36', null, null, null);
-INSERT INTO `improvements` VALUES ('20', 'Practicing every day will help to improve fluency and build confidence. All the best!', '2018-09-08 01:21:36', null, null, null);
+INSERT INTO `improvements` VALUES ('1', 'Practicing regularly at home will enable the stude', '2018-09-07 23:04:44', null, null, null);
+INSERT INTO `improvements` VALUES ('2', 'Regular practice will enable the student to improv', '2018-09-07 23:04:44', null, null, null);
+INSERT INTO `improvements` VALUES ('3', 'Regular practice will enable the student to improv', '2018-09-07 23:04:44', null, null, null);
+INSERT INTO `improvements` VALUES ('4', 'The student finds it difficult to stay focused on ', '2018-09-07 23:04:44', null, null, null);
+INSERT INTO `improvements` VALUES ('5', 'Tends to confuse some letters but with more practi', '2018-09-07 23:04:44', null, null, null);
+INSERT INTO `improvements` VALUES ('6', 'Practicing regularly at home will greatly improve ', '2018-09-07 23:04:44', null, null, null);
+INSERT INTO `improvements` VALUES ('7', 'The student has good fluency and has worked on imp', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('8', 'Performs better when recites on one to one basis. ', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('9', 'Due to frequent absenteeism, the student has misse', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('10', 'Due to frequent absenteeism, it has been difficult', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('11', 'The student has improved makharij and needs to wor', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('12', 'The student has good fluency and letter recognitio', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('13', 'The student finds words with shaddah slightly chal', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('14', 'With more practice and encouragement, the student ', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('15', 'With continuous practice, the student can excel in', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('16', 'Regular practice will build fluency and help impro', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('17', 'With more practice and encouragement, the student ', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('18', 'Additional practice will enable the student to ach', '2018-09-07 23:04:45', null, null, null);
+INSERT INTO `improvements` VALUES ('19', 'With regular practice, the student has great poten', '2018-09-07 23:04:46', null, null, null);
+INSERT INTO `improvements` VALUES ('20', 'Practicing every day will help to improve fluency ', '2018-09-07 23:04:46', null, null, null);
 
 -- ----------------------------
 -- Table structure for letters
@@ -1439,11 +1439,31 @@ CREATE TABLE `studentmakhrajs` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studentmakhrajs
 -- ----------------------------
+INSERT INTO `studentmakhrajs` VALUES ('1', '1', 'ف', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('2', '1', 'ق', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('3', '1', 'heavy', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('5', '2', 'م', '2018-09-08 00:08:05', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('6', '2', 'ن', '2018-09-08 00:08:05', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('7', '3', 'ح', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('8', '3', 'خ', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('9', '1', 'bad', '2018-09-08 00:47:35', '2018-09-08 00:47:39', null, null);
+INSERT INTO `studentmakhrajs` VALUES ('10', '3', 'heavy', '2018-09-08 00:51:57', '2018-09-08 00:52:01', null, null);
+INSERT INTO `studentmakhrajs` VALUES ('11', '3', 'bad makhraj', '2018-09-08 00:52:02', '2018-09-08 00:52:08', null, null);
+INSERT INTO `studentmakhrajs` VALUES ('12', '3', 'lip', '2018-09-08 00:56:04', '2018-09-08 00:56:06', null, null);
+INSERT INTO `studentmakhrajs` VALUES ('13', '3', 'tongue', '2018-09-08 00:56:06', '2018-09-08 00:56:08', null, null);
+INSERT INTO `studentmakhrajs` VALUES ('14', '3', 'throat', '2018-09-08 00:56:10', '2018-09-08 00:56:11', null, null);
+INSERT INTO `studentmakhrajs` VALUES ('28', '4', 'ه', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('29', '4', 'lip', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('30', '4', 'tongue', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('31', '4', 'throat', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('32', '4', 'light', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('33', '4', 'heavy', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studentmakhrajs` VALUES ('34', '4', 'ALl roundare', '2018-09-08 01:06:39', null, null, null);
 
 -- ----------------------------
 -- Table structure for studentpartners
@@ -1458,11 +1478,22 @@ CREATE TABLE `studentpartners` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studentpartners
 -- ----------------------------
+INSERT INTO `studentpartners` VALUES ('1', '1', 'parent', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentpartners` VALUES ('2', '1', 'madressa', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentpartners` VALUES ('3', '1', 'HMGS', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentpartners` VALUES ('4', '2', 'maalim', '2018-09-08 00:08:05', null, null, null);
+INSERT INTO `studentpartners` VALUES ('5', '3', 'maalim', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studentpartners` VALUES ('6', '3', 'teacher', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studentpartners` VALUES ('7', '3', 'otherpeople', '2018-09-08 00:29:41', '2018-09-08 00:29:42', null, null);
+INSERT INTO `studentpartners` VALUES ('15', '4', 'maalim', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentpartners` VALUES ('16', '4', 'teacher', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentpartners` VALUES ('17', '4', 'madressa', '2018-09-08 01:06:38', null, null, null);
+INSERT INTO `studentpartners` VALUES ('18', '4', 'Himself', '2018-09-08 01:06:38', null, null, null);
 
 -- ----------------------------
 -- Table structure for studentremarks
@@ -1517,11 +1548,15 @@ CREATE TABLE `studentreports` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studentreports
 -- ----------------------------
+INSERT INTO `studentreports` VALUES ('1', '1', '43', '1', '1', '1', '1', '0', '1', '0', '1', '18', '16', 'No thank you', '2018-09-08 00:04:04', null, '894', null);
+INSERT INTO `studentreports` VALUES ('2', '2', '43', '1', '2', '3', '2', '3', '1', '1', '1', '14', '4', '', '2018-09-08 00:08:05', null, '894', null);
+INSERT INTO `studentreports` VALUES ('3', '3', '43', '1', '3', '7', '7', '5', '1', '1', '4', '17', '8', 'ALI HANI is a good boy', '2018-09-08 00:10:07', '2018-09-08 00:16:03', '894', null);
+INSERT INTO `studentreports` VALUES ('4', '4', '43', '1', '5', '17', '3', '4', '5', '3', '4', '19', '16', 'ALI MAWJI nice', '2018-09-08 00:59:48', null, '894', null);
 
 -- ----------------------------
 -- Table structure for students
@@ -2410,11 +2445,23 @@ CREATE TABLE `studenttajweeds` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studenttajweeds
 -- ----------------------------
+INSERT INTO `studenttajweeds` VALUES ('1', '3', 'nst', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('2', '3', 'idhaar', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('23', '4', 'stop', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('24', '4', 'nst', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('25', '4', 'iqlaab', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('26', '4', 'ikhfaa', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('27', '4', 'ms', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('28', '4', 'qalqala', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('29', '4', 'raa', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('30', '4', 'laam', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('31', '4', 'hll', '2018-09-08 01:06:39', null, null, null);
+INSERT INTO `studenttajweeds` VALUES ('32', '4', 'More to this so', '2018-09-08 01:06:39', null, null, null);
 
 -- ----------------------------
 -- Table structure for studentweaknesses
@@ -2429,11 +2476,20 @@ CREATE TABLE `studentweaknesses` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studentweaknesses
 -- ----------------------------
+INSERT INTO `studentweaknesses` VALUES ('1', '1', 'ب', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentweaknesses` VALUES ('2', '1', 'ط', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentweaknesses` VALUES ('3', '1', 'Other weakness', '2018-09-08 00:04:05', null, null, null);
+INSERT INTO `studentweaknesses` VALUES ('4', '2', 'ه', '2018-09-08 00:08:05', null, null, null);
+INSERT INTO `studentweaknesses` VALUES ('5', '2', 'ی', '2018-09-08 00:08:05', null, null, null);
+INSERT INTO `studentweaknesses` VALUES ('6', '3', 'all', '2018-09-08 00:10:08', null, null, null);
+INSERT INTO `studentweaknesses` VALUES ('7', '3', 'ط', '2018-09-08 00:41:07', '2018-09-08 00:41:08', null, null);
+INSERT INTO `studentweaknesses` VALUES ('8', '3', 'ی', '2018-09-08 00:41:10', '2018-09-08 00:41:11', null, null);
+INSERT INTO `studentweaknesses` VALUES ('9', '3', 'Something else', '2018-09-08 00:45:04', '2018-09-08 00:45:08', null, null);
 
 -- ----------------------------
 -- Table structure for submenus

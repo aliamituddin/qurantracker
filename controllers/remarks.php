@@ -106,20 +106,60 @@ if ( $action == 'yearly_report_add' ) {
 	
 	$tData['settings'] = $Settings->get(1);
 	$tData['years'] = $Years->search();
-	$tData['teachers'] = $Teachers->search();
-	$tData['levels'] = $Levels->search();
-	$tData['stages'] = $LevelStages->search();
-	$tData['letters'] = $Letters->search();
+	$tData['teachers'] = $Teachers->search(USER_ID);
+	$tData['enrollments'] = $Enrollments->search();
 	
 	$data['content'] = loadTemplate($folder.'yearly_report_edit.tpl.php',$tData);
 }
 
 if ( $action == 'yearly_report_save' ) {
-	
+	$id = $_POST['id'];
+
 	$miniData = $_POST['report'];
+	$miniData['frequency'] = $_POST['frequency'];
+	$miniData['makhraj'] = $_POST['makhraj-rate'];
+	$miniData['fluency'] = $_POST['fluency'];
+	$miniData['tajweed'] = $_POST['tajweed-rate'];
+	$miniData['accuracy'] = $_POST['accuracy'];
 	$miniData['createdby'] = USER_ID;
 	
-	$_SESSION['message'] = 'Yearly Reports Saved';
+	if (!$id) {
+		$id = $StudentReports->insert($miniData);
+	}
+
+	$partner = $_POST['partner'];
+	$spData['sreportid'] = $id;
+	$StudentPartners->deleteWhere($spData);
+	foreach ($partner as $v=>$r) {
+		$spData['partner'] = $r;
+		if ($r) $StudentPartners->insert($spData);
+	}
+	
+	$weakness = $_POST['weakness'];
+	$swData['sreportid'] = $id;
+	$StudentWeaknesses->deleteWhere($swData);
+	foreach ($weakness as $v=>$r) {
+		$swData['weakness'] = $r;
+		if ($r) $StudentWeaknesses->insert($swData);
+	}
+
+	$makhraj = $_POST['makhraj'];
+	$smData['sreportid'] = $id;
+	$StudentMakhrajs->deleteWhere($smData);
+	foreach ($makhraj as $v=>$r) {
+		$smData['makhraj'] = $r;
+		if ($r) $StudentMakhrajs->insert($smData);
+	}
+
+	$tajweed = $_POST['tajweed'];
+	$stData['sreportid'] = $id;
+	$StudentTajweeds->deleteWhere($stData);
+	foreach ($tajweed as $v=>$r) {
+		$stData['tajweed'] = $r;
+		if ($r) $StudentTajweeds->insert($stData);
+	}
+
+	$_SESSION['message'] = 'Student Yearly Report Saved';
 	
 	redirectBack();
 }
@@ -137,4 +177,65 @@ if ( $action == 'getStudents' ) {
 	}
 	
 	$data['content'] = loadTemplate($folder.'modification_students.tpl.php',$tData);
+}
+
+if ( $action == 'getEnrollmentReport' ) {
+	$data['layout'] = 'layout_iframe.tpl.php';
+
+	$enrollid = $_GET['enrollid'];
+	$teacherid = $_GET['teacherid'];
+	$yearid = $_GET['yearid'];
+	
+	$report = $StudentReports->search($enrollid,$teacherid,$yearid);
+	$tData['report'] = $report[0];
+	$id = $tData['report']['id'];
+	if (!$id) $id = 0;
+
+	if ($id) $partners = $StudentPartners->search($id);
+	$validPartners = array('parent','maalim','teacher','madressa','none');
+	foreach ((array)$partners as $r) {
+		if (in_array($r['partner'],$validPartners)) {
+			$tData['partners'][$r['partner']] = $r['partner'];
+		}
+		else if ($r['partner']) {
+			$tData['partners']['other'] = $r['partner'];
+		}
+	}
+	
+	$tData['wletters'] = $StudentWeaknesses->search($id);
+	if ($id) $otherWeakness = $StudentWeaknesses->getOtherLetters($id);
+	foreach ((array)$otherWeakness as $r) {
+		if ($r['weakness'] == 'all') {
+			$tData['weakness'][$r['weakness']] = $r['weakness'];
+		} else {
+			$tData['weakness']['other'] = $r['weakness'];
+		}
+	}
+	
+	$tData['mletters'] = $StudentMakhrajs->search($id);	
+	if ($id) $otherMakhraj = $StudentMakhrajs->getOtherLetters($id);
+	$validMakhraj = array('lip','tongue','throat','light','heavy','none');
+	foreach ((array)$otherMakhraj as $r) {
+		if (in_array($r['makhraj'],$validMakhraj)) {
+			$tData['makhraj'][$r['makhraj']] = $r['makhraj'];
+		} else {
+			$tData['makhraj']['other'] = $r['makhraj'];
+		}
+	}
+
+	if ($id) $tajweed = $StudentTajweeds->search($id);	
+	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll');
+	foreach ((array)$tajweed as $r) {
+		if (in_array($r['tajweed'],$validTajweed)) {
+			$tData['tajweed'][$r['tajweed']] = $r['tajweed'];
+		} else {
+			$tData['tajweed']['other'] = $r['tajweed'];
+		}
+	}
+
+	$tData['levels'] = $Levels->search();
+	$tData['disciplines'] = $Disciplines->search();
+	$tData['improvements'] = $Improvements->search();
+	
+	$data['content'] = loadTemplate($folder.'yearly-report-student.tpl.php',$tData);
 }
