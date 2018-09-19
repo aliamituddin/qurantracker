@@ -106,6 +106,7 @@ if ( $action == 'yearly_report_add' ) {
 	
 	$tData['settings'] = $Settings->get(1);
 	$tData['years'] = $Years->search();
+	$tData['terms'] = $Terms->search();
 	$tData['teachers'] = $Teachers->search(USER_ID);
 	$tData['enrollments'] = $Enrollments->search();
 	
@@ -113,6 +114,7 @@ if ( $action == 'yearly_report_add' ) {
 }
 
 if ( $action == 'yearly_report_save' ) {
+	// die;
 	$id = $_POST['id'];
 
 	$miniData = $_POST['report'];
@@ -124,7 +126,12 @@ if ( $action == 'yearly_report_save' ) {
 	$miniData['createdby'] = USER_ID;
 	
 	if (!$id) {
+		$email = $_SESSION['member']['email'];
+		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
+		sendEmail($email, 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'narjis.thawer@gmail.com', 'Nargis Thawer');
 		$id = $StudentReports->insert($miniData);
+	} else {
+		$id = $StudentReports->update($id,$miniData);
 	}
 
 	$partner = $_POST['partner'];
@@ -185,8 +192,11 @@ if ( $action == 'getEnrollmentReport' ) {
 	$enrollid = $_GET['enrollid'];
 	$teacherid = $_GET['teacherid'];
 	$yearid = $_GET['yearid'];
+	$termid = $_GET['termid'];
 	
-	$report = $StudentReports->search($enrollid,$teacherid,$yearid);
+	$tData['enrollment'] = $Enrollments->getDetails($enrollid);
+
+	$report = $StudentReports->search($enrollid,$teacherid,$yearid,$termid);
 	$tData['report'] = $report[0];
 	$id = $tData['report']['id'];
 	if (!$id) $id = 0;

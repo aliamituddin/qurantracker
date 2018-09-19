@@ -1,11 +1,11 @@
 <?=insertHiddenInput('id',$report['id']);?>
 <?=insertHiddenInput('',$report['stageid'],'prev-stageid');?>
 <?
-	if (!$report['makhraj']) $report['makhraj'] = 1;
-	if (!$report['tajweed']) $report['tajweed'] = 1;
-	if (!$report['fluency']) $report['fluency'] = 1;
-	if (!$report['accuracy']) $report['accuracy'] = 1;
-	if (!$report['frequency']) $report['frequency'] = 1;
+	// if (!$report['makhraj']) $report['makhraj'] = 1;
+	// if (!$report['tajweed']) $report['tajweed'] = 1;
+	// if (!$report['fluency']) $report['fluency'] = 1;
+	// if (!$report['accuracy']) $report['accuracy'] = 1;
+	// if (!$report['frequency']) $report['frequency'] = 1;
 ?>
 
 <? if ($report['doc']) { ?>
@@ -33,24 +33,27 @@
 	</div><br>
 	<div class="row">
 		<div class='cell-sm'>
-			<label>How often does the Student recite Quran during the week:</label><br>
-			<?=insertRadioInput('Once a week','frequency','1','frequency','Select the frequency',0,"1|".$report['frequency'])?>
-			<?=insertRadioInput('Twice a week','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'])?>
-			<?=insertRadioInput('Thrice a week','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'])?>
-			<?=insertRadioInput('Four times a week','frequency','4','frequency','Select the frequency',0,"4|".$report['frequency'])?>
-			<?=insertRadioInput('Every day','frequency','7','frequency','Select the frequency',0,"7|".$report['frequency'])?>
-			<?=insertRadioInput('None of the days - except Saturday Madressa','frequency','0','frequency','Select the frequency',0,"0|".$report['frequency'])?>
+			<label>Student recites Quran during the week other than Husayni Madrasah with (Can choose more than one option):</label>
+			<?=insertCheckboxInput('Parent/Guardian at home','partner[]','parent','partner partner-yes','Select recitation partner','normal','parent|'.$partners['parent'])?>
+			<?=insertCheckboxInput('Maalim comes home','partner[]','maalim','partner partner-yes','Select recitation partner','normal','maalim|'.$partners['maalim'])?>
+			<?=insertCheckboxInput('Goes to a Quran teachers home','partner[]','teacher','partner partner-yes','Select recitation partner','normal','teacher|'.$partners['teacher'])?>
+			<?=insertCheckboxInput('Attends Madrastus Sadiq or other Madrasah','partner[]','madressa','partner partner-yes','Select recitation partner','normal','madressa|'.$partners['madressa'])?>
+			<?=insertCheckboxInput('Does not recite Quran at home and does not attend other Madrasah','partner[]','none','partner partner-none','Select recitation partner','normal','none|'.$partners['none'])?>
+			<?=insertTextInput('Other','partner[]',$partners['other'],'partner','Enter other partner','text',1,'|Other is required')?>
 		</div>
 	</div><br>
 	<div class="row">
 		<div class='cell-sm'>
-			<label>Student recites Quran with (Can choose more than one option):</label>
-			<?=insertCheckboxInput('Parent/Guardian at home','partner[]','parent','partner','Select recitation partner','normal','parent|'.$partners['parent'])?>
-			<?=insertCheckboxInput('Maalim comes home','partner[]','maalim','partner','Select recitation partner','normal','maalim|'.$partners['maalim'])?>
-			<?=insertCheckboxInput('Goes to a Quran teachers home','partner[]','teacher','partner','Select recitation partner','normal','teacher|'.$partners['teacher'])?>
-			<?=insertCheckboxInput('Attends Madrastus Sadiq or other madressa','partner[]','madressa','partner','Select recitation partner','normal','madressa|'.$partners['madressa'])?>
-			<?=insertCheckboxInput('Does not recite Quran at home and does not attend other Madressa','partner[]','none','partner','Select recitation partner','normal','none|'.$partners['none'])?>
-			<?=insertTextInput('Other','partner[]',$partners['other'],'partner','Enter other partner','text',1,'|Other is required')?>
+			<label>How often does the Student recite Quran during the week:</label><br>
+			<?=insertRadioInput('Once a week','frequency','1','frequency','Select the frequency',0,"1|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Twice a week','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Thrice a week','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Four times a week','frequency','4','frequency','Select the frequency',0,"4|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Every day','frequency','7','frequency','Select the frequency',0,"7|".$report['frequency'],'required')?>
+			<?=insertRadioInput('None of the days - except Saturday Madrasah','frequency','0','frequency','Select the frequency',0,"0|".$report['frequency'],'required')?>
+			<span class='invalid_feedback'>
+				Select the frequency
+			</span>
 		</div>
 	</div><br>
 </div>
@@ -60,7 +63,7 @@
 	<div class='grid'>
 		<div class='row'>
 			<div class='cell-sm'>
-				<label>The student needs to work on recognition of the following letter(s)</label><br>
+				<label>The student needs to work on recognition (identification) of the following letter(s) or joining letter(s)</label><br>
 				<? foreach ($wletters as $r) { ?>
 					<?=insertCheckboxInput($r['name'],'weakness[]',$r['name'],'weakness','Select student weaknesses','normal',$r['name'].'|'.$r['weakness'])?>
 				<? } ?>
@@ -85,10 +88,13 @@
 					<? for ($i=1;$i<6;$i++) { ?>
 						<td>
 							<label class='input-control radio' style='min-width:0px;'>
-								<input type='radio' name='makhraj-rate' value="<?=$i?>" class='makhraj-rate' <?=selected($i,$report['makhraj'],'checked')?> title="Select the rating" data-validate="required" data-caption="Select the makhraj">
+								<input type='radio' name='makhraj-rate' value="<?=$i?>" class='makhraj-rate' <?=selected($i,$report['makhraj'],'checked')?> title="Select the rating" data-validate="required">
 								<span class='check'></span>
 								<span class='caption'><?=$i?></span>
 							</label>
+							<span class='invalid_feedback'>
+								Select the makhraj rating
+							</span>
 						</td>
 					<? } ?>
 				</tr>
@@ -106,7 +112,7 @@
 			<?=insertCheckboxInput('Sound Origination- Throat letters','makhraj[]','throat','makhraj','Select student makhraj weaknesses','normal','throat|'.$makhraj['throat'])?>
 			<?=insertCheckboxInput('Light letters','makhraj[]','light','makhraj','Select student makhraj weaknesses','normal','light|'.$makhraj['light'])?>
 			<?=insertCheckboxInput('Heavy letters','makhraj[]','heavy','makhraj','Select student makhraj weaknesses','normal','heavy|'.$makhraj['heavy'])?>
-			<?=insertCheckboxInput('None. Their Makharij is excellent MashaAllah!','makhraj[]','none','makhraj','Select student makhraj weaknesses','none','none|'.$makhraj['none'])?><br>
+			<?=insertCheckboxInput('None. Their Makharij is excellent MashaAllah!','makhraj[]','none','makhraj','Select student makhraj weaknesses','normal','none|'.$makhraj['none'])?><br>
 			<?=insertTextInput('|Other','makhraj[]',$makhraj['other'],'makhraj','Enter other issues','text',1,'|Other is required')?>
 		</div>
 	</div><br>
@@ -128,10 +134,13 @@
 						<? for ($i=1;$i<6;$i++) { ?>
 							<td>
 								<label class='input-control radio' style='min-width:0px;'>
-									<input type='radio' name='fluency' value="<?=$i?>" class='fluency' <?=selected($i,$report['fluency'],'checked')?> title="Select the fluency" data-validate="required" data-caption="Select the fluency">
+									<input type='radio' name='fluency' value="<?=$i?>" class='fluency' <?=selected($i,$report['fluency'],'checked')?> title="Select the fluency">
 									<span class='check'></span>
 									<span class='caption'><?=$i?></span>
 								</label>
+								<span class='invalid_feedback fluency-error'>
+									Select the fluency rating
+								</span>
 							</td>
 						<? } ?>
 					</tr>
@@ -151,10 +160,13 @@
 						<? for ($i=1;$i<6;$i++) { ?>
 							<td>
 								<label class='input-control radio' style='min-width:0px;'>
-									<input type='radio' name='tajweed-rate' value="<?=$i?>" class='tajweed-rate' <?=selected($i,$report['tajweed'],'checked')?> title="Select the rating" data-validate="required" data-caption="Select the tajweed">
+									<input type='radio' name='tajweed-rate' value="<?=$i?>" class='tajweed-rate' <?=selected($i,$report['tajweed'],'checked')?> title="Select the rating">
 									<span class='check'></span>
 									<span class='caption'><?=$i?></span>
 								</label>
+								<span class='invalid_feedback tajweed-rate-error'>
+									Select the tajweed rating
+								</span>
 							</td>
 						<? } ?>
 					</tr>
@@ -191,10 +203,13 @@
 						<? for ($i=1;$i<6;$i++) { ?>
 							<td>
 								<label class='input-control radio' style='min-width:0px;'>
-									<input type='radio' name='accuracy' value="<?=$i?>" class='accuracy' <?=selected($i,$report['accuracy'],'checked')?> title="Select the rating" data-validate="required" data-caption="Select the accuracy">
+									<input type='radio' name='accuracy' value="<?=$i?>" class='accuracy' <?=selected($i,$report['accuracy'],'checked')?> title="Select the rating">
 									<span class='check'></span>
 									<span class='caption'><?=$i?></span>
 								</label>
+								<span class='invalid_feedback accuracy-error'>
+									Select the accuracy
+								</span>
 							</td>
 						<? } ?>
 					</tr>
@@ -207,26 +222,108 @@
 <div class='grid'>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertSelect('How is the students discipline and personality? (Please select a comment that best fits the student)','report[disciplineid]','disciplineid','Select the discipline',1,1,$disciplines,'description|id','id|'.$report['disciplineid'],'required not=""|Discipline is required')?><br>
+			<?=insertSelect('How is the students discipline and personality? (Please select a comment that best fits the student)','report[disciplineid]','disciplineid','Select the discipline',0,1,$disciplines,'description|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','data-role="select"')?><br>
 		</div>
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertSelect('What are the students areas for improvement? (Please select a comment that best fits the student)','report[improvementid]','improvementid','Select the improvement',1,1,$improvements,'description|id','id|'.$report['improvementid'],'required not=""|Discipline is required')?><br>
+			<?=insertSelect('What are the students areas for improvement? (Please select a comment that best fits the student)','report[improvementid]','improvementid','Select the improvement',0,1,$improvements,'description|id','id|'.$report['improvementid'],'required not=""|Improvement is required','data-role="select"')?><br>
 		</div>
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertTextInput('Any other comments or information you would like to share about the student?','report[comments]',$report['comments'],'','Comments','text',1,'||Name is required')?> 
+			<?=insertTextInput('<strong>Any other comments or information you would like to share about the student? (optional)</strong>|Comments','report[comments]',$report['comments'],'','Comments','text',1,'||Name is required')?> 
 		</div>
 	</div>
 </div><br>
 
-<?=insertSaveButton('Save')?>
+<?=insertSaveButton('Save','','','','return validateForm()')?>
 
 <script>
+	function prependStudentName() {
+		$('.disciplineid').find('option').each(function(){
+			var discipline = $(this).text();
+			if (discipline) {
+				discipline = '<?=ucwords(strtolower($enrollment['student']))?> '+discipline;
+				$(this).text(discipline);
+			}
+		})
+	}
+
+	function validateBigQuranOptions() {
+		var fluency = $('.fluency:checked').val();
+		var tajweedRate = $('.tajweed-rate:checked').val();
+		var accuracy = $('.accuracy:checked').val();
+		var error = 0;
+
+		if (!fluency) {
+			error =1;
+			showError('fluency');
+		} else {
+			hideError('fluency');
+		}
+
+		if (!accuracy) {
+			error =1;
+			showError('accuracy');
+		} else {
+			hideError('accuracy');
+		}
+
+		if (!tajweedRate) {
+			error =1;
+			showError('tajweed-rate');
+		} else {
+			hideError('tajweed-rate');
+		}
+
+		return error;
+	}
+
+	function showError(type) {
+		$('.'+type+'-error').show();
+	}
+
+	function hideError(type) {
+		$('.'+type+'-error').hide();
+	}
+	
+	function validateForm() {
+		var levelid = $('.levelid').val();
+		var error = 0;
+		if (levelid == 5) {
+			error = validateBigQuranOptions();
+		} else {
+
+		}	
+		
+		if (error == 1) {
+			return false;
+		}
+	}
+
+	function unselectOtherPartners() {
+		$('.partner').find('input[type=checkbox]:checked').each(function(){
+			$(this).click();
+		});
+	}
+
+	function unselectNonePartner() {
+		$('.partner-none').find('input[type=checkbox]:checked').click();
+	}
+
 	$( function() {
 		getStages();
 		showLevelFields();
+		// $('.improvementid').select2();
+		prependStudentName();
+	})
+
+	$(document).on('click','.partner-none',function() {		
+		unselectOtherPartners();
+	})
+
+	$(document).on('click','.partner-yes',function() {		
+		unselectNonePartner();
 	})
 </script>

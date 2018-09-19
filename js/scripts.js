@@ -30,6 +30,10 @@ function triggerMessage(msg, o) {
 	notify.reset();
 }
 
+function triggerInputError(obj) {
+	console.log(obj);
+}
+
 function addClasses() {
 	$('.table th').addClass('<?=TableHead.' '.TableHeadText?>');
 	$('input:button,input:submit,.button,.current').addClass('button <?=ButtonBkgText?>');

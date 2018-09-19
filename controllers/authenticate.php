@@ -35,6 +35,7 @@
 					$_SESSION['member'] = $userInfo[0];
 					$_SESSION['member']['name'] = $person['name'];
 					$_SESSION['member']['type'] = $person['type'];
+					$_SESSION['member']['email'] = $person['email'];
 					$_SESSION['member']['sysid'] = $person['id'];
 					
 					$_SESSION['message'] = 'Successfully Logged In';

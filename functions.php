@@ -117,7 +117,7 @@
 	}
 	
 	function createValidator() {
-		return $code = ' data-role="validator" data-on-error="notifyOnErrorInput" data-show-error-hint="true"';
+		return $code = " data-role=\"validator\" data-on-error=\"notifyOnErrorInput; triggerInputError(this); \" data-show-error-hint=\"true\" data-on-error-form=\"triggerError('Errors Found')\" ";
 	}
 	
 	function insertHiddenInput($name,$value,$class='') {
@@ -194,11 +194,11 @@
 				
 		$code = "<label class='input-control radio $small $otherclass'>
 		<input type='radio' name='$name' value=\"$value\" class='$class' data-validate='$valcode' ".selected($matchvalue,$datavalue,'checked')." title=\"$title\" $other>
+		<span class='check'></span>
+		<span class='caption'>$label</span>
 		<span class='invalid_feedback'>
 			$valhint
 		</span>
-		<span class='check'></span>
-		<span class='caption'>$label</span>
 		</label>";
 		
 		return $code;
@@ -294,13 +294,13 @@
 		return "class='window-form' data-on-submit=\"$other submitForm(this,'?module=$module&action=$action');  maskInputs(); return false;\" ";
 	}
 	
-	function sendEmail($to, $subject, $body_text='', $body_html='', $from, $fromName) {
+	function sendEmail($to, $subject, $body_text='', $body_html='', $from='', $fromName='') {
 		$url = 'https://api.elasticemail.com/v2/email/send';
 
 		try{
 				$post = array('from' => $from,
 				'fromName' => $fromName,
-				'apikey' => 'XXXXX',
+				'apikey' => '17b25c0e-cfa6-4b0c-a344-1a25a45e9811',
 				'subject' => $subject,
 				'to' => $to,
 				'bodyHtml' => $body_html,

@@ -21,13 +21,13 @@
 		
 		function getPerson($userid='') {
 			$sql = "select x.*, u.utypeid, ut.name as type from (
-						select name, userid, id from admins
+						select name, userid, id, email from admins
 						UNION ALL
-						select name, userid, id from teachers
+						select name, userid, id, email from teachers
 						UNION ALL
-						select name, userid, id from students
+						select name, userid, id, '' as email from students
 						UNION ALL
-						select name, userid, id from parents
+						select name, userid, id, email from parents
 					) as x
 					INNER JOIN users as u on x.userid = u.id
 					INNER JOIN usertypes as ut on ut.id = u.utypeid
