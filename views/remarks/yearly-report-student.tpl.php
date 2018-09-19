@@ -303,7 +303,7 @@
 	}
 
 	function unselectOtherPartners() {
-		$('.partner').find('input[type=checkbox]:checked').each(function(){
+		$('.partner-yes').find('input[type=checkbox]:checked').each(function(){
 			$(this).click();
 		});
 	}

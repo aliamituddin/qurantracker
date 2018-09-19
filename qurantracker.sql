@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100134
 File Encoding         : 65001
 
-Date: 2018-09-08 01:22:02
+Date: 2018-09-20 00:49:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1424,7 +1424,7 @@ CREATE TABLE `settings` (
 -- ----------------------------
 -- Records of settings
 -- ----------------------------
-INSERT INTO `settings` VALUES ('1', 'HMGS Quran', 'Husayni Madrasah Girls Section', 'logo.png', '1', '1', '2017-07-13 17:07:51', '2018-09-06 22:43:55', '1', '1');
+INSERT INTO `settings` VALUES ('1', 'HMGS Quran', 'Husayni Madrasah Girls Section', 'logo.png', '1', '2', '2017-07-13 17:07:51', '2018-09-20 00:49:10', '1', '1');
 
 -- ----------------------------
 -- Table structure for studentmakhrajs
@@ -1502,6 +1502,7 @@ CREATE TABLE `studentreports` (
   `enrollid` int(11) DEFAULT NULL,
   `teacherid` int(11) DEFAULT NULL,
   `yearid` int(11) DEFAULT NULL,
+  `termid` int(11) DEFAULT NULL,
   `levelid` int(11) DEFAULT '0',
   `stageid` int(11) DEFAULT '0',
   `frequency` int(11) DEFAULT NULL,
@@ -2603,32 +2604,31 @@ CREATE TABLE `userlevelrights` (
   `createdby` int(11) DEFAULT NULL,
   `modifiedby` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of userlevelrights
 -- ----------------------------
 INSERT INTO `userlevelrights` VALUES ('18', '3', '1', null, '2018-09-03 21:04:19', null, null, null);
 INSERT INTO `userlevelrights` VALUES ('19', '4', '1', null, '2018-09-03 21:04:25', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('20', '1', '1', null, '2018-09-05 23:17:20', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('21', '1', '3', '5', '2018-09-05 23:17:20', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('22', '1', '3', '6', '2018-09-05 23:17:20', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('23', '1', '3', '7', '2018-09-05 23:17:20', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('24', '1', '3', '8', '2018-09-05 23:17:20', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('25', '1', '3', '9', '2018-09-05 23:17:20', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('26', '1', '3', '10', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('27', '1', '3', '11', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('28', '1', '4', '12', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('29', '1', '4', '13', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('30', '1', '5', '14', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('31', '1', '5', '15', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('32', '1', '2', '1', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('33', '1', '2', '2', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('34', '1', '2', '3', '2018-09-05 23:17:21', null, null, null);
-INSERT INTO `userlevelrights` VALUES ('35', '1', '2', '4', '2018-09-05 23:17:21', null, null, null);
 INSERT INTO `userlevelrights` VALUES ('36', '2', '1', null, '2018-09-05 23:17:27', null, null, null);
 INSERT INTO `userlevelrights` VALUES ('37', '2', '5', '14', '2018-09-05 23:17:27', null, null, null);
 INSERT INTO `userlevelrights` VALUES ('38', '2', '5', '15', '2018-09-05 23:17:27', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('39', '1', '1', null, '2018-09-20 00:31:40', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('40', '1', '3', '5', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('41', '1', '3', '6', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('42', '1', '3', '7', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('43', '1', '3', '8', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('44', '1', '3', '9', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('45', '1', '3', '10', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('46', '1', '3', '11', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('47', '1', '4', '12', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('48', '1', '4', '13', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('49', '1', '5', '14', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('50', '1', '2', '1', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('51', '1', '2', '2', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('52', '1', '2', '3', '2018-09-20 00:31:41', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('53', '1', '2', '4', '2018-09-20 00:31:41', null, null, null);
 
 -- ----------------------------
 -- Table structure for userrights
