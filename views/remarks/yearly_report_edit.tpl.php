@@ -71,6 +71,10 @@
 	}
 	
 	$( function() {
+		<? if ($report['id']) { ?>
+			getEnrollment();
+		<? } ?>
+		
 		$(document).on('change','.enrollid', function() {
 			getEnrollment();
 		});

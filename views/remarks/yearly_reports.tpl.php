@@ -19,8 +19,11 @@
 			<tr>
 				<th>&nbsp;</th>
 				<th>No.</th>
-				<th>Year</th>
+				<th>Date</th>
 				<th>Teacher</th>
+				<th>Student</th>
+				<th>Level</th>
+				<th>Period</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,8 +33,11 @@
 				<a href="?module=remarks&action=yearly_report_edit&id=<?=$R['id']?>"><span class="mif-pencil"></a>
 			</td>
 			<td style="width:80px"><?=$id+1?></td>
-			<td><?=$R['year']?></td>
+			<td><?=fDate($R['doc'])?></td>
 			<td><?=$R['teacher']?></td>
+			<td><?=$R['student']?></td>
+			<td><?=$R['level']?> <?=$R['stage']?></td>
+			<td><?=$R['year']?> <?=$R['term']?></td>
 		</tr>
 	<?php } ?>
 		</tbody>

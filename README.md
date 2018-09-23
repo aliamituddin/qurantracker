@@ -2,11 +2,7 @@
 
 Todo
 Student progress per time period
-//Email to student that student done
-//Term based student report
-
-//Does not recite disables other options
 Benchmark report
-
-Change to Term 2
-Add termid in studentreports
+Email not being sent //
+View all student reports //
+Cannot save after missing some fields - show red error msg next to save button //

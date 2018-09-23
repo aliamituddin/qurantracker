@@ -298,6 +298,7 @@
 		}	
 		
 		if (error == 1) {
+			triggerError('Errors found');
 			return false;
 		}
 	}

@@ -24,6 +24,7 @@
 				<th>Mother</th>
 				<th>Madrasah</th>
 				<th>Level</th>
+				<th>Ref No</th>
 				<th>Username</th>
 			</tr>
 		</thead>
@@ -42,6 +43,7 @@
 			<td><?=$R['mother']?></td>
 			<td><?=$R['madrasah']?></td>
 			<td><?=$R['level']?></td>
+			<td><?=$R['referenceno']?></td>
 			<td><?=$R['username']?></td>
 		</tr>
 	<?php } ?>

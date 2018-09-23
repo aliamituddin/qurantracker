@@ -94,10 +94,17 @@ if ( $action == 'process_remarks' ) {
 
 if ( $action == 'yearly_reports' ) {
 
+	$tData['reports'] = $StudentReports->search();
+
 	$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
 }
 
 if ( $action == 'yearly_report_edit') {
+	
+	$id = $_GET['id'];
+	if ($id) {
+		$tData['report'] = $StudentReports->get($id);
+	}
 	
 	$action = 'yearly_report_add';
 }
@@ -107,7 +114,13 @@ if ( $action == 'yearly_report_add' ) {
 	$tData['settings'] = $Settings->get(1);
 	$tData['years'] = $Years->search();
 	$tData['terms'] = $Terms->search();
-	$tData['teachers'] = $Teachers->search(USER_ID);
+	
+	if (ADMIN) {
+		$tData['teachers'] = $Teachers->search();
+	} else {
+		$tData['teachers'] = $Teachers->search(USER_ID);
+	}
+	
 	$tData['enrollments'] = $Enrollments->search();
 	
 	$data['content'] = loadTemplate($folder.'yearly_report_edit.tpl.php',$tData);
@@ -126,10 +139,10 @@ if ( $action == 'yearly_report_save' ) {
 	$miniData['createdby'] = USER_ID;
 	
 	if (!$id) {
-		$email = $_SESSION['member']['email'];
-		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
-		sendEmail($email, 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'narjis.thawer@gmail.com', 'Nargis Thawer');
 		$id = $StudentReports->insert($miniData);
+		$teacher = $Teachers->getDetails($miniData['teacherid']);
+		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
+		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'shakirmole@gmail.com', 'HMGS');
 	} else {
 		$id = $StudentReports->update($id,$miniData);
 	}
