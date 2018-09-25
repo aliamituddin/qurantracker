@@ -297,6 +297,16 @@
 	function sendEmail($to, $subject, $body_text='', $body_html='', $from='', $fromName='') {
 		$url = 'https://api.elasticemail.com/v2/email/send';
 
+		$post = array('from' => $from,
+				'fromName' => $fromName,
+				'apikey' => '148fa9e9-0b16-4609-88b0-9f2c9275992f',
+				'subject' => $subject,
+				'to' => $to,
+				'bodyHtml' => $body_html,
+				'bodyText' => $body_text,
+				'isTransactional' => false);
+				// print_r($post);die;
+		
 		try{
 				$post = array('from' => $from,
 				'fromName' => $fromName,

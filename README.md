@@ -3,4 +3,6 @@
 Todo
 Student progress per time period
 Benchmark report
-Swahili Translation
+Email not being sent //
+View all student reports //
+Cannot save after missing some fields - show red error msg next to save button //

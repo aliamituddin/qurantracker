@@ -127,6 +127,7 @@ if ( $action == 'yearly_report_add' ) {
 }
 
 if ( $action == 'yearly_report_save' ) {
+	// die;
 	$id = $_POST['id'];
 
 	$miniData = $_POST['report'];
@@ -141,10 +142,7 @@ if ( $action == 'yearly_report_save' ) {
 		$id = $StudentReports->insert($miniData);
 		$teacher = $Teachers->getDetails($miniData['teacherid']);
 		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
-		$body = "The report for $enrollment[student] has been saved <br>
-				 Login to the website then visit <a href='http://shakirmole.epizy.com/qurantracker/?module=remarks&action=yearly_report_edit&id=$id'>this link</a> to review the report";
-
-		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', '', $body, 'shakirmole@gmail.com', 'HMGS');
+		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'shakirmole@gmail.com', 'HMGS');
 	} else {
 		$id = $StudentReports->update($id,$miniData);
 	}
