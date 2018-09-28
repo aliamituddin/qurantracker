@@ -29,8 +29,7 @@
 				<th>&nbsp;</th>
 				<th>No.</th>
 				<th>Name</th>
-				<th>Grade</th>
-				<th>Class</th>
+				<th>Grade Class</th>
 				<th>Year</th>
 			</tr>
 		</thead>
@@ -42,8 +41,7 @@
 			</td>
 			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$id+1?></td>
 			<td><?=$R['student']?></td>
-			<td><?=$R['grade']?></td>
-			<td><?=$R['class']?></td>
+			<td><?=$R['grade']?> <?=$R['class']?></td>
 			<td><?=$R['year']?></td>
 		</tr>
 	<?php } ?>

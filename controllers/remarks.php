@@ -94,7 +94,11 @@ if ( $action == 'process_remarks' ) {
 
 if ( $action == 'yearly_reports' ) {
 
-	$tData['reports'] = $StudentReports->search();
+	if (USERTYPE == 'admin') {
+		$tData['reports'] = $StudentReports->search();
+	} else {
+		$tData['reports'] = $StudentReports->search('',SYS_ID);
+	}
 
 	$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
 }
@@ -115,7 +119,7 @@ if ( $action == 'yearly_report_add' ) {
 	$tData['years'] = $Years->search();
 	$tData['terms'] = $Terms->search();
 	
-	if (ADMIN) {
+	if (USERTYPE == 'admin') {
 		$tData['teachers'] = $Teachers->search();
 	} else {
 		$tData['teachers'] = $Teachers->search(USER_ID);
@@ -206,6 +210,7 @@ if ( $action == 'getEnrollmentReport' ) {
 	$teacherid = $_GET['teacherid'];
 	$yearid = $_GET['yearid'];
 	$termid = $_GET['termid'];
+	$language = $_GET['language'];
 	
 	$tData['enrollment'] = $Enrollments->getDetails($enrollid);
 
@@ -260,5 +265,9 @@ if ( $action == 'getEnrollmentReport' ) {
 	$tData['disciplines'] = $Disciplines->search();
 	$tData['improvements'] = $Improvements->search();
 	
-	$data['content'] = loadTemplate($folder.'yearly-report-student.tpl.php',$tData);
+	if ($language == 'swahili') {
+		$data['content'] = loadTemplate($folder.'yearly_report_student_swahili.tpl.php',$tData);
+	} else {
+		$data['content'] = loadTemplate($folder.'yearly_report_student.tpl.php',$tData);
+	}
 }

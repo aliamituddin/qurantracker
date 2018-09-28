@@ -15,16 +15,23 @@
 	<div class='grid'>
 		<div class='row'>
 			<div class='cell-sm-3'>
-				<?=insertSelect('Teacher','report[teacherid]','teacherid','Select the teacher',1,0,$teachers,'name|id','id|'.$report['teacherid'])?>
+				<?=insertSelect('Teacher/Mwalimu','report[teacherid]','teacherid','Select the teacher',1,0,$teachers,'name|id','id|'.$report['teacherid'])?>
 			</div>
 			<div class='cell-sm-2'>
-				<?=insertSelect('Year','','','Select the year',1,1,$years,'name|id','id|'.$report['yearid'],'','disabled')?>
+				<?=insertSelect('Year/Mwaka','','','Select the year',1,1,$years,'name|id','id|'.$report['yearid'],'','disabled')?>
 			</div>
 			<div class='cell-sm-2'>
 				<?=insertSelect('Term','','','Select the term',1,1,$terms,'name|id','id|'.$report['termid'],'','disabled')?>
 			</div>
-			<div class='cell-sm-5'>
-				<?=insertSelect('Student','report[enrollid]','enrollid','Select the student',1,1,$enrollments,'enrollment|id','id|'.$report['enrollid'])?>
+			<div class='cell-sm-2'>
+				<label>Language/Lugha</label>
+				<select class='language'>
+					<option value='english'>English</option>
+					<option value='swahili'>Swahili</option>
+				</select>
+			</div>
+			<div class='cell-sm-3'>
+				<?=insertSelect('Student/Mwanafunzi','report[enrollid]','enrollid','Select the student',1,1,$enrollments,'enrollment|id','id|'.$report['enrollid'])?>
 			</div>
 		</div>
 	</div><br>
@@ -37,13 +44,15 @@
 		var enrollid = $('.enrollid').val();
 		var yearid = $('.yearid').val();
 		var teacherid = $('.teacherid').val();
+		var language = $('.language').val();
 		
-		$('#student-report').load('?module=remarks&action=getEnrollmentReport&teacherid='+teacherid+'&yearid='+yearid+'&enrollid='+enrollid);
+		$('#student-report').load('?module=remarks&action=getEnrollmentReport&teacherid='+teacherid+'&yearid='+yearid+'&enrollid='+enrollid+'&language='+language);
 	}
 
 	function getStages() {
 		var levelid = $('.levelid').val();
 		var stageid = $('.prev-stageid').val();
+		var language = $('.language').val();
 		
 		$.get('?module=masters&action=getLevelStages&format=json&levelid='+levelid,null,function(d){
 			CC = JSON.parse(d);
@@ -51,7 +60,11 @@
 			$('.stageid').find('option').remove();
 			$('.stageid').append($('<option>', {value:'', text:''}));
 			for(i=0;i<CC.length;i++) {
-				$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name}));
+				if (language == 'swahili') {
+					$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name_sw}));
+				} else {
+					$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name}));
+				}
 			}
 			
 			if (stageid) $('.stageid').val(stageid);

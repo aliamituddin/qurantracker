@@ -501,6 +501,7 @@ if ($action == 'ajax_getLevelStages' ) {
 		$obj=null;
 		$obj->id=$r['id'];
 		$obj->name=$r['name'];
+		$obj->name_sw=$r['name_sw'];
 		$response[]=$obj;
 	}
 	$data['content']=$response;

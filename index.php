@@ -44,6 +44,7 @@
 		// Define some global constants
 		define('MEMBER_LOGGEDIN',true);
 		define('USER_ID',$_SESSION['member']['id']);
+		define('SYS_ID',$_SESSION['member']['sysid']);
 		define('USERFULLNAME',$_SESSION['member']['name']);
 		define('USERTYPE',$_SESSION['member']['type']);
 		define('COLOR',$_SESSION['member']['color']);

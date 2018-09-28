@@ -1,21 +1,14 @@
 <?=insertHiddenInput('id',$report['id']);?>
 <?=insertHiddenInput('',$report['stageid'],'prev-stageid');?>
-<?
-	// if (!$report['makhraj']) $report['makhraj'] = 1;
-	// if (!$report['tajweed']) $report['tajweed'] = 1;
-	// if (!$report['fluency']) $report['fluency'] = 1;
-	// if (!$report['accuracy']) $report['accuracy'] = 1;
-	// if (!$report['frequency']) $report['frequency'] = 1;
-?>
 
 <? if ($report['doc']) { ?>
 	<h3 class='tally'> Report Exists - <?=fDate($report['doc'])?> </h3>
 <? } ?>
 
-<div class='grid'>
+<div class='grid border bd-gray p-4'>
 	<div class='row'>
 		<div class='cell-sm'>
-			<big>Student Progress and Current Level of Quran recitation</big><br>
+			<h6>Student Progress and Current Level of Quran recitation</h6>
 			<p>Please give accurate details<br>
 				If using Quran manual- indicate which manual 1, 2, 3 or 4 and the level.<br>
 			If in Big Quran- then state if Beginner, Intermediate or Advanced level.<br></p>
@@ -23,17 +16,17 @@
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertSelect('Current Level','report[levelid]','levelid','Select the level',1,1,$levels,'name|id','id|'.$report['levelid'],'required not=""|Select the level')?><br>
+			1. <?=insertSelect('Current Level','report[levelid]','levelid','Select the level',1,1,$levels,'name|id','id|'.$report['levelid'],'required not=""|Select the level')?><br>
 		</div>
 	</div>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertSelect('Indicate the level of the student','report[stageid]','stageid','Select the level',1,1,$stages,'name|id','id|'.$student['stageid'],'required not=""|Select the level')?><br>
+			2. <?=insertSelect('Indicate the level of the student','report[stageid]','stageid','Select the level',1,1,$stages,'name|id','id|'.$student['stageid'],'required not=""|Select the level')?>
 		</div>
 	</div><br>
 	<div class="row">
 		<div class='cell-sm'>
-			<label>Student recites Quran during the week other than Husayni Madrasah with (Can choose more than one option):</label>
+			3. <label>Student recites Quran during the week other than Husayni Madrasah with (Can choose more than one option):</label>
 			<?=insertCheckboxInput('Parent/Guardian at home','partner[]','parent','partner partner-yes','Select recitation partner','normal','parent|'.$partners['parent'])?>
 			<?=insertCheckboxInput('Maalim comes home','partner[]','maalim','partner partner-yes','Select recitation partner','normal','maalim|'.$partners['maalim'])?>
 			<?=insertCheckboxInput('Goes to a Quran teachers home','partner[]','teacher','partner partner-yes','Select recitation partner','normal','teacher|'.$partners['teacher'])?>
@@ -44,7 +37,7 @@
 	</div><br>
 	<div class="row">
 		<div class='cell-sm'>
-			<label>How often does the Student recite Quran during the week:</label><br>
+			4. <label>How often does the Student recite Quran during the week:</label><br>
 			<?=insertRadioInput('Once a week','frequency','1','frequency','Select the frequency',0,"1|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Twice a week','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Thrice a week','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'],'required')?>
@@ -55,29 +48,13 @@
 				Select the frequency
 			</span>
 		</div>
-	</div><br>
-</div>
-
-<div class='manual-options'>
-	<h3>Manuals</h3>
-	<div class='grid'>
-		<div class='row'>
-			<div class='cell-sm'>
-				<label>The student needs to work on recognition (identification) of the following letter(s) or joining letter(s)</label><br>
-				<? foreach ($wletters as $r) { ?>
-					<?=insertCheckboxInput($r['name'],'weakness[]',$r['name'],'weakness','Select student weaknesses','normal',$r['name'].'|'.$r['weakness'])?>
-				<? } ?>
-				<?=insertCheckboxInput('The student can recognize all her letters well Mashallah!','weakness[]','all','weakness','Select student weaknesses','normal','all|'.$weakness['all'])?><br>
-				<?=insertTextInput('|Other','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
-			</div>
-		</div><br>
 	</div>
-</div>
+</div><br>
 
-<div class='grid'>
+<div class='grid border bd-gray p-4'>
 	<div class='row'>
 		<div class='cell-sm'>
-			<label>How is the student's Makharij?</label>
+			1. <label>How is the student's Makharij?</label>
 			<table style='width:100%'>
 				<tr>
 					<td colspan=2>Fair</td>
@@ -103,7 +80,7 @@
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<label>The student needs more practise to improve the Makharij of the following letter(s)</label><br>
+			2. <label>The student needs more practise to improve the Makharij of the following letter(s)</label><br>
 			<? foreach ($mletters as $r) { ?>
 				<?=insertCheckboxInput($r['name'],'makhraj[]',$r['name'],'makhraj','Select student makhraj weaknesses','normal',$r['name'].'|'.$r['makhraj'])?>
 			<? } ?>
@@ -118,12 +95,28 @@
 	</div><br>
 </div>
 
-<div class="bigquran-options">
+<div class='manual-options border bd-gray p-4'>
+	<h3>Manuals</h3>
+	<div class='grid'>
+		<div class='row'>
+			<div class='cell-sm'>
+				3. <label>The student needs to work on recognition (identification) of the following letter(s) or joining letter(s)</label><br>
+				<? foreach ($wletters as $r) { ?>
+					<?=insertCheckboxInput($r['name'],'weakness[]',$r['name'],'weakness','Select student weaknesses','normal',$r['name'].'|'.$r['weakness'])?>
+				<? } ?>
+				<?=insertCheckboxInput('The student can recognize all her letters well Mashallah!','weakness[]','all','weakness','Select student weaknesses','normal','all|'.$weakness['all'])?><br>
+				<?=insertTextInput('|Other','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="bigquran-options border bd-gray p-4">
 	<h3>Big Quran</h3>
 	<div class='grid'>
 		<div class='row'>
 			<div class='cell-sm'>
-				<label>How is the student's Fluency of recitation?</label><br>
+				3. <label>How is the student's Fluency of recitation?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Fair</td>
@@ -149,7 +142,7 @@
 		</div><br>
 		<div class='row'>
 			<div class='cell-sm'>
-				<label>How is the student's Tajweed?</label><br>
+				4. <label>How is the student's Tajweed?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Fair</td>
@@ -175,7 +168,7 @@
 		</div><br>
 		<div class='row'>
 			<div class='cell-sm'>
-				<label>The student needs more practise on the following Tajweed rules</label><br>
+				5. <label>The student needs more practise on the following Tajweed rules</label><br>
 				<?=insertCheckboxInput('Stopping signs','tajweed[]','stop','tajweed','Select student makhraj weaknesses','normal','stop|'.$tajweed['stop'])?>
 				<?=insertCheckboxInput('Rules of Nun Sakin and Tanween','tajweed[]','nst','tajweed','Select student makhraj weaknesses','normal','nst|'.$tajweed['nst'])?>
 				<?=insertCheckboxInput('Idghaam','tajweed[]','idghaam','tajweed','Select student makhraj weaknesses','normal','idghaam|'.$tajweed['idghaam'])?>
@@ -192,7 +185,7 @@
 		</div><br>
 		<div class='row'>
 			<div class='cell-sm'>
-				<label>How is the student's Accuracy in recitation?</label><br>
+				6. <label>How is the student's Accuracy in recitation?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Fair</td>
@@ -218,16 +211,17 @@
 		</div><br>
 	</div>
 </div>
+<br>
 
-<div class='grid'>
+<div class='grid border bd-gray p-4'>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertSelect('How is the students discipline and personality? (Please select a comment that best fits the student)','report[disciplineid]','disciplineid','Select the discipline',0,1,$disciplines,'description|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','data-role="select"')?><br>
+			1. <?=insertSelect('How is the students discipline and personality? (Please select a comment that best fits the student)','report[disciplineid]','disciplineid','Select the discipline',0,1,$disciplines,'description|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','data-role="select"')?>
 		</div>
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertSelect('What are the students areas for improvement? (Please select a comment that best fits the student)','report[improvementid]','improvementid','Select the improvement',0,1,$improvements,'description|id','id|'.$report['improvementid'],'required not=""|Improvement is required','data-role="select"')?><br>
+			2. <?=insertSelect('What are the students areas for improvement? (Please select a comment that best fits the student)','report[improvementid]','improvementid','Select the improvement',0,1,$improvements,'description|id','id|'.$report['improvementid'],'required not=""|Improvement is required','data-role="select"')?>
 		</div>
 	</div><br>
 	<div class='row'>
