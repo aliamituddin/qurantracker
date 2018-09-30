@@ -42,6 +42,8 @@
 			<?=insertRadioInput('Mara mbili','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Mara tatu','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Mara nne','frequency','4','frequency','Select the frequency',0,"4|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Mara tano','frequency','5','frequency','Select the frequency',0,"5|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Mara sita','frequency','6','frequency','Select the frequency',0,"6|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Kila siku','frequency','7','frequency','Select the frequency',0,"7|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Huhudhuria Madrasah Jumamosi tu','frequency','0','frequency','Select the frequency',0,"0|".$report['frequency'],'required')?>
 			<span class='invalid_feedback'>

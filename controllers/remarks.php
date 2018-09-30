@@ -143,10 +143,15 @@ if ( $action == 'yearly_report_save' ) {
 	$miniData['createdby'] = USER_ID;
 	
 	if (!$id) {
+		$report = $StudentReports->search($miniData['enrollid'],$miniData['teacherid'],$miniData['yearid'],$miniData['termid']);
+		$id = $report[0]['id'];
+	}
+
+	if (!$id) {
 		$id = $StudentReports->insert($miniData);
 		$teacher = $Teachers->getDetails($miniData['teacherid']);
 		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
-		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'shakirmole@gmail.com', 'HMGS');
+		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'qadmin@hmgs.ac.tz', 'HMGS');
 	} else {
 		$id = $StudentReports->update($id,$miniData);
 	}

@@ -42,6 +42,8 @@
 			<?=insertRadioInput('Twice a week','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Thrice a week','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Four times a week','frequency','4','frequency','Select the frequency',0,"4|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Five times a week','frequency','5','frequency','Select the frequency',0,"5|".$report['frequency'],'required')?>
+			<?=insertRadioInput('Six times a week','frequency','6','frequency','Select the frequency',0,"6|".$report['frequency'],'required')?>
 			<?=insertRadioInput('Every day','frequency','7','frequency','Select the frequency',0,"7|".$report['frequency'],'required')?>
 			<?=insertRadioInput('None of the days - except Saturday Madrasah','frequency','0','frequency','Select the frequency',0,"0|".$report['frequency'],'required')?>
 			<span class='invalid_feedback'>
