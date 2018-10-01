@@ -257,7 +257,7 @@ if ( $action == 'getEnrollmentReport' ) {
 	}
 
 	if ($id) $tajweed = $StudentTajweeds->search($id);	
-	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll');
+	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','none','na');
 	foreach ((array)$tajweed as $r) {
 		if (in_array($r['tajweed'],$validTajweed)) {
 			$tData['tajweed'][$r['tajweed']] = $r['tajweed'];

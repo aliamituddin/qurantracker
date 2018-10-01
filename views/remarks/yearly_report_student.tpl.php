@@ -182,6 +182,8 @@
 				<?=insertCheckboxInput('Rules of Raa','tajweed[]','raa','tajweed','Select student makhraj weaknesses','normal','raa|'.$tajweed['raa'])?>
 				<?=insertCheckboxInput('Rules of Laam','tajweed[]','laam','tajweed','Select student makhraj weaknesses','normal','laam|'.$tajweed['laam'])?>
 				<?=insertCheckboxInput('Heavy and Light letters','tajweed[]','hll','tajweed','Select student makhraj weaknesses','normal','hll|'.$tajweed['hll'])?>
+				<?=insertCheckboxInput('Mashallah the student follows all the Tajweed rules well!','tajweed[]','none','tajweed','Select student makhraj weaknesses','normal','none|'.$tajweed['none'])?>
+				<?=insertCheckboxInput('We have not covered Tajweed rules yet','tajweed[]','na','tajweed','Select student makhraj weaknesses','normal','na|'.$tajweed['na'])?>
 				<?=insertTextInput('|Other','tajweed[]',$tajweed['other'],'tajweed','Enter other issues','text',1,'|Other is required')?>
 			</div>
 		</div><br>
