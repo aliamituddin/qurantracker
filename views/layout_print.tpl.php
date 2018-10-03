@@ -6,16 +6,14 @@
 		<meta name="author" content="Ahadith" />
 		
 		<link rel="stylesheet" href="css/metro.css">
-		<link rel="stylesheet" href="css/metro-responsive.css">
-		<link rel="stylesheet" href="css/metro-icons.css">
-		<link rel="stylesheet" href="css/metro-schemes.css">
-		<link rel="stylesheet" href="css/metro-rtl.css">
-		<link rel="stylesheet" href="css/metro-colors.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="css/froala_page.min.css" rel="stylesheet" type="text/css">
 		<link href="css/froala_editor.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="css/style.css">
 		<link href="css/StyleSheet.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="css/datatables.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="css/select2.main.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="css/select2.min.css" media="screen" rel="stylesheet" type="text/css"/>
 		
 		<script>
 		  window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
