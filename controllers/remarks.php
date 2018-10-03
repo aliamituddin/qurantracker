@@ -276,3 +276,68 @@ if ( $action == 'getEnrollmentReport' ) {
 		$data['content'] = loadTemplate($folder.'yearly_report_student.tpl.php',$tData);
 	}
 }
+
+if ($action == 'yearly_report_delete') {
+	$id = $_GET['id'];
+	$srData['sreportid'] = $id;
+
+	$StudentPartners->deleteWhere($srData);
+	$StudentMakhrajs->deleteWhere($srData);
+	$StudentTajweeds->deleteWhere($srData);
+	$StudentWeaknesses->deleteWhere($srData);
+	$StudentReports->real_delete($id);
+
+	$_SESSION['message'] = 'Student Report Deleted';
+
+	redirectBack();
+}
+
+if ($action == 'yearly_report_print') {
+	$data['layout'] = 'layout_print.tpl.php';
+	$id = $_GET['id'];	
+
+	$tData['report'] = $StudentReports->getDetails($id);
+
+	$wletters = $StudentWeaknesses->search($id);	
+	foreach ($wletters as $v=>$r) {
+		if ($r['weakness']) $tData['wletters'][] = $r['name'];
+	}
+	if ($id) $otherWeakness = $StudentWeaknesses->getOtherLetters($id);
+	foreach ((array)$otherWeakness as $r) {
+		if ($r['weakness'] == 'all') {
+			$tData['wletters'][] = 'The student can recognize all her letters well Mashallah!';
+		} else {
+			$tData['wletters'][] = $r['weakness'];
+		}
+	}
+
+	$mletters = $StudentMakhrajs->search($id);	
+	foreach ($mletters as $v=>$r) {
+		if ($r['makhraj']) $tData['mletters'][] = $r['name'];
+	}
+	if ($id) $otherMakhraj = $StudentMakhrajs->getOtherLetters($id);
+	$validMakhraj = array('lip','tongue','throat','light','heavy','none');
+	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters','None');
+	foreach ((array)$otherMakhraj as $v=>$r) {
+		$key = array_search($r['makhraj'], $validMakhraj);		
+		if ($key) {
+			$tData['mletters'][] = $makhrajNames[$key];
+		} else {
+			$tData['mletters'][] = $r['makhraj'];
+		}
+	}
+
+	if ($id) $tajweeds = $StudentTajweeds->search($id);	
+	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','none','na');
+	$tajweedNames = array('Stopping signs','Rules of Nun Sakin and Tanween','Idghaam','Idhaar','Iqlaab','Ikhfaa','Rules of Meem Sakin','Qalqala','Rules of Raa','Rules of Laam','Heavy and Light letters','Mashallah the student follows all the Tajweed rules well!','We have not covered Tajweed rules yet');
+	foreach ((array)$tajweeds as $r) {
+		$key = array_search($r['tajweed'], $validTajweed);	
+		if ($key) {
+			$tData['tajweeds'][] = $tajweedNames[$key];
+		} else {
+			$tData['tajweeds'][] = $r['tajweed'];
+		}
+	}
+
+	$data['content'] = loadTemplate($folder.'yearly_report_print.tpl.php',$tData);
+}
