@@ -21,7 +21,7 @@
 	</div>
 	<div class='row'>
 		<div class='cell-sm'>
-			2. <?=insertSelect('Indicate the level of the student','report[stageid]','stageid','Select the level',1,1,$stages,'name|id','id|'.$student['stageid'],'required not=""|Select the level')?>
+			2. <?=insertSelect('Indicate the level of the student','report[stageid]','stageid','Select the level',1,1,$stages,'name|id','id|'.$student['stageid'],'required not=""|Select the level','disabled')?>
 		</div>
 	</div><br>
 	<div class="row">

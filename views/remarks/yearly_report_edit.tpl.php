@@ -54,21 +54,24 @@
 		var stageid = $('.prev-stageid').val();
 		var language = $('.language').val();
 		
-		$.get('?module=masters&action=getLevelStages&format=json&levelid='+levelid,null,function(d){
-			CC = JSON.parse(d);
-			
-			$('.stageid').find('option').remove();
-			$('.stageid').append($('<option>', {value:'', text:''}));
-			for(i=0;i<CC.length;i++) {
-				if (language == 'swahili') {
-					$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name_sw}));
-				} else {
-					$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name}));
+		if (levelid) {
+			$.get('?module=masters&action=getLevelStages&format=json&levelid='+levelid,null,function(d){
+				CC = JSON.parse(d);
+				$('.stageid').prop('disabled','');
+				
+				$('.stageid').find('option').remove();
+				$('.stageid').append($('<option>', {value:'', text:''}));
+				for(i=0;i<CC.length;i++) {
+					if (language == 'swahili') {
+						$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name_sw}));
+					} else {
+						$('.stageid').append($('<option>', {value:CC[i].id, text:CC[i].name}));
+					}
 				}
-			}
-			
-			if (stageid) $('.stageid').val(stageid);
-		});
+				
+				if (stageid) $('.stageid').val(stageid);
+			});
+		}
 	}
 
 	function showLevelFields() {

@@ -21,7 +21,7 @@
 	</div>
 	<div class='row'>
 		<div class='cell-sm'>
-			2. <?=insertSelect('Elezea ngazi aliyopo mwanafunzi','report[stageid]','stageid','Changua ngazi',1,1,$stages,'name_sw|id','id|'.$student['stageid'],'required not=""|Chagua ngazi')?>
+			2. <?=insertSelect('Elezea ngazi aliyopo mwanafunzi','report[stageid]','stageid','Changua ngazi',1,1,$stages,'name_sw|id','id|'.$student['stageid'],'required not=""|Chagua ngazi','disabled')?>
 		</div>
 	</div><br>
 	<div class="row">

@@ -94,6 +94,11 @@
 	
 	function resizeAndUploadImage($uploaddir,$image,$ctrl_imgwidth,$new_imgheight,$name="") { //$image = "array";
 		$time = time();
+		
+		if(!file_exists($uploaddir)){
+			mkdir($uploaddir);
+		}
+		
 		if ( $image['name'] ) {
 			$size = getimagesize($image["tmp_name"]); //check if image is uploaded if it has image size
 			if ($size) { //resize image to 200xp width
