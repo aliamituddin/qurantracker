@@ -5,7 +5,7 @@
 		var $table = "studentreports";
 		
 		function search($enrollid='',$teacherid='',$yearid='') {
-			$sql = "Select sr.*, t.name as teacher, st.name as student, y.name as year, r.name as term, l.name as level, s.name as stage, g.name as grade, c.name as class from studentreports as sr
+			$sql = "Select sr.*, g.id as gradeid, c.id as classid, t.name as teacher, st.name as student, y.name as year, r.name as term, l.name as level, s.name as stage, g.name as grade, c.name as class from studentreports as sr
 					inner join enrollments as e on e.id = sr.enrollid
 					inner join students as st on st.id = e.studentid
 					inner join teachers as t on t.id = sr.teacherid

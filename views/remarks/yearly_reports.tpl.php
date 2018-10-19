@@ -41,7 +41,9 @@
 			<td><?=fDate($R['doc'])?></td>
 			<td><?=$R['teacher']?></td>
 			<td><?=$R['student']?></td>
-			<td><?=$R['grade']?> <?=$R['class']?></td>
+			<td>
+				<a href="?module=remarks&action=yearly_report_print&gradeid=<?=$R['gradeid']?>&classid=<?=$R['classid']?>" <?=displayHint('Class Print')?> target='_blank'> <?=$R['grade']?> <?=$R['class']?> </a>
+			</td>
 			<td><?=$R['level']?> <?=$R['stage']?></td>
 			<td><?=$R['year']?> <?=$R['term']?></td>
 		</tr>

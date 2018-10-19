@@ -182,6 +182,9 @@
 				<?=insertCheckboxInput('Sheria za Raa','tajweed[]','raa','tajweed','Select student makhraj weaknesses','normal','raa|'.$tajweed['raa'])?>
 				<?=insertCheckboxInput('Sheria za Laam','tajweed[]','laam','tajweed','Select student makhraj weaknesses','normal','laam|'.$tajweed['laam'])?>
 				<?=insertCheckboxInput('Herufi nyepesi na nzito','tajweed[]','hll','tajweed','Select student makhraj weaknesses','normal','hll|'.$tajweed['hll'])?>
+				<?=insertCheckboxInput('Maddah','tajweed[]','maddah','tajweed','Select student makhraj weaknesses','normal','maddah|'.$tajweed['maddah'])?>
+				<?=insertCheckboxInput('Shaddah','tajweed[]','shaddah','tajweed','Select student makhraj weaknesses','normal','shaddah|'.$tajweed['shaddah'])?>
+				<?=insertCheckboxInput('Short/Long vowels','tajweed[]','slvowels','tajweed','Select student makhraj weaknesses','normal','slvowels|'.$tajweed['slvowels'])?>
 				<?=insertCheckboxInput('Mashallah mwanafunzi anafuata sheria zote za tajweed','tajweed[]','none','tajweed','Select student makhraj weaknesses','normal','none|'.$tajweed['none'])?>
 				<?=insertCheckboxInput('Hatujafundisha sheria za Tajweed','tajweed[]','na','tajweed','Select student makhraj weaknesses','normal','na|'.$tajweed['na'])?>
 				<?=insertTextInput('|Nyinginezo','tajweed[]',$tajweed['other'],'tajweed','Enter other issues','text',1,'|Other is required')?>

@@ -257,7 +257,7 @@ if ( $action == 'getEnrollmentReport' ) {
 	}
 
 	if ($id) $tajweed = $StudentTajweeds->search($id);	
-	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','none','na');
+	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','shaddah','maddah','slvowels','none','na');
 	foreach ((array)$tajweed as $r) {
 		if (in_array($r['tajweed'],$validTajweed)) {
 			$tData['tajweed'][$r['tajweed']] = $r['tajweed'];
@@ -295,6 +295,35 @@ if ($action == 'yearly_report_delete') {
 if ($action == 'yearly_report_print') {
 	$data['layout'] = 'layout_print.tpl.php';
 	$id = $_GET['id'];	
+	$gradeid = $_GET['gradeid'];
+	$classid = $_GET['classid'];
+
+	if ($gradeid && $classid) {
+		$enrollments = $Enrollments->search($gradeid,$classid);
+		foreach ($enrollments as $e) {
+			$report = $StudentReports->search($e['id']);
+			$report = $report[0];
+			if ($report['id']) {
+				$reports[] = retrieveStudentReport($report['id']);
+			} else {
+				echo "Not found: $e[student] <br>";
+			}
+		}
+	} else {
+		if ($id) {
+			$reports[] = retrieveStudentReport($id);
+		}
+	}
+	$tData['reports'] = $reports;
+
+	$data['content'] = loadTemplate($folder.'yearly_report_print.tpl.php',$tData);
+}
+
+function retrieveStudentReport($id) {
+	global $StudentReports;
+	global $StudentWeaknesses;
+	global $StudentMakhrajs;
+	global $StudentTajweeds;
 
 	$tData['report'] = $StudentReports->getDetails($id);
 
@@ -317,10 +346,10 @@ if ($action == 'yearly_report_print') {
 	}
 	if ($id) $otherMakhraj = $StudentMakhrajs->getOtherLetters($id);
 	$validMakhraj = array('lip','tongue','throat','light','heavy','none');
-	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters','None');
+	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters','None. Their Makharij is excellent MashaAllah!');
 	foreach ((array)$otherMakhraj as $v=>$r) {
 		$key = array_search($r['makhraj'], $validMakhraj);		
-		if ($key) {
+		if ($key >= 0) {
 			$tData['mletters'][] = $makhrajNames[$key];
 		} else {
 			$tData['mletters'][] = $r['makhraj'];
@@ -328,16 +357,16 @@ if ($action == 'yearly_report_print') {
 	}
 
 	if ($id) $tajweeds = $StudentTajweeds->search($id);	
-	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','none','na');
-	$tajweedNames = array('Stopping signs','Rules of Nun Sakin and Tanween','Idghaam','Idhaar','Iqlaab','Ikhfaa','Rules of Meem Sakin','Qalqala','Rules of Raa','Rules of Laam','Heavy and Light letters','Mashallah the student follows all the Tajweed rules well!','We have not covered Tajweed rules yet');
+	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','maddah','shaddah','slvowels','none','na');
+	$tajweedNames = array('Stopping signs','Rules of Nun Sakin and Tanween','Idghaam','Idhaar','Iqlaab','Ikhfaa','Rules of Meem Sakin','Qalqala','Rules of Raa','Rules of Laam','Heavy and Light letters','Shaddah','Maddah','Short/Long vowels','Mashallah the student follows all the Tajweed rules well!','We have not covered Tajweed rules yet');
+	
 	foreach ((array)$tajweeds as $r) {
 		$key = array_search($r['tajweed'], $validTajweed);	
-		if ($key) {
+		if ($key >= 0) {
 			$tData['tajweeds'][] = $tajweedNames[$key];
 		} else {
 			$tData['tajweeds'][] = $r['tajweed'];
 		}
 	}
-
-	$data['content'] = loadTemplate($folder.'yearly_report_print.tpl.php',$tData);
+	return $tData['report'];
 }
