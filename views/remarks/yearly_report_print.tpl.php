@@ -1,4 +1,14 @@
-<? foreach ($reports as $report) { ?>
+<div class="d-print-none">
+    <? foreach ($missings as $r) { 
+        echo 'Missing: '.$r.'<br>';
+    } ?>
+</div>
+<? foreach ($reports as $report) { 
+    $tajweeds = $report['tajweeds'];
+    $mletters = $report['mletters'];
+    $wletters = $report['wletters'];
+    $report = $report['report'];
+?>
 <div style='page-break-after:always'>
     <div class='grid'>
         <div class='row border bd-black border-size-2 '>

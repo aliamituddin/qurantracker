@@ -27,6 +27,11 @@
 			.table td { padding: 0rem 0.3rem !important; }
 			.input-control input { border:  !important}
 			.row { margin: 0 !important}
+			@media print{
+				.d-print-none{
+					display:none;
+				}
+			}
 		</style>
 	</head>
 	<body class="">

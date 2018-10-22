@@ -306,7 +306,7 @@ if ($action == 'yearly_report_print') {
 			if ($report['id']) {
 				$reports[] = retrieveStudentReport($report['id']);
 			} else {
-				echo "Not found: $e[student] <br>";
+				$tData['missings'][] = $e['student'];
 			}
 		}
 	} else {
@@ -319,13 +319,46 @@ if ($action == 'yearly_report_print') {
 	$data['content'] = loadTemplate($folder.'yearly_report_print.tpl.php',$tData);
 }
 
+if ($action == 'yearly_report_export') {
+	$data['layout'] = 'layout_excel.tpl.php';
+	$id = $_GET['id'];	
+
+	$enrollments = $Enrollments->search($gradeid,$classid);
+	foreach ($enrollments as $e) {
+		$report = $StudentReports->search($e['id']);
+		$report = $report[0];
+		if ($report['id']) {
+			$reports[] = retrieveStudentReport($report['id']);
+		} else {
+			$tData['missings'][] = $e['student'];
+		}
+	}
+	$tData['reports'] = $reports;
+
+	$data['content'] = loadTemplate($folder.'yearly_report_export.tpl.php',$tData);
+}
+
 function retrieveStudentReport($id) {
 	global $StudentReports;
 	global $StudentWeaknesses;
 	global $StudentMakhrajs;
 	global $StudentTajweeds;
+	global $StudentPartners;
 
 	$tData['report'] = $StudentReports->getDetails($id);
+
+	$partners = $StudentPartners->search($id);
+	$validPartners = array('parent','maalim','teacher','madressa','none');
+	$partnerNames = array('Partner/Guardian at home','Maalim comes home','Goes to a Quran teachers home','Attends Madratus Sadiq or other Madrasah','Does not recite Quran at home and does not attend other Madrasah');
+	foreach ((array)$partners as $r) {
+		$key = array_search($r['partner'], $validPartners);
+		if (is_numeric($key)) {
+			$tData['partners'][] = $partnerNames[$key];
+		}
+		else if ($r['partner']) {
+			$tData['partners'][] = $r['partner'];
+		}
+	}
 
 	$wletters = $StudentWeaknesses->search($id);	
 	foreach ($wletters as $v=>$r) {
@@ -349,7 +382,7 @@ function retrieveStudentReport($id) {
 	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters','None. Their Makharij is excellent MashaAllah!');
 	foreach ((array)$otherMakhraj as $v=>$r) {
 		$key = array_search($r['makhraj'], $validMakhraj);		
-		if ($key >= 0) {
+		if (is_numeric($key)) {
 			$tData['mletters'][] = $makhrajNames[$key];
 		} else {
 			$tData['mletters'][] = $r['makhraj'];
@@ -362,11 +395,11 @@ function retrieveStudentReport($id) {
 	
 	foreach ((array)$tajweeds as $r) {
 		$key = array_search($r['tajweed'], $validTajweed);	
-		if ($key >= 0) {
+		if (is_numeric($key)) {
 			$tData['tajweeds'][] = $tajweedNames[$key];
 		} else {
 			$tData['tajweeds'][] = $r['tajweed'];
 		}
 	}
-	return $tData['report'];
+	return $tData;
 }

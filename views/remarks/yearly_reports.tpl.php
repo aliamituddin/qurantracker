@@ -2,6 +2,9 @@
 
 <div>
 	<span class="place-right"> <a class="button" href="?module=remarks&action=yearly_report_add"> Add </a> </span>
+	<? if (USERTYPE == 'admin') { ?>
+	<span class="place-right mr-5"> <a class="button" href="?module=remarks&action=yearly_report_export"> Export </a> </span>
+	<? } ?>
 	<form method="GET" class='no-visible' <?=createValidator()?> >
 		<input type="hidden" name="module" value="remarks">
 		<input type="hidden" name="action" value="modifications">
