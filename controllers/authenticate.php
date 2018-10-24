@@ -57,6 +57,7 @@
 	if ( $action == 'logout' ) {
 	
 		session_destroy();
+		session_start();
 		$_SESSION['message'] = 'You have successfully logged out';
 		redirect('home','index');
 	}

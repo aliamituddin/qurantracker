@@ -3,7 +3,7 @@
 		<title><?=$title?></title>
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/metro.css">
-		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.js"></script>
 	</head>
 	<body class="metro">
 		<? 
@@ -26,27 +26,15 @@
 			</form>
 		</div>
 		
-		<script type='text/javascript'>
+		<script type='text/javascript'>			
 			function triggerError(msg) {
-				var notify = Metro.notify;
-				notify.setup({
-					timeout: 5000,
-				});
-				notify.create(msg, "", {
-					cls: "alert"
-				});
-				notify.reset();
+				var toast = Metro.toast.create;	
+				toast(msg, null, 5000, "alert");
 			}
-			
+
 			function triggerMessage(msg, o) {
-				var notify = Metro.notify;
-				notify.setup({
-					timeout: 5000,
-				});
-				notify.create(msg, "", {
-					cls: "success"
-				});
-				notify.reset();
+				var toast = Metro.toast.create;	
+				toast(msg, null, 5000, "success");
 			}
 			
 			$(function(){

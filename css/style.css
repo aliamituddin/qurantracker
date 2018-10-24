@@ -77,3 +77,21 @@ fieldset {
 .report-label {
 	font-weight: bold;
 }
+
+.required {	
+	border:0 !important;
+}
+
+.required input {
+	border-bottom:1px crimson solid !important;
+}
+
+.input-material .invalid {
+	border:0 !important;
+	border-bottom:2px crimson solid !important;
+}
+
+.input-material .valid {
+	border:0 !important;
+	border-bottom:2px #60a917 solid !important;
+}

@@ -158,7 +158,8 @@
 		if ($validate[1]) $valhint = $validate[1];
 		
 		$code = "$labeltext
-            <input type='$type' name='$name' class='$class' title=\"$title\" value=\"$value\" placeholder=\"$label[1]\" data-validate='$valcode' $other>
+            <input type='$type' name='$name' class='$class' title=\"$title\" value=\"$value\" data-role='materialinput' data-label='$label[1]'
+			data-informer='$title' placeholder=\"$label[1]\" data-validate='$valcode' $other>
             <span class='invalid_feedback'>
                 $valhint
             </span>";
@@ -198,7 +199,7 @@
 		if ($validate[1]) $valhint = $validate[1];
 				
 		$code = "<label class='input-control radio $small $otherclass'>
-		<input type='radio' name='$name' value=\"$value\" class='$class' data-validate='$valcode' ".selected($matchvalue,$datavalue,'checked')." title=\"$title\" $other>
+		<input type='radio' name='$name' value=\"$value\" class='$class' data-validate='$valcode' ".selected($matchvalue,$datavalue,'checked')." title=\"$title\" data-style='2' $other>
 		<span class='check'></span>
 		<span class='caption'>$label</span>
 		<span class='invalid_feedback'>
@@ -219,7 +220,7 @@
 
 		if ($type=='switch') {		
 			$code = "<div class='$otherclass'>
-			<input type='checkbox' data-role='switch' data-caption='$label' data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
+			<input type='checkbox' data-role='switch' data-caption='$label' data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" data-style='2' $other>
 			<span class='invalid_feedback'>
 				$valhint
 			</span>

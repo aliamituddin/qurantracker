@@ -12,18 +12,10 @@
 		<title><?=$title?></title>
 		
 		<link rel="stylesheet" href="css/metro.css">
-		<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<link href="css/froala_page.min.css" rel="stylesheet" type="text/css">
-		<link href="css/froala_editor.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="css/style.css">
-		<link href="css/StyleSheet.css" media="screen" rel="stylesheet" type="text/css"/>
 		<link href="css/datatables.css" media="screen" rel="stylesheet" type="text/css"/>
 		<link href="css/select2.main.css" media="screen" rel="stylesheet" type="text/css"/>
-		<link href="css/select2.min.css" media="screen" rel="stylesheet" type="text/css"/>
-		
-		<script>
-			window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-		</script>		
+		<link href="css/select2.css" media="screen" rel="stylesheet" type="text/css"/>
 	</head>
 	<body class="">
 		<div id="maincontent">
@@ -49,15 +41,10 @@
 			<img src='img/<?=LOGO?>' class='logo'>
 		</div>
 		
+		<script src="js/jquery.js"></script>
 		<script src="js/datatables.js"></script>
-		<script src="js/select2.min.js"></script>
+		<script src="js/select2.js"></script>
 		<script src="js/maskinput.js"></script>
-		
-		<!--Validation Scripts-->
-		<script language="javascript" src="<?=base_url()?>js/yahoo-min.js" type="text/javascript"></script>
-		<script language="javascript" src="<?=base_url()?>js/event-min.js" type="text/javascript"></script>
-		<script language="javascript" src="<?=base_url()?>js/jsvalidate.js" type="text/javascript"></script>
-		<!--Validation Scripts-->
 		
 		<!-- Metro UI CSS JavaScript plugins -->
 		<script src="js/metro.js"></script>

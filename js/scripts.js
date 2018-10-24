@@ -17,17 +17,13 @@ $(function(){
 });
 
 function triggerError(msg) {
-	var notify = Metro.notify;
-	notify.setup({	timeout: 5000, duration: 500 });
-	notify.create(msg, "", { cls: "alert" });
-	notify.reset();
+	var toast = Metro.toast.create;	
+	toast(msg, null, 5000, "alert");
 }
 
 function triggerMessage(msg, o) {
-	var notify = Metro.notify;
-	notify.setup({ timeout: 5000, duration: 100  });
-	notify.create(msg, "", { cls: "success" });
-	notify.reset();
+	var toast = Metro.toast.create;	
+	toast(msg, null, 5000, "success");
 }
 
 function triggerInputError(obj) {
@@ -41,6 +37,7 @@ function addClasses() {
 	$('[class^=app-bar-]').addClass('bg-<?=COLOR?>');
 	$('*[data-validate-func="required"]').addClass('bd-red');
 	$('fieldset').addClass('bd-lightGray p-5');
+	$('.button').addClass('drop-shadow');
 	$('table.table').parent().addClass('');
 	
 	$('.input-clear-button').remove();
@@ -63,22 +60,22 @@ function unmaskAllInputs() {
 
 function createCalenders() {
 	$(".datepicker").calendarpicker({
-		format: "%Y-%m-%d",
-		position: "bottom",
-		clsCalendarHeader: "d-none",
+		format: "%Y-%m-%d",		
+		dialogMode: true,
+		clsCalendar: 'compact',
 	});
 	$(".resdatepicker").calendarpicker({
-		format: "%Y-%m-%d",
-		position: "bottom",
-		clsCalendarHeader: "d-none",
+		format: "%Y-%m-%d",		
+		dialogMode: true,
+		clsCalendar: 'compact',
 		minDate: '<?=date('Y-m-d',strtotime('yesterday'))?>',
 		minYear: '<?=date('Y',strtotime('yesterday'))?>',
 	});
 	
 	$(".dobdatepicker").calendarpicker({
 		format: "%Y-%m-%d", // set output format
-		position: "bottom",
-		clsCalendarHeader: "d-none",
+		dialogMode: true,
+		clsCalendar: 'compact',
 		maxDate: '<?=date('Y-m-d')?>'
 	});
 }
@@ -86,8 +83,8 @@ function createCalenders() {
 function convertToCalendar(obj) {
 	$(obj).calendarpicker({
 		format: "%Y-%m-%d",
-		position: "bottom",
-		clsCalendarHeader: "d-none",
+		dialogMode: true,
+		clsCalendar: 'compact',
 	});
 	$(obj).val('<?=date('Y-m-d')?>');
 }

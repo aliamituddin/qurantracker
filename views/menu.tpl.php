@@ -1,7 +1,7 @@
 <?
     define('ElementHover','bg-hover-black fg-white bg-'.COLOR);
 ?>
-<nav class="app-bar <?=TableHead?> app-bar-expand-md" data-role="appbar">
+<nav class="app-bar <?=TableHead?>" data-role="appbar" data-expand-point="md">
 	<a href="?action=index" class="brand no-hover d-none-lg fg-white">Admin Panel</a>
 	
 	<ul class="app-bar-menu">
