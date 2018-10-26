@@ -367,7 +367,7 @@ function retrieveStudentReport($id) {
 	if ($id) $otherWeakness = $StudentWeaknesses->getOtherLetters($id);
 	foreach ((array)$otherWeakness as $r) {
 		if ($r['weakness'] == 'all') {
-			$tData['wletters'][] = 'The student can recognize all her letters well Mashallah!';
+			$tData['wletters'][] = 'The student can recognize all the letters well Mashallah!';
 		} else {
 			$tData['wletters'][] = $r['weakness'];
 		}

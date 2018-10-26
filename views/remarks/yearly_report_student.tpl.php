@@ -106,7 +106,7 @@
 				<? foreach ($wletters as $r) { ?>
 					<?=insertCheckboxInput($r['name'],'weakness[]',$r['name'],'weakness','Select student weaknesses','normal',$r['name'].'|'.$r['weakness'])?>
 				<? } ?>
-				<?=insertCheckboxInput('The student can recognize all her letters well Mashallah!','weakness[]','all','weakness','Select student weaknesses','normal','all|'.$weakness['all'])?><br>
+				<?=insertCheckboxInput('The student can recognize all the letters well Mashallah!','weakness[]','all','weakness','Select student weaknesses','normal','all|'.$weakness['all'])?><br>
 				<?=insertTextInput('|Other','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
 			</div>
 		</div>
