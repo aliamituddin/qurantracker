@@ -379,7 +379,7 @@ function retrieveStudentReport($id) {
 	}
 	if ($id) $otherMakhraj = $StudentMakhrajs->getOtherLetters($id);
 	$validMakhraj = array('lip','tongue','throat','light','heavy','none');
-	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters','None. Their Makharij is excellent MashaAllah!');
+	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters',"The student's Makharij is excellent MashaAllah!");
 	foreach ((array)$otherMakhraj as $v=>$r) {
 		$key = array_search($r['makhraj'], $validMakhraj);		
 		if (is_numeric($key)) {

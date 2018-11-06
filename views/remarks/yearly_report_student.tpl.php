@@ -91,7 +91,7 @@
 			<?=insertCheckboxInput('Sound Origination- Throat letters','makhraj[]','throat','makhraj','Select student makhraj weaknesses','normal','throat|'.$makhraj['throat'])?>
 			<?=insertCheckboxInput('Light letters','makhraj[]','light','makhraj','Select student makhraj weaknesses','normal','light|'.$makhraj['light'])?>
 			<?=insertCheckboxInput('Heavy letters','makhraj[]','heavy','makhraj','Select student makhraj weaknesses','normal','heavy|'.$makhraj['heavy'])?>
-			<?=insertCheckboxInput('None. Their Makharij is excellent MashaAllah!','makhraj[]','none','makhraj','Select student makhraj weaknesses','normal','none|'.$makhraj['none'])?><br>
+			<?=insertCheckboxInput("The student&apos;s Makharij is excellent MashaAllah!",'makhraj[]','none','makhraj','Select student makhraj weaknesses','normal','none|'.$makhraj['none'])?><br>
 			<?=insertTextInput('|Other','makhraj[]',$makhraj['other'],'makhraj','Enter other issues','text',1,'|Other is required')?>
 		</div>
 	</div><br>

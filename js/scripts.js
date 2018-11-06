@@ -136,12 +136,7 @@ function createSearchableSelects() {
 }
 
 var cdirect = 1;
-function submitForm(form,url) {	
-	if ( FIC_checkForm(form) ) { } else {
-		triggerError("Please check the highlighted fields");
-		return false;
-	}
-	
+function submitForm(form,url) {		
 	formdata = $(form).closest('form').serialize();	
 	
 	var submitBtn = $(form).closest('form').find('.submit');

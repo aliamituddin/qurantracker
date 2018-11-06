@@ -16,6 +16,7 @@
 		<link href="css/datatables.css" media="screen" rel="stylesheet" type="text/css"/>
 		<link href="css/select2.main.css" media="screen" rel="stylesheet" type="text/css"/>
 		<link href="css/select2.css" media="screen" rel="stylesheet" type="text/css"/>
+		<script src="js/jquery.js"></script>
 	</head>
 	<body class="">
 		<div id="maincontent">
@@ -41,7 +42,6 @@
 			<img src='img/<?=LOGO?>' class='logo'>
 		</div>
 		
-		<script src="js/jquery.js"></script>
 		<script src="js/datatables.js"></script>
 		<script src="js/select2.js"></script>
 		<script src="js/maskinput.js"></script>
