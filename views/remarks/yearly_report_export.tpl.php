@@ -1,6 +1,8 @@
 <table class="table table-border cell-border row-hover" data-role="" border=1>
     <thead>
         <tr>
+            <th>SID</th>
+            <th>EID</th>
             <th>S/N</th>
             <th>Name</th>
             <th>Class</th>
@@ -30,6 +32,8 @@
     $report = $report['report'];
 ?>
         <tr>
+            <td><?=$report['studentid']?></td>
+            <td><?=$report['enrollid']?></td>
             <td><?=$report['referenceno']?></td>
             <td><?=$report['student']?></td>
             <td><?=$report['grade']?> <?=$report['class']?></td>

@@ -158,6 +158,8 @@ function submitForm(form,url) {
 			
 		} else {
 			triggerError(CC[0]['msg']);
+			var replacedBtn = $(form).closest('form').find('.replaced-submit');
+			replacedBtn.replaceWith(submitBtn);
 		}	
 		
 	});

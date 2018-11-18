@@ -299,7 +299,7 @@ if ($action == 'yearly_report_print') {
 	$classid = $_GET['classid'];
 
 	if ($gradeid && $classid) {
-		$enrollments = $Enrollments->search($gradeid,$classid);
+		$enrollments = $Enrollments->search($gradeid,$classid,1);
 		foreach ($enrollments as $e) {
 			$report = $StudentReports->search($e['id']);
 			$report = $report[0];
