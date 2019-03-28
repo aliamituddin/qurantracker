@@ -27,25 +27,18 @@
 	<div class="row">
 		<div class='cell-sm'>
 			3. <label>Student recites Quran during the week other than Husayni Madrasah with (Can choose more than one option):</label>
-			<?=insertCheckboxInput('Parent/Guardian at home','partner[]','parent','partner partner-yes','Select recitation partner','normal','parent|'.$partners['parent'])?>
-			<?=insertCheckboxInput('Maalim comes home','partner[]','maalim','partner partner-yes','Select recitation partner','normal','maalim|'.$partners['maalim'])?>
-			<?=insertCheckboxInput('Goes to a Quran teachers home','partner[]','teacher','partner partner-yes','Select recitation partner','normal','teacher|'.$partners['teacher'])?>
-			<?=insertCheckboxInput('Attends Madrastus Sadiq or other Madrasah','partner[]','madressa','partner partner-yes','Select recitation partner','normal','madressa|'.$partners['madressa'])?>
-			<?=insertCheckboxInput('Does not recite Quran at home and does not attend other Madrasah','partner[]','none','partner partner-none','Select recitation partner','normal','none|'.$partners['none'])?>
-			<?=insertTextInput('Other','partner[]',$partners['other'],'partner','Enter other partner','text',1,'|Other is required')?>
+			<? foreach ($spartners as $v=>$r) { ?>
+				<?=insertCheckboxInput($r['description'],'partner[]',$r['pid'],"partner",'Select recitation partner','normal',$r['pid'].'|'.$r['partnerid'])?>
+			<? } ?>
+			<?=insertTextInput('|Other','report[opartner]',$report['opartner'],'partner','Enter other partner','text',1,'|Other is required')?>
 		</div>
 	</div><br>
 	<div class="row">
 		<div class='cell-sm'>
 			4. <label>How often does the Student recite Quran during the week:</label><br>
-			<?=insertRadioInput('Once a week','frequency','1','frequency','Select the frequency',0,"1|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Twice a week','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Thrice a week','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Four times a week','frequency','4','frequency','Select the frequency',0,"4|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Five times a week','frequency','5','frequency','Select the frequency',0,"5|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Six times a week','frequency','6','frequency','Select the frequency',0,"6|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Every day','frequency','7','frequency','Select the frequency',0,"7|".$report['frequency'],'required')?>
-			<?=insertRadioInput('None of the days - except Saturday Madrasah','frequency','0','frequency','Select the frequency',0,"0|".$report['frequency'],'required')?>
+			<? foreach ($frequencies as $v=>$r) { ?>
+				<?=insertRadioInput($r['description'],'frequency',$r['id'],'frequency','Select the frequency',0,$r['id']."|".$report['frequencyid'],'required')?>
+			<? } ?>
 			<span class='invalid_feedback'>
 				Select the frequency
 			</span>
@@ -54,9 +47,10 @@
 </div><br>
 
 <div class='grid border bd-gray p-4'>
-	<div class='row'>
+	<!--
+	<div class='row d-none'>
 		<div class='cell-sm'>
-			1. <label>How is the student's Makharij?</label>
+			0. <label>How is the student's Makharij?</label>
 			<table style='width:100%'>
 				<tr>
 					<td colspan=2>Fair</td>
@@ -80,19 +74,20 @@
 			</table>
 		</div>
 	</div><br>
+	-->
 	<div class='row'>
 		<div class='cell-sm'>
-			2. <label>The student needs more practise to improve the Makharij of the following letter(s)</label><br>
-			<? foreach ($mletters as $r) { ?>
-				<?=insertCheckboxInput($r['name'],'makhraj[]',$r['name'],'makhraj','Select student makhraj weaknesses','normal',$r['name'].'|'.$r['makhraj'])?>
-			<? } ?>
-			<?=insertCheckboxInput('Sound Origination- Lip letters','makhraj[]','lip','makhraj','Select student makhraj weaknesses','normal','lip|'.$makhraj['lip'])?>
-			<?=insertCheckboxInput('Sound Origination- Tongue letters','makhraj[]','tongue','makhraj','Select student makhraj weaknesses','normal','tongue|'.$makhraj['tongue'])?>
-			<?=insertCheckboxInput('Sound Origination- Throat letters','makhraj[]','throat','makhraj','Select student makhraj weaknesses','normal','throat|'.$makhraj['throat'])?>
-			<?=insertCheckboxInput('Light letters','makhraj[]','light','makhraj','Select student makhraj weaknesses','normal','light|'.$makhraj['light'])?>
-			<?=insertCheckboxInput('Heavy letters','makhraj[]','heavy','makhraj','Select student makhraj weaknesses','normal','heavy|'.$makhraj['heavy'])?>
-			<?=insertCheckboxInput("The student&apos;s Makharij is excellent MashaAllah!",'makhraj[]','none','makhraj','Select student makhraj weaknesses','normal','none|'.$makhraj['none'])?><br>
-			<?=insertTextInput('|Other','makhraj[]',$makhraj['other'],'makhraj','Enter other issues','text',1,'|Other is required')?>
+			1. <label>The student needs more practise to improve the Makharij of the following letter(s)</label><br>
+			<? foreach ($smakhrajs as $v=>$r) { 
+				if ($r['override']) {
+					$class = 'override';
+				} else {
+					$class = 'no-override';
+				}	
+			?>
+				<?=insertCheckboxInput($r['description'],'makhraj[]',$r['mid'],"makhraj $class",'Select student makhraj weaknesses','normal',$r['mid'].'|'.$r['makhrajid'],'',"data-group='makhraj'")?>
+			<? } ?><br>
+			<?//=insertTextInput('|Other','makhraj[]',$makhraj['other'],'makhraj','Enter other issues','text',1,'|Other is required')?>
 		</div>
 	</div><br>
 </div>
@@ -102,12 +97,17 @@
 	<div class='grid'>
 		<div class='row'>
 			<div class='cell-sm'>
-				3. <label>The student needs to work on recognition (identification) of the following letter(s) or joining letter(s)</label><br>
-				<? foreach ($wletters as $r) { ?>
-					<?=insertCheckboxInput($r['name'],'weakness[]',$r['name'],'weakness','Select student weaknesses','normal',$r['name'].'|'.$r['weakness'])?>
-				<? } ?>
-				<?=insertCheckboxInput('The student can recognize all the letters well Mashallah!','weakness[]','all','weakness','Select student weaknesses','normal','all|'.$weakness['all'])?><br>
-				<?=insertTextInput('|Other','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
+				2. <label>The student needs to work on recognition (identification) of the following letter(s) or joining letter(s)</label><br>
+				<? foreach ($sweaknesses as $v=>$r) {
+					if ($r['override']) {
+						$class = 'override';
+					} else {
+						$class = 'no-override';
+					}
+				?>
+					<?=insertCheckboxInput($r['description'],'weakness[]',$r['wid'],"weakness $class",'Select student weaknesses','normal',$r['wid'].'|'.$r['weaknessid'],'',"data-group='weakness'")?>
+				<? } ?><br>
+				<?//=insertTextInput('|Other','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
 			</div>
 		</div>
 	</div>
@@ -116,9 +116,10 @@
 <div class="bigquran-options border bd-gray p-4">
 	<h3>Big Quran</h3>
 	<div class='grid'>
-		<div class='row'>
+		<!--
+		<div class='row d-none'>
 			<div class='cell-sm'>
-				3. <label>How is the student's Fluency of recitation?</label><br>
+				0.3. <label>How is the student's Fluency of recitation?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Fair</td>
@@ -142,9 +143,9 @@
 				</table>
 			</div>
 		</div><br>
-		<div class='row'>
+		<div class='row d-none'>
 			<div class='cell-sm'>
-				4. <label>How is the student's Tajweed?</label><br>
+				0.4. <label>How is the student's Tajweed?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Fair</td>
@@ -168,31 +169,26 @@
 				</table>
 			</div>
 		</div><br>
+		-->
 		<div class='row'>
 			<div class='cell-sm'>
-				5. <label>The student needs more practise on the following Tajweed rules</label><br>
-				<?=insertCheckboxInput('Stopping signs','tajweed[]','stop','tajweed','Select student makhraj weaknesses','normal','stop|'.$tajweed['stop'])?>
-				<?=insertCheckboxInput('Rules of Nun Sakin and Tanween','tajweed[]','nst','tajweed','Select student makhraj weaknesses','normal','nst|'.$tajweed['nst'])?>
-				<?=insertCheckboxInput('Idghaam','tajweed[]','idghaam','tajweed','Select student makhraj weaknesses','normal','idghaam|'.$tajweed['idghaam'])?>
-				<?=insertCheckboxInput('Idhaar','tajweed[]','idhaar','tajweed','Select student makhraj weaknesses','normal','idhaar|'.$tajweed['idhaar'])?>
-				<?=insertCheckboxInput('Iqlaab','tajweed[]','iqlaab','tajweed','Select student makhraj weaknesses','normal','iqlaab|'.$tajweed['iqlaab'])?>
-				<?=insertCheckboxInput('Ikhfaa','tajweed[]','ikhfaa','tajweed','Select student makhraj weaknesses','normal','ikhfaa|'.$tajweed['ikhfaa'])?>
-				<?=insertCheckboxInput('Rules of Meem Sakin','tajweed[]','ms','tajweed','Select student makhraj weaknesses','normal','ms|'.$tajweed['ms'])?>
-				<?=insertCheckboxInput('Qalqala','tajweed[]','qalqala','tajweed','Select student makhraj weaknesses','normal','qalqala|'.$tajweed['qalqala'])?>
-				<?=insertCheckboxInput('Rules of Raa','tajweed[]','raa','tajweed','Select student makhraj weaknesses','normal','raa|'.$tajweed['raa'])?>
-				<?=insertCheckboxInput('Rules of Laam','tajweed[]','laam','tajweed','Select student makhraj weaknesses','normal','laam|'.$tajweed['laam'])?>
-				<?=insertCheckboxInput('Heavy and Light letters','tajweed[]','hll','tajweed','Select student makhraj weaknesses','normal','hll|'.$tajweed['hll'])?>
-				<?=insertCheckboxInput('Maddah','tajweed[]','maddah','tajweed','Select student makhraj weaknesses','normal','maddah|'.$tajweed['maddah'])?>
-				<?=insertCheckboxInput('Shaddah','tajweed[]','shaddah','tajweed','Select student makhraj weaknesses','normal','shaddah|'.$tajweed['shaddah'])?>
-				<?=insertCheckboxInput('Short/Long vowels','tajweed[]','slvowels','tajweed','Select student makhraj weaknesses','normal','slvowels|'.$tajweed['slvowels'])?>
-				<?=insertCheckboxInput('Mashallah the student follows all the Tajweed rules well!','tajweed[]','none','tajweed','Select student makhraj weaknesses','normal','none|'.$tajweed['none'])?>
-				<?=insertCheckboxInput('We have not covered Tajweed rules yet','tajweed[]','na','tajweed','Select student makhraj weaknesses','normal','na|'.$tajweed['na'])?>
-				<?=insertTextInput('|Other','tajweed[]',$tajweed['other'],'tajweed','Enter other issues','text',1,'|Other is required')?>
+				<label>2. The student needs more practise on the following Tajweed rules (Please note- select the tajweed rules that the child knows and needs practice on. The rules may not have been necessarily taught by you but the child may have been taught in previous years by other teachers)</label><br>
+				<? foreach ($stajweeds as $v=>$r) { 
+					if ($r['override']) {
+						$class = 'override';
+					} else {
+						$class = 'no-override';
+					}	
+				?>
+				<?=insertCheckboxInput($r['description'],'tajweed[]',$r['tid'],"tajweed $class",'Select student makhraj weaknesses','normal',$r['tid'].'|'.$r['tajweedid'],'',"data-group='tajweed'")?>
+				<? } ?>
+				<?//=insertTextInput('|Other','tajweed[]',$tajweed['other'],'tajweed','Enter other issues','text',1,'|Other is required')?>
 			</div>
 		</div><br>
-		<div class='row'>
+		<!--
+		<div class='row d-none'>
 			<div class='cell-sm'>
-				6. <label>How is the student's Accuracy in recitation?</label><br>
+				0.6. <label>How is the student's Accuracy in recitation?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Fair</td>
@@ -216,6 +212,7 @@
 				</table>
 			</div>
 		</div><br>
+		-->
 	</div>
 </div>
 <br>
@@ -223,17 +220,17 @@
 <div class='grid border bd-gray p-4'>
 	<div class='row'>
 		<div class='cell-sm'>
-			1. <?=insertSelect('How is the students discipline and personality? (Please select a comment that best fits the student)','report[disciplineid]','disciplineid','Select the discipline',0,1,$disciplines,'description|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','data-role="select"')?>
+			1. <?=insertSelect('How is the students discipline and personality? (Please select a comment that best fits the student)','report[disciplineid]','disciplineid','Select the discipline',0,1,$disciplines,'description|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','')?>
 		</div>
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			2. <?=insertSelect('What are the students areas for improvement? (Please select a comment that best fits the student)','report[improvementid]','improvementid','Select the improvement',0,1,$improvements,'description|id','id|'.$report['improvementid'],'required not=""|Improvement is required','data-role="select"')?>
+			2. <?=insertSelect('What are the students areas for improvement? (Please select a comment that best fits the student)','report[improvementid]','improvementid','Select the improvement',0,1,$improvements,'description|id','id|'.$report['improvementid'],'required not=""|Improvement is required','')?>
 		</div>
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertTextInput('<strong>Any other comments or information you would like to share about the student? (optional)</strong>|Comments','report[comments]',$report['comments'],'','Comments','text',1,'||Name is required')?> 
+			<?=insertTextInput('<strong>Any other comments, concerns, suggestions, feedback or information you would like to share for Q-Admin attention? (Any behavior/discipline issues, if child has any special needs, does he/she require learning support or counseling? etc.). (Please note - any comments entered here will not appear on the report and is only for the Q-Admins)</strong>|Comments','report[comments]',$report['comments'],'','Comments','text',1,'||Name is required')?> 
 		</div>
 	</div>
 </div><br>
@@ -245,7 +242,7 @@
 		$('.disciplineid').find('option').each(function(){
 			var discipline = $(this).text();
 			if (discipline) {
-				discipline = '<?=ucwords(strtolower($enrollment['student']))?> '+discipline;
+				discipline = '<?=getFirstName($enrollment['student'])?> '+discipline;
 				$(this).text(discipline);
 			}
 		})
@@ -293,7 +290,7 @@
 		var levelid = $('.levelid').val();
 		var error = 0;
 		if (levelid == 5) {
-			error = validateBigQuranOptions();
+			// error = validateBigQuranOptions();
 		} else {
 
 		}	
@@ -304,28 +301,60 @@
 		}
 	}
 
-	function unselectOtherPartners() {
-		$('.partner-yes').find('input[type=checkbox]:checked').each(function(){
-			$(this).click();
-		});
+	function unselectOtherOptions(obj) {
+		obj = $(obj).find('input').get(0);
+
+		if ( $(obj).prop('checked') == true) {
+			var group = $(obj).data('group');
+			$('.'+group).find('input').prop('checked',false);
+			$(obj).prop('checked',true);
+		}
+	}
+	
+	function unselectOverrideOptions(obj) {
+		obj = $(obj).find('input').get(0);
+
+		if ( $(obj).prop('checked') == true) {
+			var group = $(obj).data('group');
+			$('.override.'+group).find('input').prop('checked',false);
+		}
 	}
 
-	function unselectNonePartner() {
-		$('.partner-none').find('input[type=checkbox]:checked').click();
+	function checkMaxOptions(obj) {
+		var maxOptions = 7;
+
+		obj = $(obj).find('input').get(0);
+		var group = $(obj).data('group');
+
+		var checkedOptions=0;
+		$('.'+group).each( function() {
+			var checkedInput = $(this).find('input').prop('checked');
+			if (checkedInput == true) {
+				checkedOptions++;
+			}
+		})
+		if (checkedOptions > maxOptions) {
+			$(obj).prop('checked',false);
+			triggerError('Maximum 7 options allowed')
+		}
 	}
 
 	$( function() {
 		getStages();
 		showLevelFields();
-		// $('.improvementid').select2();
 		prependStudentName();
+		$('.improvementid').select2();
+		$('.disciplineid').select2();
 	})
 
-	$(document).on('click','.partner-none',function() {		
-		unselectOtherPartners();
+	$(document).on('click','.override',function() {		
+		unselectOtherOptions(this);
+	})
+	$(document).on('click','.no-override',function() {		
+		unselectOverrideOptions(this);
+	})
+	$(document).on('click','.makhraj,.weakness,.tajweed',function() {		
+		checkMaxOptions(this);
 	})
 
-	$(document).on('click','.partner-yes',function() {		
-		unselectNonePartner();
-	})
 </script>

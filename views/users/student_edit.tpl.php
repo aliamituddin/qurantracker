@@ -6,6 +6,8 @@
 	
 	<?=insertTextInput('Name','student[name]',$student['name'],'','Enter the students\'s name','text',1,'required||Name is required')?><br>
 	
+	<?=insertSelect('Gender','student[gender]','','Select the gender',1,1,$genders,'name|name','name|'.$student['gender'])?><br>
+
 	<?=insertTextInput('Reference No','student[referenceno]',$student['referenceno'],'','Enter the students\'s reference no','text',1,'||Name is required')?><br>
 	
 	<?=insertSelect('Father','student[fparentid]','','Select the father',1,1,$males,'name|id','id|'.$student['fparentid'],'','data-role="select2"')?><br>

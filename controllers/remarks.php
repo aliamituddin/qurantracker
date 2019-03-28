@@ -94,10 +94,18 @@ if ( $action == 'process_remarks' ) {
 
 if ( $action == 'yearly_reports' ) {
 
-	if (USERTYPE == 'admin') {
-		$tData['reports'] = $StudentReports->search();
-	} else {
-		$tData['reports'] = $StudentReports->search('',SYS_ID);
+	$tData['student'] = $_GET['student'];
+	$tData['teacherid'] = $_GET['teacherid'];
+	if (USERTYPE == 'admin') { 
+		$tData['teachers'] = $Teachers->search();
+	}
+
+	if ($tData['student'] || $tData['teacherid']) {
+		if (USERTYPE == 'admin') {
+			$tData['reports'] = $StudentReports->search('',$tData['teacherid'],'',$tData['student']);
+		} else {
+			$tData['reports'] = $StudentReports->search('',SYS_ID,'',$tData['student']);
+		}
 	}
 
 	$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
@@ -131,11 +139,11 @@ if ( $action == 'yearly_report_add' ) {
 }
 
 if ( $action == 'yearly_report_save' ) {
-	// die;
+	// print_r($_POST['partner']); die;
 	$id = $_POST['id'];
 
 	$miniData = $_POST['report'];
-	$miniData['frequency'] = $_POST['frequency'];
+	$miniData['frequencyid'] = $_POST['frequency'];
 	$miniData['makhraj'] = $_POST['makhraj-rate'];
 	$miniData['fluency'] = $_POST['fluency'];
 	$miniData['tajweed'] = $_POST['tajweed-rate'];
@@ -160,7 +168,7 @@ if ( $action == 'yearly_report_save' ) {
 	$spData['sreportid'] = $id;
 	$StudentPartners->deleteWhere($spData);
 	foreach ($partner as $v=>$r) {
-		$spData['partner'] = $r;
+		$spData['partnerid'] = $r;
 		if ($r) $StudentPartners->insert($spData);
 	}
 	
@@ -168,7 +176,7 @@ if ( $action == 'yearly_report_save' ) {
 	$swData['sreportid'] = $id;
 	$StudentWeaknesses->deleteWhere($swData);
 	foreach ($weakness as $v=>$r) {
-		$swData['weakness'] = $r;
+		$swData['weaknessid'] = $r;
 		if ($r) $StudentWeaknesses->insert($swData);
 	}
 
@@ -176,7 +184,7 @@ if ( $action == 'yearly_report_save' ) {
 	$smData['sreportid'] = $id;
 	$StudentMakhrajs->deleteWhere($smData);
 	foreach ($makhraj as $v=>$r) {
-		$smData['makhraj'] = $r;
+		$smData['makhrajid'] = $r;
 		if ($r) $StudentMakhrajs->insert($smData);
 	}
 
@@ -184,12 +192,23 @@ if ( $action == 'yearly_report_save' ) {
 	$stData['sreportid'] = $id;
 	$StudentTajweeds->deleteWhere($stData);
 	foreach ($tajweed as $v=>$r) {
-		$stData['tajweed'] = $r;
+		$stData['tajweedid'] = $r;
 		if ($r) $StudentTajweeds->insert($stData);
 	}
 
 	$_SESSION['message'] = 'Student Yearly Report Saved';
 	
+	redirectBack();
+}
+
+if ( $action == 'yearly_report_flag' ) {
+	
+	$id = $_GET['id'];
+	$miniData['flag'] = $_GET['flag'];
+
+	$StudentReports->update($id,$miniData);
+	$_SESSION['message'] = 'Flag Set';
+
 	redirectBack();
 }
 
@@ -224,51 +243,15 @@ if ( $action == 'getEnrollmentReport' ) {
 	$id = $tData['report']['id'];
 	if (!$id) $id = 0;
 
-	if ($id) $partners = $StudentPartners->search($id);
-	$validPartners = array('parent','maalim','teacher','madressa','none');
-	foreach ((array)$partners as $r) {
-		if (in_array($r['partner'],$validPartners)) {
-			$tData['partners'][$r['partner']] = $r['partner'];
-		}
-		else if ($r['partner']) {
-			$tData['partners']['other'] = $r['partner'];
-		}
-	}
+	$tData['spartners'] = $StudentPartners->search($id,1);
+	$tData['sweaknesses'] = $StudentWeaknesses->search($id,1);
+	$tData['smakhrajs'] = $StudentMakhrajs->search($id,1);
+	$tData['stajweeds'] = $StudentTajweeds->search($id,1);
 	
-	$tData['wletters'] = $StudentWeaknesses->search($id);
-	if ($id) $otherWeakness = $StudentWeaknesses->getOtherLetters($id);
-	foreach ((array)$otherWeakness as $r) {
-		if ($r['weakness'] == 'all') {
-			$tData['weakness'][$r['weakness']] = $r['weakness'];
-		} else {
-			$tData['weakness']['other'] = $r['weakness'];
-		}
-	}
-	
-	$tData['mletters'] = $StudentMakhrajs->search($id);	
-	if ($id) $otherMakhraj = $StudentMakhrajs->getOtherLetters($id);
-	$validMakhraj = array('lip','tongue','throat','light','heavy','none');
-	foreach ((array)$otherMakhraj as $r) {
-		if (in_array($r['makhraj'],$validMakhraj)) {
-			$tData['makhraj'][$r['makhraj']] = $r['makhraj'];
-		} else {
-			$tData['makhraj']['other'] = $r['makhraj'];
-		}
-	}
-
-	if ($id) $tajweed = $StudentTajweeds->search($id);	
-	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','shaddah','maddah','slvowels','none','na');
-	foreach ((array)$tajweed as $r) {
-		if (in_array($r['tajweed'],$validTajweed)) {
-			$tData['tajweed'][$r['tajweed']] = $r['tajweed'];
-		} else {
-			$tData['tajweed']['other'] = $r['tajweed'];
-		}
-	}
-
 	$tData['levels'] = $Levels->search();
-	$tData['disciplines'] = $Disciplines->search();
-	$tData['improvements'] = $Improvements->search();
+	$tData['disciplines'] = $Disciplines->search(1);
+	$tData['improvements'] = $Improvements->search(1);
+	$tData['frequencies'] = $Frequencies->search(1);
 	
 	if ($language == 'swahili') {
 		$data['content'] = loadTemplate($folder.'yearly_report_student_swahili.tpl.php',$tData);
@@ -280,7 +263,7 @@ if ( $action == 'getEnrollmentReport' ) {
 if ($action == 'yearly_report_delete') {
 	$id = $_GET['id'];
 	$srData['sreportid'] = $id;
-
+	
 	$StudentPartners->deleteWhere($srData);
 	$StudentMakhrajs->deleteWhere($srData);
 	$StudentTajweeds->deleteWhere($srData);
@@ -288,7 +271,7 @@ if ($action == 'yearly_report_delete') {
 	$StudentReports->real_delete($id);
 
 	$_SESSION['message'] = 'Student Report Deleted';
-
+	
 	redirectBack();
 }
 
@@ -304,31 +287,48 @@ if ($action == 'yearly_report_print') {
 			$report = $StudentReports->search($e['id']);
 			$report = $report[0];
 			if ($report['id']) {
-				$reports[] = retrieveStudentReport($report['id']);
+				$id = $report['id'];
+				$reports[$id]['report'] = $StudentReports->getDetails($id);
+				
+				$reports[$id]['partners'] = $StudentPartners->search($id);
+				$reports[$id]['weaknesses'] = $StudentWeaknesses->search($id);
+				$reports[$id]['makhrajs'] = $StudentMakhrajs->search($id);
+				$reports[$id]['tajweeds'] = $StudentTajweeds->search($id);
 			} else {
 				$tData['missings'][] = $e['student'];
 			}
 		}
 	} else {
 		if ($id) {
-			$reports[] = retrieveStudentReport($id);
+			$reports[$id]['report'] = $StudentReports->getDetails($id);
+			
+			$reports[$id]['partners'] = $StudentPartners->search($id);
+			$reports[$id]['weaknesses'] = $StudentWeaknesses->search($id);
+			$reports[$id]['makhrajs'] = $StudentMakhrajs->search($id);
+			$reports[$id]['tajweeds'] = $StudentTajweeds->search($id);
 		}
 	}
 	$tData['reports'] = $reports;
-
+	
 	$data['content'] = loadTemplate($folder.'yearly_report_print.tpl.php',$tData);
 }
 
 if ($action == 'yearly_report_export') {
 	$data['layout'] = 'layout_excel.tpl.php';
 	$id = $_GET['id'];	
-
-	$enrollments = $Enrollments->search($gradeid,$classid);
+	
+	$enrollments = $Enrollments->search();
 	foreach ($enrollments as $e) {
 		$report = $StudentReports->search($e['id']);
 		$report = $report[0];
 		if ($report['id']) {
-			$reports[] = retrieveStudentReport($report['id']);
+			$id = $report['id'];
+			$reports[$id]['report'] = $StudentReports->getDetails($id);
+			
+			$reports[$id]['partners'] = $StudentPartners->search($id);
+			$reports[$id]['weaknesses'] = $StudentWeaknesses->search($id);
+			$reports[$id]['makhrajs'] = $StudentMakhrajs->search($id);
+			$reports[$id]['tajweeds'] = $StudentTajweeds->search($id);
 		} else {
 			$tData['missings'][] = $e['student'];
 		}
@@ -336,70 +336,4 @@ if ($action == 'yearly_report_export') {
 	$tData['reports'] = $reports;
 
 	$data['content'] = loadTemplate($folder.'yearly_report_export.tpl.php',$tData);
-}
-
-function retrieveStudentReport($id) {
-	global $StudentReports;
-	global $StudentWeaknesses;
-	global $StudentMakhrajs;
-	global $StudentTajweeds;
-	global $StudentPartners;
-
-	$tData['report'] = $StudentReports->getDetails($id);
-
-	$partners = $StudentPartners->search($id);
-	$validPartners = array('parent','maalim','teacher','madressa','none');
-	$partnerNames = array('Partner/Guardian at home','Maalim comes home','Goes to a Quran teachers home','Attends Madratus Sadiq or other Madrasah','Does not recite Quran at home and does not attend other Madrasah');
-	foreach ((array)$partners as $r) {
-		$key = array_search($r['partner'], $validPartners);
-		if (is_numeric($key)) {
-			$tData['partners'][] = $partnerNames[$key];
-		}
-		else if ($r['partner']) {
-			$tData['partners'][] = $r['partner'];
-		}
-	}
-
-	$wletters = $StudentWeaknesses->search($id);	
-	foreach ($wletters as $v=>$r) {
-		if ($r['weakness']) $tData['wletters'][] = $r['name'];
-	}
-	if ($id) $otherWeakness = $StudentWeaknesses->getOtherLetters($id);
-	foreach ((array)$otherWeakness as $r) {
-		if ($r['weakness'] == 'all') {
-			$tData['wletters'][] = 'The student can recognize all the letters well Mashallah!';
-		} else {
-			$tData['wletters'][] = $r['weakness'];
-		}
-	}
-
-	$mletters = $StudentMakhrajs->search($id);	
-	foreach ($mletters as $v=>$r) {
-		if ($r['makhraj']) $tData['mletters'][] = $r['name'];
-	}
-	if ($id) $otherMakhraj = $StudentMakhrajs->getOtherLetters($id);
-	$validMakhraj = array('lip','tongue','throat','light','heavy','none');
-	$makhrajNames = array('Sound Origination- Lip letters','Sound Origination- Tongue letters','Sound Origination- Throat letters','Light letters','Heavy letters',"The student's Makharij is excellent MashaAllah!");
-	foreach ((array)$otherMakhraj as $v=>$r) {
-		$key = array_search($r['makhraj'], $validMakhraj);		
-		if (is_numeric($key)) {
-			$tData['mletters'][] = $makhrajNames[$key];
-		} else {
-			$tData['mletters'][] = $r['makhraj'];
-		}
-	}
-
-	if ($id) $tajweeds = $StudentTajweeds->search($id);	
-	$validTajweed = array('stop','nst','idghaam','idhaar','iqlaab','ikhfaa','ms','qalqala','raa','laam','hll','maddah','shaddah','slvowels','none','na');
-	$tajweedNames = array('Stopping signs','Rules of Nun Sakin and Tanween','Idghaam','Idhaar','Iqlaab','Ikhfaa','Rules of Meem Sakin','Qalqala','Rules of Raa','Rules of Laam','Heavy and Light letters','Shaddah','Maddah','Short/Long vowels','Mashallah the student follows all the Tajweed rules well!','We have not covered Tajweed rules yet');
-	
-	foreach ((array)$tajweeds as $r) {
-		$key = array_search($r['tajweed'], $validTajweed);	
-		if (is_numeric($key)) {
-			$tData['tajweeds'][] = $tajweedNames[$key];
-		} else {
-			$tData['tajweeds'][] = $r['tajweed'];
-		}
-	}
-	return $tData;
 }

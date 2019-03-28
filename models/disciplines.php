@@ -4,9 +4,9 @@
 	{ 
 		var $table = "disciplines";
 		
-		function search($name='') {
+		function search($status='') {
 			$sql = "Select * from " . $this->table . " where 1 = 1";
-			if ( $name ) $sql .= " and name like '%" . $name . "%'";
+			if ( is_numeric($status) ) $sql .= " and status = $status ";
 			
 			return $this->fetchRows($sql);
 		}

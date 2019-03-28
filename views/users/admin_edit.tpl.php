@@ -10,7 +10,7 @@
 	
 	<?=insertTextInput('Email','admin[email]',$admin['email'],'','Enter the admins\'s email','email',1,'required||Email is required')?><br>
 	
-	<?=insertCheckboxInput('Active','user[status]',1,'','Is an active user','switch',$admin['status'].'|1','place-right')?><br>
+	<?=insertCheckboxInput('Active','user[status]',1,'place-right','Is an active user','switch',$admin['status'].'|1')?><br>
 
 	<?=insertTextInput('Username','user[username]',$admin['username'],'username','Enter a unique username','text',1,'required||Username is required')?><br>
 	

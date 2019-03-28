@@ -10,6 +10,11 @@
 	$Letters = new Letters();
 	$Disciplines = new Disciplines();
 	$Improvements = new Improvements();
+	$Frequencies = new Frequencies();
+	$Weaknesses = new Weaknesses();
+	$Tajweeds = new Tajweeds();
+	$Makhrajs = new Makhrajs();
+	$Partners = new Partners();
 	
 	$Students = new Students();
 	$Parents = new Parents();

@@ -4,11 +4,13 @@
 	{ 
 		var $table = "studentweaknesses";
 		
-		function search($sreportid=0) {
-			$sql = "select l.id, l.name, sw.weakness from letters as l
-					left join studentweaknesses as sw on l.name = sw.weakness and sw.sreportid = $sreportid
-					order by l.id ";
-			
+		function search($sreportid,$status='') {
+			$sql = "select sw.*, w.id as wid, w.override, w.description, w.description_sw from studentweaknesses as sw
+					right join weaknesses as w on w.id = sw.weaknessid and sw.sreportid = $sreportid
+					where 1=1 ";
+			if (is_numeric($status)) $sql .= " and w.status = $status";
+			$sql .= " order by w.id";
+			// echo $sql;
 			return $this->fetchRows($sql);
 		}
 

@@ -9,7 +9,7 @@ if ( $action == 'enrollments' ) {
 	
 	$tData['grades'] = $Grades->search();
 	$tData['classes'] = $Classes->search();
-	$tData['enrolls'] = $Enrollments->search($tData['gradeid'],$tData['classid']);
+	if ($tData['gradeid']) $tData['enrolls'] = $Enrollments->search($tData['gradeid'],$tData['classid']);
 	
 	$data['content'] = loadTemplate($folder.'enrollments.tpl.php',$tData);
 }

@@ -1,0 +1,94 @@
+Hope you are well. Here's the list of pointers/changes/edits we discussed on sat for the progress report for further discussion with Shakir:
+
+1. We want to maintain last years progress reports please as that will serve as our baseline data and we will now be adding onto that so inshAllah by end of this year we will have in total 3 data points (Nov'18, Apr'19, Nov'19) and we can then ideally produce pie charts and bar graphs to represent the summary statistics and individual student progress. 
+Terms and Year has to be maintained.Did we save the year for the previous Data?
+
+2. We have new students this year and the serial numbers of students have changed. We are trying to see if we can adapt the unique serial numbers that madrasah had once created or we use the ones our system created in Nov. I will get back to you once Kaneezbai disucsses this with the office.
+Remeber the Reference numbers we added last time to the db and later on this number was used in reprots. The series has chnaged this year too. 
+I was thinking we can either update them this time. I and fatma can help out with update from excel to db once they get the numbers.
+
+3. Only if possible- change Quran to Qur'an in the reports. ' to be used , everywhere in the application where ever Quran has been mentioned.
+
+4. Ensure reports don't get submitted if fields are empty- I think this may have been resolved. So last time i believe this was resolved. Just for precaution this was mentioned during meeting
+
+5. Include a highlight/flag option for Q-admins so they know which reports require follow ups. 
+  So this is a new requirement. Basically after teachers submit the reports, Qadmin team goes through each and every report to check the comments and input of data done correctly or not. During the checking they want an option "To be checked again" by check box (this to be marked on the student name.  (Something like mark Important  mails in hotmail email) even sorted in that manner too those reports marked "To be checked again" appear on top. Is it doable? if yes, then please if you can give the how long will it take to do it/
+
+6. Set a condition for all the qns on Tajweed, Makhraj and letter recognition that the teacher can only select upto 7 options.
+  There are more than 10 options in each of these questions, once the teacher chooses 7 options the system shouldn't allow teacher to choose more.
+
+7. Wherever the word MashA appears on the form- please spell it out in full MashAllah eg. 8th comment under discipline question
+
+
+8. Remove the  'OTHER' Option from the questions on letter recognition, makhraj and tajweed. But let it remain in the 3 rd question on Qur'an recitation.
+
+
+9. Add the following options under Tajweed:
+-Huruful Muqattat
+-Silent Letters
+-Sukoon
+-Silent letters followed by Shaddah
+-Ghunnah
+-Accuracy
+-Fluency 
+-To the option of 'We have not covered all Tajweed rules yet' please continue the sentence and add to it- 'We have not covered all Tajweed rules yet, but those that are covered, the student has grasped them well MashAllah (Put a condition on this option that if this is selected then teacher can't select other options)
+-Add- 'We have recently started Big Qur'an, so we have not covered Tajweed rules yet' (Put a condition on this option that if this is selected then teacher can't select other options)
+-Remove/Hide option of 'Rules of Nun sakin and Tanween'
+-In the option of 'Mashallah the student follows all the Tajweed rules well'- Remove the word 'ALL' (Put a condition on this option that if this is selected then teacher can't select other options)
+
+10. Under letter recognition, add option of 
+-'The student struggles to recognize above letter(s) in the joint form'
+- In the option of 'The student can recognize all the letters well Mashallah!' - Remove the word 'ALL' (Put a condition on this option that if this is selected then teacher can't select other options)
+
+11. Please remove/hide the scale question on Makhraj, Fluency, Tajweed and Accuracy. 
+These questions are supposed to be hidden. As we have already saved data from previous data entry i thought better to hhide than delete these questions. Possible?
+If hidden is possible, the coding while saving the form will change where these questions are not must to answer.
+
+12. Under question 3 on with whom the Student recites Qur'an with, please add another option
+-Recites individually
+Please remove/hide the option on 'None of the days- except Sat Madrasah'
+
+14. When producing reports- In the comments part- after the names, the word 'Is' should be 'is'.
+We discussed the possibility of Q-Admins having access to edit comments and add new comments. 
+
+Also- can name appear as first name only under 'comments' in the report instead of spelling out the whole name?
+The report submission which comes from the application, the comment section you were joining 2 comments and the name of the student. 
+They have requested only first name to appear instead of full name. eg Rubab is.... instead of Rubab Razahussein Is...
+
+15. Can comments show clearly and in full on the browser so the teachers can select easily and view the whole comment?
+This happens when mobile devices are used to open the application. The comments are cut. any technical advice?
+
+
+16. For the last question on ' Any other comments or information you would like to share about the student? (optional)' can we please rephrase to  
+
+'Any other comments, concerns, suggestions, feedback or information you would like to share for Q-Admin attention? (Any behavior/discipline issues, if child has any special needs, does he/she require learning support or counseling? etc.). (Please note-any comments entered here will not appear on the report and is only for the Q-Admins)'
+
+17. For the question on Tajweed- please rephrase the question to:
+'The student needs more practise on the following Tajweed rules (Please note- select the tajweed rules that the child knows and needs practice on. The rules may not have been necessarily taught by you but the child may have been taught in previous years by other teachers)'
+
+18. For the question on Makhraj, we want to specify the letters in brackets for the following options:
+-Sound Origination- Lip letters (   )
+-Sound Origination- Tongue letters (  )
+-Sound Origination- Throat letters (   )
+-Heavy letters (    )
+I dont have the Arabic key board to type the letters out so have attached the document which has the alphabet letters for each of the above sound origination categories and another pic specifying the heavy letters if you can include those on the report please)
+
+19. Under comments section, we want to add the following comments please and would be great if Q-Admin can get access to make further edits:
+
+-Has the potential to greatly improve Qur'an recitation, however needs more guidance and supervision during recitation.
+-I strongly encourage your child to attend Madrasah Sadiq or recite with a maalim at home to improve fluency and Qur'an recitation.
+-Needs to be more attentive in bringing the H/W card for keeping records so the student can practice Qur'an recitation at home.
+-Tends to confuse dotted letters when in joint form but with more practice, the student will be able to improve.
+-Tends to make occasional mistakes in accuracy and overlooks vowels and harakats. Please continue encouraging practice at home to excel at Qur'an recitation.
+-The student frequently forgets bringing the manuals to Madrasah that greatly affects progress. Please ensure your child brings their Qur'an manual every week as I see great potential in the student to do well in Qur'an. 
+-The student recites very fast and tends to make accuracy mistakes. Daily practice will help in maintaining an appropriate pace which will greatly improve Qur'an recitation. 
+
+So there are changes is comments they wanted to remove some comments , some comments to be rectified.  
+Is it possible to give the Admin option to add and modify the comments (both comments) so in this way admins will  be responsible on whatever they want to modify or add.
+I feel this will be a better option for them rather than us doing it everytime for them. 
+If this is possible then we can also ask them to modify the comments and start each comment with small letters to resolve issue mentioned in point 14.
+
+
+19. I would like to edit some other comments to make them more sensible when they are combined with the Name on the reports. If its possible for Q-Admin to make changes, then I will edit them then.
+
+Also- is it possible to include gender as a category so I can edit the comments accordingly. At the moment- its referring to the child as 'the student' to avoid adding 'his/her'. If that option is possible- then we would ideally like to edit the comments to say 'his' for all the males and 'her' for all the females so its more of a personalized report.

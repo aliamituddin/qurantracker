@@ -5,7 +5,7 @@
 		var $table = "enrollments";
 		
 		function search($gradeid='',$classid='',$status='') {
-			$sql = "Select e.*, CONCAT(s.name,'-',g.name,c.name) as enrollment, s.name as student, g.name as grade, c.name as class, y.name as year from ".$this->table." as e
+			$sql = "Select e.*, CONCAT(s.name,'-',g.name,c.name) as enrollment, s.name as student, s.referenceno, g.name as grade, c.name as class, y.name as year from ".$this->table." as e
 					INNER JOIN grades as g on g.id = e.gradeid
 					INNER JOIN classes as c on c.id = e.classid
 					INNER JOIN years as y on y.id = e.yearid

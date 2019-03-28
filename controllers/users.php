@@ -6,7 +6,7 @@ if ( $action == 'students' ) {
 	
 	$tData['name'] = $_GET['name'];
 	
-	$tData['users'] = $Students->search($tData['name']);
+	if ($tData['name']) $tData['users'] = $Students->search($tData['name']);
 	
 	$data['content'] = loadTemplate($folder.'students.tpl.php',$tData);
 }
@@ -27,6 +27,9 @@ if ( $action == 'student_add') {
 	$tData['males'] = $Parents->search('','m');
 	$tData['females'] = $Parents->search('','f');
 	$tData['madrasahs'] = $Madrasahs->search();
+
+	$tData['genders'][0]['name'] = 'male';
+	$tData['genders'][1]['name'] = 'female';
 	
 	$data['content'] = loadTemplate($folder.'student_edit.tpl.php',$tData);
 }
@@ -75,6 +78,14 @@ if ( $action == 'ajax_student_save' ) {
 	
 	$response[]=$obj;
 	$data['content'] = $response;
+}
+
+if ($action == 'student_export') {
+	$data['layout'] = 'layout_excel.tpl.php';
+
+	$tData['students'] = $Enrollments->search();
+
+	$data['content'] = loadTemplate($folder.'student_export.tpl.php',$tData);
 }
 
 if ( $action == 'parents' ) {

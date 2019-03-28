@@ -490,7 +490,6 @@ if ( $action == 'ajax_benchremark_save' ) {
 	$data['content'] = $response;
 }
 
-
 if ($action == 'ajax_getLevelStages' ) {
 	$levelid = $_GET['levelid'];
 	

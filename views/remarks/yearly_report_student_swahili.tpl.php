@@ -27,25 +27,18 @@
 	<div class="row">
 		<div class='cell-sm'>
 			3. <label>Mwanafunzi anasoma Quran na (Unaweza kuchagua zaida ya moja):</label>
-			<?=insertCheckboxInput('Na mzazi/mlezi akiwa nyumbani','partner[]','parent','partner partner-yes','Select recitation partner','normal','parent|'.$partners['parent'])?>
-			<?=insertCheckboxInput('Na Maalim akiwa nyumbani','partner[]','maalim','partner partner-yes','Select recitation partner','normal','maalim|'.$partners['maalim'])?>
-			<?=insertCheckboxInput('Humfuata mwalimu wa Quran nyumbani kwake','partner[]','teacher','partner partner-yes','Select recitation partner','normal','teacher|'.$partners['teacher'])?>
-			<?=insertCheckboxInput('Humfuata Madrasatus Sadiq ma Madrasah','partner[]','madressa','partner partner-yes','Select recitation partner','normal','madressa|'.$partners['madressa'])?>
-			<?=insertCheckboxInput('Hasomi Quran nyumbani na hahudhurii Madrasah','partner[]','none','partner partner-none','Select recitation partner','normal','none|'.$partners['none'])?>
-			<?=insertTextInput('Nyinginezo','partner[]',$partners['other'],'partner','Enter other partner','text',1,'|Other is required')?>
+			<? foreach ($spartners as $v=>$r) { ?>
+				<?=insertCheckboxInput($r['description_sw'],'partner[]',$r['pid'],'partner partner-yes','Select recitation partner','normal',$r['pid'].'|'.$r['partnerid'])?>
+			<? } ?>
+			<?=insertTextInput('|Other','report[opartner]',$report['opartner'],'partner','Enter other partner','text',1,'|Other is required')?>
 		</div>
 	</div><br>
 	<div class="row">
 		<div class='cell-sm'>
 			4. <label>Je mwanafunzi husomaje Quran siku za wiki ukiondoa Madrasah Jumamosi:</label><br>
-			<?=insertRadioInput('Mara moja','frequency','1','frequency','Select the frequency',0,"1|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Mara mbili','frequency','2','frequency','Select the frequency',0,"2|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Mara tatu','frequency','3','frequency','Select the frequency',0,"3|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Mara nne','frequency','4','frequency','Select the frequency',0,"4|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Mara tano','frequency','5','frequency','Select the frequency',0,"5|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Mara sita','frequency','6','frequency','Select the frequency',0,"6|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Kila siku','frequency','7','frequency','Select the frequency',0,"7|".$report['frequency'],'required')?>
-			<?=insertRadioInput('Huhudhuria Madrasah Jumamosi tu','frequency','0','frequency','Select the frequency',0,"0|".$report['frequency'],'required')?>
+			<? foreach ($frequencies as $v=>$r) { ?>
+				<?=insertRadioInput($r['description_sw'],'frequency',$r['id'],'frequency','Select the frequency',0,$r['id']."|".$report['frequencyid'],'required')?>
+			<? } ?>
 			<span class='invalid_feedback'>
 				Chagua mmoja
 			</span>
@@ -54,7 +47,8 @@
 </div><br>
 
 <div class='grid border bd-gray p-4'>
-	<div class='row'>
+	<!--
+	<div class='row d-none'>
 		<div class='cell-sm'>
 			1. <label>Elezea Makhraj ya mwanafunzi</label>
 			<table style='width:100%'>
@@ -80,19 +74,14 @@
 			</table>
 		</div>
 	</div><br>
+	-->
 	<div class='row'>
 		<div class='cell-sm'>
-			2. <label>Mwanafunzi anhitaji mazoezi zaidi kuboresha Makhraj ya herufi zifuatazo:</label><br>
-			<? foreach ($mletters as $r) { ?>
-				<?=insertCheckboxInput($r['name'],'makhraj[]',$r['name'],'makhraj','Select student makhraj weaknesses','normal',$r['name'].'|'.$r['makhraj'])?>
-			<? } ?>
-			<?=insertCheckboxInput('Satui inapotengenezwa - Herufi za mdomoni','makhraj[]','lip','makhraj','Select student makhraj weaknesses','normal','lip|'.$makhraj['lip'])?>
-			<?=insertCheckboxInput('Satui inapotengenezwa - Herufi za kwenye ulimi','makhraj[]','tongue','makhraj','Select student makhraj weaknesses','normal','tongue|'.$makhraj['tongue'])?>
-			<?=insertCheckboxInput('Satui inapotengenezwa - Herufi za kwenye koromeo','makhraj[]','throat','makhraj','Select student makhraj weaknesses','normal','throat|'.$makhraj['throat'])?>
-			<?=insertCheckboxInput('Herufi nyepesi','makhraj[]','light','makhraj','Select student makhraj weaknesses','normal','light|'.$makhraj['light'])?>
-			<?=insertCheckboxInput('Herufi nzito','makhraj[]','heavy','makhraj','Select student makhraj weaknesses','normal','heavy|'.$makhraj['heavy'])?>
-			<?=insertCheckboxInput('Makhraj yake ni nzuri kabisa. Mashallah!','makhraj[]','none','makhraj','Select student makhraj weaknesses','normal','none|'.$makhraj['none'])?><br>
-			<?=insertTextInput('|Nyinginezo','makhraj[]',$makhraj['other'],'makhraj','Enter other issues','text',1,'|Other is required')?>
+			1. <label>Mwanafunzi anhitaji mazoezi zaidi kuboresha Makhraj ya herufi zifuatazo:</label><br>
+			<? foreach ($smakhrajs as $v=>$r) { ?>
+				<?=insertCheckboxInput($r['description_sw'],'makhraj[]',$r['mid'],'makhraj','Select student makhraj weaknesses','normal',$r['mid'].'|'.$r['makhrajid'])?>
+			<? } ?><br>
+			<?//=insertTextInput('|Nyinginezo','makhraj[]',$makhraj['other'],'makhraj','Enter other issues','text',1,'|Other is required')?>
 		</div>
 	</div><br>
 </div>
@@ -102,12 +91,11 @@
 	<div class='grid'>
 		<div class='row'>
 			<div class='cell-sm'>
-				3. <label>Mwanafunzi anahitaji kufanya kazi kutambua herufi zifuatazo:</label><br>
-				<? foreach ($wletters as $r) { ?>
-					<?=insertCheckboxInput($r['name'],'weakness[]',$r['name'],'weakness','Select student weaknesses','normal',$r['name'].'|'.$r['weakness'])?>
-				<? } ?>
-				<?=insertCheckboxInput('Mwanafunzi ana uwezo wa kutambua herufi zote vizuri kabisa. Mashallah!','weakness[]','all','weakness','Select student weaknesses','normal','all|'.$weakness['all'])?><br>
-				<?=insertTextInput('|Nyinginezo','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
+				2. <label>Mwanafunzi anahitaji kufanya kazi kutambua herufi zifuatazo:</label><br>
+				<? foreach ($sweaknesses as $v=>$r) { ?>
+					<?=insertCheckboxInput($r['description_sw'],'weakness[]',$r['wid'],'weakness','Select student weaknesses','normal',$r['wid'].'|'.$r['weaknessid'])?>
+				<? } ?><br>
+				<?//=insertTextInput('|Nyinginezo','weakness[]',$weakness['other'],'weakness','Enter other weakness','text',1,'|Other is required')?>
 			</div>
 		</div>
 	</div>
@@ -116,9 +104,10 @@
 <div class="bigquran-options border bd-gray p-4">
 	<h3>Quran Kubwa</h3>
 	<div class='grid'>
-		<div class='row'>
+		<!--
+		<div class='row d-none'>
 			<div class='cell-sm'>
-				3. <label>Mwanafunzi husoma Quran kwa urahisi gani?</label><br>
+				X. <label>Mwanafunzi husoma Quran kwa urahisi gani?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Kawaida Tu</td>
@@ -144,7 +133,7 @@
 		</div><br>
 		<div class='row'>
 			<div class='cell-sm'>
-				4. <label>Tajweed ya mwanafunzi ikoja?</label><br>
+				X. <label>Tajweed ya mwanafunzi ikoja?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Kawaida Tu</td>
@@ -168,31 +157,20 @@
 				</table>
 			</div>
 		</div><br>
+		-->
 		<div class='row'>
 			<div class='cell-sm'>
-				5. <label>Mwanafunzi anahitaji msaada zaidi kwenye sheria zifuatazo za Tajweed</label><br>
-				<?=insertCheckboxInput('Alama za waqf','tajweed[]','stop','tajweed','Select student makhraj weaknesses','normal','stop|'.$tajweed['stop'])?>
-				<?=insertCheckboxInput('Sheria za Nun Sakin na Tanween','tajweed[]','nst','tajweed','Select student makhraj weaknesses','normal','nst|'.$tajweed['nst'])?>
-				<?=insertCheckboxInput('Idghaam','tajweed[]','idghaam','tajweed','Select student makhraj weaknesses','normal','idghaam|'.$tajweed['idghaam'])?>
-				<?=insertCheckboxInput('Idhaar','tajweed[]','idhaar','tajweed','Select student makhraj weaknesses','normal','idhaar|'.$tajweed['idhaar'])?>
-				<?=insertCheckboxInput('Iqlaab','tajweed[]','iqlaab','tajweed','Select student makhraj weaknesses','normal','iqlaab|'.$tajweed['iqlaab'])?>
-				<?=insertCheckboxInput('Ikhfaa','tajweed[]','ikhfaa','tajweed','Select student makhraj weaknesses','normal','ikhfaa|'.$tajweed['ikhfaa'])?>
-				<?=insertCheckboxInput('Sheria za Meem Sakin','tajweed[]','ms','tajweed','Select student makhraj weaknesses','normal','ms|'.$tajweed['ms'])?>
-				<?=insertCheckboxInput('Qalqala','tajweed[]','qalqala','tajweed','Select student makhraj weaknesses','normal','qalqala|'.$tajweed['qalqala'])?>
-				<?=insertCheckboxInput('Sheria za Raa','tajweed[]','raa','tajweed','Select student makhraj weaknesses','normal','raa|'.$tajweed['raa'])?>
-				<?=insertCheckboxInput('Sheria za Laam','tajweed[]','laam','tajweed','Select student makhraj weaknesses','normal','laam|'.$tajweed['laam'])?>
-				<?=insertCheckboxInput('Herufi nyepesi na nzito','tajweed[]','hll','tajweed','Select student makhraj weaknesses','normal','hll|'.$tajweed['hll'])?>
-				<?=insertCheckboxInput('Maddah','tajweed[]','maddah','tajweed','Select student makhraj weaknesses','normal','maddah|'.$tajweed['maddah'])?>
-				<?=insertCheckboxInput('Shaddah','tajweed[]','shaddah','tajweed','Select student makhraj weaknesses','normal','shaddah|'.$tajweed['shaddah'])?>
-				<?=insertCheckboxInput('Short/Long vowels','tajweed[]','slvowels','tajweed','Select student makhraj weaknesses','normal','slvowels|'.$tajweed['slvowels'])?>
-				<?=insertCheckboxInput('Mashallah mwanafunzi anafuata sheria zote za tajweed','tajweed[]','none','tajweed','Select student makhraj weaknesses','normal','none|'.$tajweed['none'])?>
-				<?=insertCheckboxInput('Hatujafundisha sheria za Tajweed','tajweed[]','na','tajweed','Select student makhraj weaknesses','normal','na|'.$tajweed['na'])?>
-				<?=insertTextInput('|Nyinginezo','tajweed[]',$tajweed['other'],'tajweed','Enter other issues','text',1,'|Other is required')?>
+				2. <label>Mwanafunzi anahitaji msaada zaidi kwenye sheria zifuatazo za Tajweed</label><br>
+				<? foreach ($stajweeds as $v=>$r) { ?>
+					<?=insertCheckboxInput($r['description_sw'],'tajweed[]',$r['tid'],'tajweed','Select student makhraj weaknesses','normal',$r['tid'].'|'.$r['tajweedid'])?>
+				<? } ?>
+				<?//=insertTextInput('|Nyinginezo','tajweed[]',$tajweed['other'],'tajweed','Enter other issues','text',1,'|Other is required')?>
 			</div>
 		</div><br>
-		<div class='row'>
+		<!--
+		<div class='row d-none'>
 			<div class='cell-sm'>
-				6. <label>Usahihi wa mwanafunzi kwenye kusoma Quran upoje?</label><br>
+				X. <label>Usahihi wa mwanafunzi kwenye kusoma Quran upoje?</label><br>
 				<table style='width:100%'>
 					<tr>
 						<td colspan=2>Kawaida Tu</td>
@@ -216,6 +194,7 @@
 				</table>
 			</div>
 		</div><br>
+		-->
 	</div>
 </div>
 <br>
@@ -223,12 +202,12 @@
 <div class='grid border bd-gray p-4'>
 	<div class='row'>
 		<div class='cell-sm'>
-			1. <?=insertSelect('Haiba na nidhamu ya mwanafunzi vipoje? (Tafadhali tazamo hapo chini ni sentensi zipi zinamhusu huyu mwanafunzi)','report[disciplineid]','disciplineid','Elezea haiba na nidhamu',0,1,$disciplines,'description_sw|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','data-role="select"')?>
+			1. <?=insertSelect('Haiba na nidhamu ya mwanafunzi vipoje? (Tafadhali tazamo hapo chini ni sentensi zipi zinamhusu huyu mwanafunzi)','report[disciplineid]','disciplineid','Elezea haiba na nidhamu',0,1,$disciplines,'description_sw|id','id|'.$report['disciplineid'],'required not=""|Discipline is required','')?>
 		</div>
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			2. <?=insertSelect('Ni maeneo yapi mwanafunzi ameboresha kuonyesha mabadiliko? (Tafadhali chagua sentensi zinazoendana na huyu mwanafunzi)','report[improvementid]','improvementid','Elezea maeneo ya kujiboresha',0,1,$improvements,'description_sw|id','id|'.$report['improvementid'],'required not=""|Improvement is required','data-role="select"')?>
+			2. <?=insertSelect('Ni maeneo yapi mwanafunzi ameboresha kuonyesha mabadiliko? (Tafadhali chagua sentensi zinazoendana na huyu mwanafunzi)','report[improvementid]','improvementid','Elezea maeneo ya kujiboresha',0,1,$improvements,'description_sw|id','id|'.$report['improvementid'],'required not=""|Improvement is required','')?>
 		</div>
 	</div><br>
 	<div class='row'>
@@ -245,7 +224,7 @@
 		$('.disciplineid').find('option').each(function(){
 			var discipline = $(this).text();
 			if (discipline) {
-				discipline = '<?=ucwords(strtolower($enrollment['student']))?> '+discipline;
+				discipline = '<?=getFirstName($enrollment['student'])?> '+discipline;
 				$(this).text(discipline);
 			}
 		})
@@ -293,7 +272,7 @@
 		var levelid = $('.levelid').val();
 		var error = 0;
 		if (levelid == 5) {
-			error = validateBigQuranOptions();
+			// error = validateBigQuranOptions();
 		} else {
 
 		}	
@@ -304,28 +283,60 @@
 		}
 	}
 
-	function unselectOtherPartners() {
-		$('.partner-yes').find('input[type=checkbox]:checked').each(function(){
-			$(this).click();
-		});
+	function unselectOtherOptions(obj) {
+		obj = $(obj).find('input').get(0);
+
+		if ( $(obj).prop('checked') == true) {
+			var group = $(obj).data('group');
+			$('.'+group).find('input').prop('checked',false);
+			$(obj).prop('checked',true);
+		}
+	}
+	
+	function unselectOverrideOptions(obj) {
+		obj = $(obj).find('input').get(0);
+
+		if ( $(obj).prop('checked') == true) {
+			var group = $(obj).data('group');
+			$('.override.'+group).find('input').prop('checked',false);
+		}
 	}
 
-	function unselectNonePartner() {
-		$('.partner-none').find('input[type=checkbox]:checked').click();
+	function checkMaxOptions(obj) {
+		var maxOptions = 7;
+
+		obj = $(obj).find('input').get(0);
+		var group = $(obj).data('group');
+
+		var checkedOptions=0;
+		$('.'+group).each( function() {
+			var checkedInput = $(this).find('input').prop('checked');
+			if (checkedInput == true) {
+				checkedOptions++;
+			}
+		})
+		if (checkedOptions > maxOptions) {
+			$(obj).prop('checked',false);
+			triggerError('Chaguo 7 tu zinaruhusiwa')
+		}
 	}
 
 	$( function() {
 		getStages();
 		showLevelFields();
-		// $('.improvementid').select2();
 		prependStudentName();
+		$('.improvementid').select2();
+		$('.disciplineid').select2();
 	})
 
-	$(document).on('click','.partner-none',function() {		
-		unselectOtherPartners();
+	$(document).on('click','.override',function() {		
+		unselectOtherOptions(this);
+	})
+	$(document).on('click','.no-override',function() {		
+		unselectOverrideOptions(this);
+	})
+	$(document).on('click','.makhraj,.weakness,.tajweed',function() {		
+		checkMaxOptions(this);
 	})
 
-	$(document).on('click','.partner-yes',function() {		
-		unselectNonePartner();
-	})
 </script>

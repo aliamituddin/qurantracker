@@ -4,7 +4,7 @@
 	{ 
 		var $table = "studentreports";
 		
-		function search($enrollid='',$teacherid='',$yearid='') {
+		function search($enrollid='',$teacherid='',$yearid='',$student='') {
 			$sql = "Select sr.*, st.id as studentid, g.id as gradeid, c.id as classid, t.name as teacher, st.name as student, y.name as year, r.name as term, l.name as level, s.name as stage, g.name as grade, c.name as class from studentreports as sr
 					inner join enrollments as e on e.id = sr.enrollid
 					inner join students as st on st.id = e.studentid
@@ -19,7 +19,8 @@
 			if ( $enrollid ) $sql .= " and sr.enrollid = $enrollid";
 			if ( $teacherid ) $sql .= " and sr.teacherid = $teacherid";
 			if ( $yearid ) $sql .= " and sr.yearid = $yearid";
-			
+			if ( $student ) $sql .= " and st.name like '%$student%'";
+			// echo $sql;
 			return $this->fetchRows($sql);
 		}
 

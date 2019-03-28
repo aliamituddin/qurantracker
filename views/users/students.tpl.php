@@ -1,15 +1,24 @@
 <h2> Students </h2>
 
 <div>
-	<span class="place-right"> <a class="button" href="#" onclick="openWindow('?module=users&action=student_add')"> Add </a> </span>
-	<form method="GET" class='no-visible' <?=createValidator()?> >
+	<span class="place-right"> <a class="button" href="#" onclick="openWindow('?module=users&action=student_add')"> Add </a> </span> 
+	<span class="place-right mr-5"> <a class="button" href="?module=users&action=student_export"> Export </a> </span> <br>
+	<form method="GET" class='visible' >
 		<input type="hidden" name="module" value="users">
 		<input type="hidden" name="action" value="students">
-		<label>Name</label> 
-		<div class="input-control text">
-			<input type="text" name="name" value="<?=$name?>">
-		</div
-		<input type="submit" value="Search">
+		<div class='grid'>
+			<div class='row'>
+				<div class='cell colspan10'>
+					<label>Name</label> 
+					<div class="input-control text">
+						<input type="text" name="name" value="<?=$name?>">
+					</div>
+				</div>
+				<div class='cell colspan2'>
+					<input type="submit" value="Search">
+				</div>
+			</div>
+		</div>
 	</form>
 </div>
 
@@ -20,6 +29,7 @@
 				<th>&nbsp;</th>
 				<th>No.</th>
 				<th>Name</th>
+				<th>Gender</th>
 				<th>Father</th>
 				<th>Mother</th>
 				<th>Madrasah</th>
@@ -39,6 +49,7 @@
 			</td>
 			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$id+1?></td>
 			<td><?=$R['name']?></td>
+			<td><?=$R['gender']?></td>
 			<td><?=$R['father']?></td>
 			<td><?=$R['mother']?></td>
 			<td><?=$R['madrasah']?></td>

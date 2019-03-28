@@ -12,7 +12,7 @@
 					left join parents as f on f.id = s.fparentid and f.gender = 'm'
 					left join parents as m on m.id = s.mparentid and m.gender = 'f'
 					where 1 = 1";
-			if ( $name ) $sql .= " and name like '%" . $name . "%'";
+			if ( $name ) $sql .= " and s.name like '%" . $name . "%'";
 			
 			$sql .= " order by s.name";
 			// echo $sql;

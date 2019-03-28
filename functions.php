@@ -124,13 +124,7 @@
 	function createValidator() {
 		return $code = " data-role=\"validator\" data-on-error=\"notifyOnErrorInput; triggerInputError(this); \" data-show-error-hint=\"true\" data-on-error-form=\"triggerError('Errors Found')\" ";
 	}
-	
-	function insertHiddenInput($name,$value,$class='') {
-		$code = "<input type='hidden' class='$class' name='$name' value='$value'>";
-		
-		return $code;
-	}
-	
+
 	function printFooter() {
 		$code='<div class="grid" style="border-top:4px double black;">
 				<div class="row">
@@ -142,6 +136,19 @@
 					</div>
 				</div>
 			</div>';
+		
+		return $code;
+	}
+	
+	function getFirstName($name) {
+		$names = explode(' ',$name);
+		$firstname = $names[0];
+		
+		return $firstname;
+	}
+	
+	function insertHiddenInput($name,$value,$class='') {
+		$code = "<input type='hidden' class='$class' name='$name' value='$value'>";
 		
 		return $code;
 	}
@@ -220,14 +227,14 @@
 
 		if ($type=='switch') {		
 			$code = "<div class='$otherclass'>
-			<input type='checkbox' data-role='switch' data-caption='$label' data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" data-style='2' $other>
+			<input type='checkbox' data-role='switch' data-caption=\"$label\" data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" data-style='2' $other>
 			<span class='invalid_feedback'>
 				$valhint
 			</span>
 			</div>";
 		} else if ($type=='normal') {
 			$code = "<div class='$otherclass'>
-			<input type='checkbox' data-role='checkbox' data-caption='$label' data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
+			<input type='checkbox' data-role='checkbox' data-caption=\"$label\" data-validate='$valcode' name='$name' class='$class' title=\"$title\" ".selected($matchvalue,$datavalue,'checked')." value=\"$value\" $other>
 			<span class='invalid_feedback'>
 				$valhint
 			</span>
@@ -252,6 +259,7 @@
 		if ($validate[0]) $valcode = $validate[0];
 		if ($validate[1]) $valhint = $validate[1];
 		
+		$options = '';
 		foreach ($data as $r) {
 			$options .= "<option value=\"".$r[$datavalue]."\" ".selected($r[$matchfield],$matchvalue,'selected')." $otheropt>".$r[$dataname]."</option>";
 		}

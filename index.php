@@ -13,7 +13,7 @@
 	
 	$default_module = 'home';
 	$default_action = 'index';
-	$data['title'] = 'Quran Tracker System';
+	$data['title'] = 'Qur\'an Tracker System';
 	$layout = 'layout.tpl.php';
 	
 	$module = $_GET['module'];
@@ -72,23 +72,27 @@
 	
 	$data['module'] = $module;
 	$data['action'] = $action;
-		
+	
 	$_SESSION['menus'] = array();
-	
-	if ($_SESSION['member']['utypeid']) $right = $UserLevelRights->getLevelRights($_SESSION['member']['utypeid'],$module,$action);
-	else $right = $UserLevelRights->getLevelRights(0,$module,$action);
-	$trace = $Menus->getAllMenus($module,$action);	
-	
-	if (!$right & $trace) { $_SESSION['error'] = 'Unauthorized Entry'; redirect('home','index'); }
-		
+
 	if (USERTYPE == 'admin') {
-		$menus = $Menus->getAllMenus();
+		$menus = $UserLevelRights->getLevelRights(1);
 		foreach ($menus as $m) {
 			if ($m['sname']) $_SESSION['menus'][$m['mname']]['subs'][$m['sname']] = $m;
 			$_SESSION['menus'][$m['mname']]['module'] = $m['mmod'];
 			$_SESSION['menus'][$m['mname']]['action'] = $m['mact'];
 		}
 	} else if ($_SESSION['member']['id']) {		
+		if ($_SESSION['member']['utypeid']) $right = $UserRights->getUserRights($_SESSION['member']['id'],$module,$action);
+		$trace = $Menus->getAllMenus($module,$action);	
+		
+		if (!$right[0]['umid'] & $trace) { 
+			if ($module != 'home') {
+				$_SESSION['error'] = 'Unauthorized Entry';
+				redirect('home','index'); 
+			}
+		}
+
 		$menus = $UserRights->getUserRights($_SESSION['member']['id']);
 		foreach ((array)$menus as $m) {
 			if ($m['sname'] && $m['usid']) $_SESSION['menus'][$m['mname']]['subs'][$m['sname']] = $m;

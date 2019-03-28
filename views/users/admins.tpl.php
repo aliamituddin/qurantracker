@@ -8,7 +8,7 @@
 		<label>Name</label> 
 		<div class="input-control text">
 			<input type="text" name="name" value="<?=$name?>">
-		</div
+		</div>
 		<input type="submit" value="Search">
 	</form>
 </div>

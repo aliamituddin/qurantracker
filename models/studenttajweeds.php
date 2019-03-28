@@ -4,12 +4,13 @@
 	{ 
 		var $table = "studenttajweeds";
 		
-		function search($sreportid='') {
-			$sql = "select st.* from studenttajweeds as st
+		function search($sreportid,$status='') {
+			$sql = "select st.*, t.id as tid, t.override, t.description, t.description_sw from studenttajweeds as st
+					right join tajweeds as t on t.id = st.tajweedid and st.sreportid = $sreportid
 					where 1=1 ";
-					
-			if ($sreportid) $sql .= " and st.sreportid = $sreportid";
-			
+			if (is_numeric($status)) $sql .= " and t.status = $status";
+			$sql .= " order by t.id";
+			// echo $sql;
 			return $this->fetchRows($sql);
 		}
 		

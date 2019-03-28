@@ -1,8 +1,8 @@
 <?php
 
-	class Improvements extends model 
+	class Frequencies extends model 
 	{ 
-		var $table = "improvements";
+		var $table = "frequencies";
 		
 		function search($status='') {
 			$sql = "Select * from " . $this->table . " where 1 = 1";

@@ -26,8 +26,8 @@
     <tbody>
 <? foreach ($reports as $report) { 
     $tajweeds = $report['tajweeds'];
-    $mletters = $report['mletters'];
-    $wletters = $report['wletters'];
+    $makhrajs = $report['makhrajs'];
+    $weaknesses = $report['weaknesses'];
     $partners = $report['partners'];
     $report = $report['report'];
 ?>
@@ -46,9 +46,30 @@
             <td><?=$report['tajweed']?></td>
             <td><?=$report['accuracy']?></td>
             <td><?=implode(', ',$partners)?></td>
-            <td><?=implode(', ',$wletters)?></td>
-            <td><?=implode(', ',$mletters)?></td>
-            <td><?=implode(', ',$tajweeds)?></td>
+            <td>
+                <? foreach ($weaknesses as $v=>$r) { ?>
+                    <span><?=($r['id'])?$r['description']:'';?></span>
+                <? } ?>
+                <? if ($report['oweakness']){ ?>
+                    <span><?=$report['oweakness']?></span>
+                <? } ?>
+            </td>
+            <td>
+                <? foreach ($makhrajs as $v=>$r) { ?>
+                    <span><?=($r['id'])?$r['description']:'';?></span>
+                <? } ?>
+                <? if ($report['omakhraj']){ ?>
+                    <span><?=$report['omakhraj']?></span>
+                <? } ?>
+            </td>
+            <td>
+                <? foreach ($tajweeds as $v=>$r) { ?>
+                    <span><?=($r['id'])?$r['description']:'';?></span>
+                <? } ?>
+                <? if ($report['otajweed']){ ?>
+                    <span><?=$report['otajweed']?></span>
+                <? } ?>
+            </td>
             <td><?=$report['discipline']?></td>
             <td><?=$report['improvement']?></td>
             <td><?=$report['comments']?></td>
