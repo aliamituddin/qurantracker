@@ -14,7 +14,7 @@
 						<input type="text" name="name" value="<?=$name?>">
 					</div>
 				</div>
-				<div class='cell colspan2'>
+				<div class='cell colspan2'><br>
 					<input type="submit" value="Search">
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 		<thead>
 			<tr>
 				<th>&nbsp;</th>
-				<th>No.</th>
+				<th>Student No.</th>
 				<th>Name</th>
 				<th>Gender</th>
 				<th>Father</th>
@@ -47,7 +47,7 @@
 				<a href="#" onclick="openWindow('?module=users&action=user_rights_edit&id=<?=$R['userid']?>')" <?=displayHint('User Rights')?>><span class="mif-user"></a> 
 				<? } ?>
 			</td>
-			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$id+1?></td>
+			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$R['id']?></td>
 			<td><?=$R['name']?></td>
 			<td><?=$R['gender']?></td>
 			<td><?=$R['father']?></td>

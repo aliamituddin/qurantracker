@@ -160,7 +160,7 @@
 		-->
 		<div class='row'>
 			<div class='cell-sm'>
-				2. <label>Mwanafunzi anahitaji msaada zaidi kwenye sheria zifuatazo za Tajweed</label><br>
+				2. <label>Mwanafunzi anahitaji mazoezi zaidi kwenye sheria za Tajweed zifuatazo (Tafadhali orodesha sheria za Tajweed ambazo mwanafunzi anazojua na anazohitaji mazoezi. Sio lazima hizi sheria ziwe zimefundishwa na wewe. Zinaweza kuwa zimefundishwa na waalimu waliotangulia kabla yako.)</label><br>
 				<? foreach ($stajweeds as $v=>$r) { ?>
 					<?=insertCheckboxInput($r['description_sw'],'tajweed[]',$r['tid'],'tajweed','Select student makhraj weaknesses','normal',$r['tid'].'|'.$r['tajweedid'])?>
 				<? } ?>
@@ -212,7 +212,7 @@
 	</div><br>
 	<div class='row'>
 		<div class='cell-sm'>
-			<?=insertTextInput('<strong>Je una chochote ambacho unataka kutuambia kuhusiana na huyu mwanafunzi?</strong>|Comments','report[comments]',$report['comments'],'','Maoni','text',1,'||Name is required')?> 
+			<?=insertTextInput('<strong>Kama kuna maoni, nyongeza, pendekezo, mrejesho wowote ama maelezo yeyote unayotaka kushea na (uongonzi) Q-Admin? (Kuhusiana na tabia/nidhamu, kama mwanafunzi ana mahitaji maalum, je anahitaji ushauri ama msaada kwenye masomo etc. Kumbuka kwamaba kitakachoandikwa hapa hakitaonekana kwenye ripoti. Hii ni kwa ajili ya uongozi (Q-Admins))</strong>|Comments','report[comments]',$report['comments'],'','Maoni','text',1,'||Name is required')?> 
 		</div>
 	</div>
 </div><br>

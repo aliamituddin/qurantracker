@@ -405,3 +405,70 @@ if ( $action == 'partner_status_change' ) {
 
 	redirectBack();
 }
+
+if ( $action == 'weaknesses' ) {
+	
+	$tData['name'] = $_GET['name'];
+	
+	$tData['weaknesses'] = $Weaknesses->search($tData['name']);
+	
+	$data['content'] = loadTemplate($folder.'weaknesses.tpl.php',$tData);
+}
+
+if ( $action == 'weakness_edit' ) {
+	$data['layout'] = 'layout_iframe.tpl.php';
+	
+	$id = $_GET['id'];
+	$tData['weakness'] = $Weaknesses->get($id);
+	
+	$action = 'weakness_add';
+}
+
+if ( $action == 'weakness_add') {
+	$data['layout'] = 'layout_iframe.tpl.php';
+	
+	$data['content'] = loadTemplate($folder.'weakness_edit.tpl.php',$tData);
+}
+
+if ( $action == 'ajax_weakness_save' ) {
+	
+	$obj = null;
+	
+	$id = intval($_POST['id']);
+	$miniData = $_POST['weakness'];
+	
+	if ( empty($id) )  {
+		$miniData['createdby'] = USER_ID;
+		$Weaknesses->insert($miniData);
+		
+		$obj->msg='Letter Recognition Added';
+		$obj->status=1;
+		$obj->redirect='?module=reportmasters&action=weakness_add';
+		$obj->mainredirect='?module=reportmasters&action=weaknesses';
+				
+	} else {
+		$miniData['modifiedby'] = USER_ID;
+		
+		$Weaknesses->update($id,$miniData);
+		
+		$obj->msg='Letter Recognition Updated';
+		$obj->status=1;
+		$obj->redirect='?module=reportmasters&action=weakness_edit&id='.$id;
+		$obj->mainredirect='?module=reportmasters&action=weaknesses';
+				
+	}
+	
+	$response[]=$obj;
+	$data['content'] = $response;
+}
+
+if ( $action == 'weakness_status_change' ) {
+	
+	$id = $_GET['id'];
+	$miniData['status'] = $_GET['status'];
+
+	$Weaknesses->update($id,$miniData);
+	$_SESSION['message'] = 'Status Changed';
+
+	redirectBack();
+}

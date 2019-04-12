@@ -4,8 +4,12 @@
 	{ 
 		var $table = "enrollments";
 		
-		function search($gradeid='',$classid='',$status='') {
-			$sql = "Select e.*, CONCAT(s.name,'-',g.name,c.name) as enrollment, s.name as student, s.referenceno, g.name as grade, c.name as class, y.name as year from ".$this->table." as e
+		function search($gradeid='',$classid='',$status='',$yearid='',$cgradeid='',$cclassid='',$cyearid='') {
+			$sql = "Select e.*, CONCAT(s.name,'-',g.name,c.name) as enrollment, s.name as student, s.referenceno, g.name as grade, c.name as class, y.name as year, 
+					(select ec.id from enrollments as ec
+					where ec.gradeid = ".($cgradeid+0)." and ec.classid = ".($cclassid+0)." and ec.yearid = ".($cyearid+0)." 
+					and s.id = ec.studentid) as cenrollmentid
+					 from ".$this->table." as e
 					INNER JOIN grades as g on g.id = e.gradeid
 					INNER JOIN classes as c on c.id = e.classid
 					INNER JOIN years as y on y.id = e.yearid
@@ -14,6 +18,7 @@
 			if ( $gradeid ) $sql .= " and e.gradeid = " . $gradeid;
 			if ( $classid ) $sql .= " and e.classid = " . $classid;
 			if ( is_numeric($status) ) $sql .= " and e.status = " . $status;
+			if ( $yearid ) $sql .= " and e.yearid = " . $yearid;
 			
 			$sql .= " order by e.status desc, g.id, c.id, s.id";
 			return $this->fetchRows($sql);

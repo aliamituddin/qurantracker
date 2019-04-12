@@ -1,4 +1,126 @@
+ALTER TABLE `enrollments`
+ADD COLUMN `referenceno`  int NULL AFTER `yearid`;
 
+update enrollments set referenceno = (select s.referenceno from students as s where s.id = studentid);
+
+DROP TABLE IF EXISTS `menus`;
+CREATE TABLE `menus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `module` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `sortno` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of menus
+-- ----------------------------
+INSERT INTO `menus` VALUES ('1', 'Home', 'home', 'index', '1', '1');
+INSERT INTO `menus` VALUES ('2', 'Users', '', '', '9', '1');
+INSERT INTO `menus` VALUES ('3', 'Masters', '', null, '2', '1');
+INSERT INTO `menus` VALUES ('4', 'Allocations', null, null, '4', '1');
+INSERT INTO `menus` VALUES ('5', 'Progress Records', null, null, '5', '1');
+INSERT INTO `menus` VALUES ('6', 'Report Masters', null, null, '3', '1');
+
+-- ----------------------------
+-- Table structure for submenus
+-- ----------------------------
+DROP TABLE IF EXISTS `submenus`;
+CREATE TABLE `submenus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menuid` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `module` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `sortno` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of submenus
+-- ----------------------------
+INSERT INTO `submenus` VALUES ('1', '2', 'Students', 'users', 'students', '1', '1');
+INSERT INTO `submenus` VALUES ('2', '2', 'Parents', 'users', 'parents', '2', '1');
+INSERT INTO `submenus` VALUES ('3', '2', 'Teachers', 'users', 'teachers', '3', '1');
+INSERT INTO `submenus` VALUES ('4', '2', 'Admins', 'users', 'admins', '4', '1');
+INSERT INTO `submenus` VALUES ('5', '3', 'Madrasahs', 'masters', 'madrasahs', '1', '1');
+INSERT INTO `submenus` VALUES ('6', '3', 'Grades', 'masters', 'grades', '2', '1');
+INSERT INTO `submenus` VALUES ('7', '3', 'Classes', 'masters', 'classes', '3', '1');
+INSERT INTO `submenus` VALUES ('8', '3', 'Terms', 'masters', 'terms', '4', '1');
+INSERT INTO `submenus` VALUES ('9', '3', 'Years', 'masters', 'years', '5', '1');
+INSERT INTO `submenus` VALUES ('10', '3', 'Levels', 'masters', 'levels', '6', '1');
+INSERT INTO `submenus` VALUES ('11', '3', 'Benchmarks', 'masters', 'benchmarks', '7', '1');
+INSERT INTO `submenus` VALUES ('12', '4', 'Student Enrollments', 'allocations', 'enrollments', '1', '1');
+INSERT INTO `submenus` VALUES ('13', '4', 'Teacher Allocations', 'allocations', 'allocations', '2', '1');
+INSERT INTO `submenus` VALUES ('14', '5', 'Modify Level', 'remarks', 'modifications', '1', '1');
+INSERT INTO `submenus` VALUES ('15', '5', 'Yearly Report', 'remarks', 'yearly_reports', '2', '1');
+INSERT INTO `submenus` VALUES ('16', '3', 'Improvements', 'masters', 'improvements', '8', '0');
+INSERT INTO `submenus` VALUES ('17', '3', 'Discipline Remarks', 'masters', 'disciplines', '9', '0');
+INSERT INTO `submenus` VALUES ('18', '3', 'Frequencies', 'masters', 'frequencies', '10', '0');
+INSERT INTO `submenus` VALUES ('19', '3', 'Makhrajs', 'masters', 'makhrajs', '11', '0');
+INSERT INTO `submenus` VALUES ('20', '3', 'Partners', 'masters', 'partners', '12', '0');
+INSERT INTO `submenus` VALUES ('21', '3', 'Tajweeds', 'masters', 'tajweeds', '13', '0');
+INSERT INTO `submenus` VALUES ('22', '6', 'Discipline Remarks', 'reportmasters', 'disciplines', '1', '1');
+INSERT INTO `submenus` VALUES ('23', '6', 'Improvements', 'reportmasters', 'improvements', '2', '1');
+INSERT INTO `submenus` VALUES ('24', '6', 'Frequencies', 'reportmasters', 'frequencies', '3', '1');
+INSERT INTO `submenus` VALUES ('25', '6', 'Makhrajs', 'reportmasters', 'makhrajs', '4', '1');
+INSERT INTO `submenus` VALUES ('26', '6', 'Tajweeds', 'reportmasters', 'tajweeds', '5', '1');
+INSERT INTO `submenus` VALUES ('27', '6', 'Partners', 'reportmasters', 'partners', '6', '1');
+INSERT INTO `submenus` VALUES ('28', '6', 'Letter Recognitions', 'reportmasters', 'weaknesses', '7', '1');
+
+-- ----------------------------
+-- Table structure for userlevelrights
+-- ----------------------------
+DROP TABLE IF EXISTS `userlevelrights`;
+CREATE TABLE `userlevelrights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `typeid` int(11) DEFAULT NULL,
+  `menuid` int(11) DEFAULT NULL,
+  `submenuid` int(11) DEFAULT NULL,
+  `doc` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dom` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdby` int(11) DEFAULT NULL,
+  `modifiedby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of userlevelrights
+-- ----------------------------
+INSERT INTO `userlevelrights` VALUES ('18', '3', '1', null, '2018-09-03 16:34:19', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('19', '4', '1', null, '2018-09-03 16:34:25', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('36', '2', '1', null, '2018-09-05 18:47:27', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('37', '2', '5', '14', '2018-09-05 18:47:27', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('38', '2', '5', '15', '2018-09-05 18:47:27', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('132', '1', '1', null, '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('133', '1', '3', '5', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('134', '1', '3', '6', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('135', '1', '3', '7', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('136', '1', '3', '8', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('137', '1', '3', '9', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('138', '1', '3', '10', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('139', '1', '3', '11', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('140', '1', '6', '22', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('141', '1', '6', '23', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('142', '1', '6', '24', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('143', '1', '6', '25', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('144', '1', '6', '26', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('145', '1', '6', '27', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('146', '1', '6', '28', '2019-04-12 03:04:34', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('147', '1', '4', '12', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('148', '1', '4', '13', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('149', '1', '5', '14', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('150', '1', '5', '15', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('151', '1', '2', '1', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('152', '1', '2', '2', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('153', '1', '2', '3', '2019-04-12 03:04:35', null, null, null);
+INSERT INTO `userlevelrights` VALUES ('154', '1', '2', '4', '2019-04-12 03:04:35', null, null, null);
+
+
+----------------------------------------------------
 --
 -- Table structure for table `frequencies`
 --
@@ -114,10 +236,32 @@ INSERT INTO `partners` (`id`, `description`, `description_sw`, `status`, `doc`, 
 
 -- --------------------------------------------------------
 
+DROP TABLE IF EXISTS `menus`;
+CREATE TABLE `menus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `module` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `sortno` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of menus
+-- ----------------------------
+INSERT INTO `menus` VALUES ('1', 'Home', 'home', 'index', '1', '1');
+INSERT INTO `menus` VALUES ('2', 'Users', '', '', '9', '1');
+INSERT INTO `menus` VALUES ('3', 'Masters', '', null, '2', '1');
+INSERT INTO `menus` VALUES ('4', 'Allocations', null, null, '4', '1');
+INSERT INTO `menus` VALUES ('5', 'Progress Records', null, null, '5', '1');
+INSERT INTO `menus` VALUES ('6', 'Report Masters', null, null, '3', '1');
+
 --
 -- Table structure for table `submenus`
 --
 
+DROP TABLE submenus;
 CREATE TABLE `submenus` (
   `id` int(11) NOT NULL,
   `menuid` int(11) DEFAULT NULL,
@@ -131,7 +275,6 @@ CREATE TABLE `submenus` (
 --
 -- Dumping data for table `submenus`
 --
-DROP TABLE submenus;
 INSERT INTO `submenus` (`id`, `menuid`, `name`, `module`, `action`, `sortno`, `status`) VALUES
 (1, 2, 'Students', 'users', 'students', 1, 1),
 (2, 2, 'Parents', 'users', 'parents', 2, 1),
@@ -446,3 +589,7 @@ ALTER TABLE `studenttajweeds` CHANGE `tajweed` `tajweedid` INT(11) NULL DEFAULT 
 ALTER TABLE `disciplines` ADD `status` INT NOT NULL DEFAULT '1' AFTER `description_sw`;
 ALTER TABLE `improvements` ADD `status` INT NOT NULL DEFAULT '1' AFTER `description_sw`;
 ALTER TABLE `studentreports` CHANGE COLUMN `frequency` `frequencyid`  int(11) NULL DEFAULT NULL AFTER `stageid`;
+
+UPDATE students set gender = 'male' where id <= 322;
+UPDATE students set gender = 'female' where id > 322;
+UPDATE students set gender = 'male' where id = 864;

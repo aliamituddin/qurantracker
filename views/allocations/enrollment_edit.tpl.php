@@ -3,7 +3,7 @@
 <form enctype="multipart/form-data" method="post" <?=createValidator()?>  <?=windowOnSubmit('allocations','enrollment_save')?> >
 	<?=insertHiddenInput('id',$enrollment['id'])?>
 		
-	<?=insertCheckboxInput('Active','enrollment[status]',1,'','Is an active enrollment','switch',$enrollment['status'].'|1','','place-right')?><br>
+	<?=insertCheckboxInput('Active','enrollment[status]',1,'','Is an active enrollment','switch',$enrollment['status'].'|1','','','place-right')?><br>
 	
 	<? if ($enrollment['id']) {
 		echo insertSelect('Student','enrollment[studentid]','studentid','Select the student',1,1,$students,'name|id','id|'.$enrollment['studentid']);
@@ -12,6 +12,8 @@
 	}
 	?>
 	<br>
+
+	<?=insertTextInput('Reference No','student[referenceno]',$enrollment['referenceno'],'','Enter the students\'s reference no','text',1,'||Name is required')?><br>
 	
 	<?=insertSelect('Grade','enrollment[gradeid]','','Select the grade',1,1,$grades,'name|id','id|'.$enrollment['gradeid'])?><br>
 	

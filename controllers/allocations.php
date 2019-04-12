@@ -6,10 +6,13 @@ if ( $action == 'enrollments' ) {
 	
 	$tData['gradeid'] = $_GET['gradeid'];
 	$tData['classid'] = $_GET['classid'];
+	$tData['yearid'] = $_GET['yearid'];
 	
 	$tData['grades'] = $Grades->search();
 	$tData['classes'] = $Classes->search();
-	if ($tData['gradeid']) $tData['enrolls'] = $Enrollments->search($tData['gradeid'],$tData['classid']);
+	$tData['years'] = $Years->search();
+
+	if ($tData['gradeid']) $tData['enrolls'] = $Enrollments->search($tData['gradeid'],$tData['classid'],'',$tData['yearid']);
 	
 	$data['content'] = loadTemplate($folder.'enrollments.tpl.php',$tData);
 }
@@ -72,6 +75,58 @@ if ( $action == 'ajax_enrollment_save' ) {
 	
 	$response[]=$obj;
 	$data['content'] = $response;
+}
+
+if ( $action == 'enrollment_multi_edit' ) {
+	
+	$tData['classes'] = $Classes->getAll();
+	$tData['grades'] = $Grades->getAll();
+	$tData['years'] = $Years->getAll();
+	
+	$data['content'] = loadTemplate($folder.'enrollment_multi_edit.tpl.php', $tData);
+}
+
+if ( $action == 'enrollment_multi_save' ) {
+    
+	$miniData['classid'] = $_POST['tclassid'];
+	$miniData['gradeid'] = $_POST['tgradeid'];
+	$miniData['yearid'] = $_POST['tyearid'];
+    
+	$sData['classid'] = $_POST['fclassid'];
+	$sData['gradeid'] = $_POST['fgradeid'];
+	$sData['yearid'] = $_POST['fyearid'];
+	
+	$studentid = $_POST['studentid'];
+	$enrollmentid = $_POST['enrollmentid'];
+	$uData['status'] = 0;
+	
+	foreach ($studentid as $v=>$r) {
+		$miniData['studentid'] = $r;
+		$sData['studentid'] = $r;
+		$Enrollments->insert($miniData);
+
+		$Enrollments->updateWhere($sData,$uData);
+	}
+
+	$_SESSION['message'] = 'Students Enrolled';
+	
+	redirect('allocations','enrollment_multi_edit');
+}
+
+if ($action == 'getEnrolledStudents' ) {
+	$data['layout'] = 'layout_iframe.tpl.php';
+
+	$fgradeid = $_GET['fgradeid'];
+	$fclassid = $_GET['fclassid'];
+	$fyearid = $_GET['fyearid'];
+
+	$tgradeid = $_GET['tgradeid'];
+	$tclassid = $_GET['tclassid'];
+	$tyearid = $_GET['tyearid'];
+	
+	$tData['enrollments'] = $Enrollments->search($fgradeid,$fclassid,1,$fyearid,$tgradeid,$tclassid,$tyearid);
+	
+	$data['content'] = loadTemplate($folder.'enrollment_multi_students.tpl.php', $tData);
 }
 
 if ( $action == 'allocations' ) {

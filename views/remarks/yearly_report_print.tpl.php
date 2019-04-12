@@ -103,7 +103,7 @@
 				<img src='img/signature.png' style='width:80px;position:absolute;left:140px;bottom:-5px'>
 			</div>
             <div class='cell-5'>
-                Date: <?=($report['term'] == 1)?'April':'December';?> <?=$report['year']?>
+                Date: <?=($report['termid'] == 1)?'April':'December';?> <?=$report['year']?>
 			</div>
 		</div>
         <div class='row border bd-black border-size-2 p-3 border-top-none'>

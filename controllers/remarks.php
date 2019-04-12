@@ -96,17 +96,23 @@ if ( $action == 'yearly_reports' ) {
 
 	$tData['student'] = $_GET['student'];
 	$tData['teacherid'] = $_GET['teacherid'];
+	$tData['yearid'] = $_GET['yearid'];
+	$tData['termid'] = $_GET['termid'];
+
 	if (USERTYPE == 'admin') { 
 		$tData['teachers'] = $Teachers->search();
 	}
-
-	if ($tData['student'] || $tData['teacherid']) {
+	
+	if ($tData['student'] || $tData['teacherid'] || $tData['yearid'] || $tData['termid']) {
 		if (USERTYPE == 'admin') {
-			$tData['reports'] = $StudentReports->search('',$tData['teacherid'],'',$tData['student']);
+			$tData['reports'] = $StudentReports->search('',$tData['teacherid'],$tData['yearid'],$tData['student'],$tData['termid']);
 		} else {
-			$tData['reports'] = $StudentReports->search('',SYS_ID,'',$tData['student']);
+			$tData['reports'] = $StudentReports->search('',SYS_ID,$tData['yearid'],$tData['student'],$tData['termid']);
 		}
 	}
+
+	$tData['terms'] = $Terms->search();
+	$tData['years'] = $Years->search();
 
 	$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
 }
@@ -139,7 +145,7 @@ if ( $action == 'yearly_report_add' ) {
 }
 
 if ( $action == 'yearly_report_save' ) {
-	// print_r($_POST['partner']); die;
+	
 	$id = $_POST['id'];
 
 	$miniData = $_POST['report'];

@@ -10,14 +10,20 @@
 		<input type="hidden" name="action" value="yearly_reports">
 		<div class='grid'>
 			<div class='row'>
-				<div class='cell colspan5'>
+				<div class='cell colspan2'>
 					<label>Student Name</label> 
 					<div class="input-control text">
 						<input type="text" name="student" value="<?=$student?>">
 					</div>
 				</div>
-				<div class='cell colspan5'>
+				<div class='cell colspan2'>
 					<?=insertSelect('Teacher','teacherid','','Select the teacher',0,1,$teachers,'name|id','id|'.$teacherid)?>
+				</div>
+				<div class='cell colspan2'>
+					<?=insertSelect('Year','yearid','','Select the year',0,0,$years,'name|id','id|'.$yearid)?>
+				</div>
+				<div class='cell colspan2'>
+					<?=insertSelect('Term','termid','','Select the term',0,0,$terms,'name|id','id|'.$termid)?>
 				</div>
 				<div class='cell colspan'> <br>
 					<input type="submit" value="Search">
