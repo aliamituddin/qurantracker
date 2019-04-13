@@ -4,6 +4,7 @@
 	<div class='cell'>
 		<span class='place-right'> <a class="button" href="#" onclick="openWindow('?module=allocations&action=enrollment_add')"> Add </a> </span>
 		<span class='place-right mr-5'> <a class="button place-right" href="?module=allocations&action=enrollment_multi_edit"> Transfer </a> </span>
+		<span class='place-right mr-5'> <a class="button place-right" href="?module=allocations&action=enrollment_import_edit"> Import </a> </span>
 	</div>
 </div>
 <div class='row'>

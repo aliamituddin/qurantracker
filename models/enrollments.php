@@ -5,7 +5,7 @@
 		var $table = "enrollments";
 		
 		function search($gradeid='',$classid='',$status='',$yearid='',$cgradeid='',$cclassid='',$cyearid='') {
-			$sql = "Select e.*, CONCAT(s.name,'-',g.name,c.name) as enrollment, s.name as student, s.referenceno, g.name as grade, c.name as class, y.name as year, 
+			$sql = "Select e.*, CONCAT(s.name,'-',g.name,c.name) as enrollment, s.name as student, e.referenceno, g.name as grade, c.name as class, y.name as year, 
 					(select ec.id from enrollments as ec
 					where ec.gradeid = ".($cgradeid+0)." and ec.classid = ".($cclassid+0)." and ec.yearid = ".($cyearid+0)." 
 					and s.id = ec.studentid) as cenrollmentid

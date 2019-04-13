@@ -113,6 +113,73 @@ if ( $action == 'enrollment_multi_save' ) {
 	redirect('allocations','enrollment_multi_edit');
 }
 
+if ( $action == 'enrollment_import_edit' ) {
+	
+	$tData['classes'] = $Classes->getAll();
+	$tData['grades'] = $Grades->getAll();
+	$tData['years'] = $Years->getAll();
+	
+	$data['content'] = loadTemplate($folder.'enrollment_import_edit.tpl.php', $tData);
+}
+
+if ( $action == 'enrollment_import_save' ) {
+	
+	$yearid = $_POST['yearid'];
+	$classid = $_POST['classid'];
+	$gradeid = $_POST['gradeid'];
+
+	$grade = $Grades->get($gradeid);
+	$gender = $grade['gender'];
+
+	$sData['gender'] = $gender;
+	$sData['madrasahid'] = 1;
+	
+	$eData['gradeid'] = $gradeid;
+	$eData['classid'] = $classid;
+	$eData['yearid'] = $yearid;
+	
+	if (!$_FILES['upload']['name']) {	
+		$_SESSION['error'] = 'No File was Uploaded';
+		redirectBack();
+	} else {
+		ini_set('auto_detect_line_endings',TRUE);
+		$file = $_FILES['upload']['tmp_name']; 
+		$handle = fopen($file,"r");
+		
+		do { 
+			if ($data[0] && $data[0] != 'Name') { 
+				$uData['name'] = $data[0];
+				$uData['utypeid'] = 3; //student
+				$userid = $Users->insert($uData);
+
+				$sData['name'] = $data[0];
+				$sData['userid'] = $userid;
+				$studentid = $Students->insert($sData);
+				
+				$eData['studentid'] = $studentid;
+				$eData['referenceno'] = $data[1];
+				$Enrollments->insert($eData);
+			} 
+		} while ($data = fgetcsv($handle,1000,",","'")); 
+		
+		ini_set('auto_detect_line_endings',FALSE);
+	}
+	
+	$_SESSION['message'] = 'Students Imported & Enrolled';
+	redirectBack();
+}
+
+if ( $action == 'enrollment_template_download' ) {
+	
+	$data['layout'] = 'layout_csv.tpl.php';
+
+	$fname = 'template.csv';
+	
+	$tData['fname'] = $fname;
+	
+	$data['content'] = loadTemplate($folder.'enrollment_template.tpl.php', $tData);
+}
+
 if ($action == 'getEnrolledStudents' ) {
 	$data['layout'] = 'layout_iframe.tpl.php';
 
