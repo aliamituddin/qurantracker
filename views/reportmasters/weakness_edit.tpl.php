@@ -6,6 +6,8 @@
 
 	<?=insertTextInput('Swahili','weakness[description_sw]',$weakness['description_sw'],'','Enter the weakness\'s swahili description','text',1,'required|Swahili Description is required')?><br>
 	
+	<?=insertTextInput('Sort No','weakness[sortno]',$weakness['sortno'],'','Enter the weakness\'s sort no','number',1,'required|Sort no is required')?><br>
+
 	<?=insertCheckboxInput('Override','weakness[override]',1,'place-right','Override other options','switch',$weakness['override'].'|1')?><br>
 
 	<?=insertSaveButton('Save');?>

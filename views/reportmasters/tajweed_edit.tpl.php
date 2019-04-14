@@ -6,6 +6,8 @@
 
 	<?=insertTextInput('Swahili','tajweed[description_sw]',$tajweed['description_sw'],'','Enter the tajweed\'s swahili description','text',1,'required|Swahili Description is required')?><br>
 	
+	<?=insertTextInput('Sort No','tajweed[sortno]',$tajweed['sortno'],'','Enter the tajweed\'s sortno','number',1,'required|Sort no is required')?><br>
+
 	<?=insertCheckboxInput('Override','tajweed[override]',1,'place-right','Override other options','switch',$tajweed['override'].'|1')?><br>
 
 	<?=insertSaveButton('Save');?>

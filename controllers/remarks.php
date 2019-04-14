@@ -139,7 +139,7 @@ if ( $action == 'yearly_report_add' ) {
 		$tData['teachers'] = $Teachers->search(USER_ID);
 	}
 	
-	$tData['enrollments'] = $Enrollments->search();
+	$tData['enrollments'] = $Enrollments->search('','',1);
 	
 	$data['content'] = loadTemplate($folder.'yearly_report_edit.tpl.php',$tData);
 }

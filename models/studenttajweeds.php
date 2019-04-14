@@ -9,7 +9,7 @@
 					right join tajweeds as t on t.id = st.tajweedid and st.sreportid = $sreportid
 					where 1=1 ";
 			if (is_numeric($status)) $sql .= " and t.status = $status";
-			$sql .= " order by t.id";
+			$sql .= " order by t.sortno";
 			// echo $sql;
 			return $this->fetchRows($sql);
 		}

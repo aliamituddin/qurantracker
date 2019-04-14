@@ -1,5 +1,24 @@
-ALTER TABLE `grades`
-MODIFY COLUMN `name`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '' AFTER `id`,
-ADD COLUMN `gender`  enum('male','female') NULL DEFAULT 'male' AFTER `name`;
+ALTER TABLE `frequencies`
+ADD COLUMN `sortno`  int NULL DEFAULT 0 AFTER `status`;
 
-update grades set gender = 'female' where id > 6;
+update frequencies set sortno = id;
+
+ALTER TABLE `makhrajs`
+ADD COLUMN `sortno`  int NULL DEFAULT 0 AFTER `override`;
+
+update makhrajs set sortno = id;
+
+ALTER TABLE `tajweeds`
+ADD COLUMN `sortno`  int NULL DEFAULT 0 AFTER `override`;
+
+update tajweeds set sortno = id;
+
+ALTER TABLE `weaknesses`
+ADD COLUMN `sortno`  int NULL DEFAULT 0 AFTER `override`;
+
+update weaknesses set sortno = id;
+
+ALTER TABLE `partners`
+ADD COLUMN `sortno`  int NULL DEFAULT 0 AFTER `status`;
+
+update partners set sortno = id;

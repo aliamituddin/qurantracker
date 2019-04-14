@@ -6,6 +6,8 @@
 
 	<?=insertTextInput('Swahili','makhraj[description_sw]',$makhraj['description_sw'],'','Enter the makhraj\'s swahili description','text',1,'required|Swahili Description is required')?><br>
 	
+	<?=insertTextInput('Sort No','makhraj[sortno]',$makhraj['sortno'],'','Enter the makhraj\'s sortno','number',1,'required|Sort no is required')?><br>
+
 	<?=insertCheckboxInput('Override','makhraj[override]',1,'place-right','Override other options','switch',$makhraj['override'].'|1')?><br>
 
 	<?=insertSaveButton('Save');?>

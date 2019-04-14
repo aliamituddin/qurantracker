@@ -5,6 +5,8 @@
 	<?=insertTextInput('English','partner[description]',$partner['description'],'','Enter the partner\'s description','text',1,'required|Description is required')?><br>
 
 	<?=insertTextInput('Swahili','partner[description_sw]',$partner['description_sw'],'','Enter the partner\'s swahili description','text',1,'required|Swahili Description is required')?><br>
+
+	<?=insertTextInput('Sort No','partner[sortno]',$partner['sortno'],'','Enter the partner\'s sort no','number',1,'required|Sort no is required')?><br>
 	
 	<?=insertSaveButton('Save');?>
 </form>

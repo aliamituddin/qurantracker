@@ -34,7 +34,7 @@
 					<a href="?module=reportmasters&action=tajweed_status_change&id=<?=$R['id']?>&status=1" <?=displayHint('Activate')?>><span class="mif-checkmark sp_icon fg-green"></a>
 				<? } ?>
 			</td>
-			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$id+1?></td>
+			<td class="fg-white bg-<?=($R['status'])?'green':'crimson';?>" style="width:80px"><?=$R['sortno']?></td>
 			<td><?=$R['description']?></td>
 			<td><?=($R['override'])?'Yes':'';?></td>
 		</tr>

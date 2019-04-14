@@ -9,7 +9,7 @@
 					right join makhrajs as m on m.id = sm.makhrajid and sm.sreportid = $sreportid
 					where 1=1 ";
 			if (is_numeric($status)) $sql .= " and m.status = $status";
-			$sql .= " order by m.id";
+			$sql .= " order by m.sortno";
 			// echo $sql;
 			return $this->fetchRows($sql);
 		}

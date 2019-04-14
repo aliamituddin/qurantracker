@@ -9,7 +9,7 @@
 					right join weaknesses as w on w.id = sw.weaknessid and sw.sreportid = $sreportid
 					where 1=1 ";
 			if (is_numeric($status)) $sql .= " and w.status = $status";
-			$sql .= " order by w.id";
+			$sql .= " order by w.sortno";
 			// echo $sql;
 			return $this->fetchRows($sql);
 		}

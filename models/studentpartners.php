@@ -9,7 +9,7 @@
 					right join partners as p on p.id = sp.partnerid and sp.sreportid = $sreportid
 					where 1=1 ";
 			if (is_numeric($status)) $sql .= " and p.status = $status";
-			$sql .= " order by p.id";
+			$sql .= " order by p.sortno";
 			// echo $sql;
 			return $this->fetchRows($sql);
 		}
