@@ -122,7 +122,7 @@
 	}
 	
 	function createValidator() {
-		return $code = " data-role=\"validator\" data-on-error=\"notifyOnErrorInput; triggerInputError(this); \" data-show-error-hint=\"true\" data-on-error-form=\"triggerError('Errors Found')\" ";
+		return $code = " data-role=\"validator\" data-on-error=\"triggerOnFormError(this); \" data-show-error-hint=\"true\" data-on-error-form=\"triggerError('Errors Found')\" ";
 	}
 
 	function printFooter() {
@@ -308,36 +308,32 @@
 		return "class='window-form' data-on-submit=\"$other submitForm(this,'?module=$module&action=$action');  maskInputs(); return false;\" ";
 	}
 	
-	function sendEmail($to, $subject, $body_text='', $body_html='', $from='', $fromName='') {
-		$url = 'https://api.elasticemail.com/v2/email/send';
+	function sendEmail($to, $subject, $cc='', $body_html='', $from='quranhmgs@gmail.com', $fromName='') {
+		require 'phpmailer/PHPMailerAutoload.php'; 
 		
-		try{
-				$post = array('from' => $from,
-				'fromName' => $fromName,
-				'apikey' => 'f20327d5-479e-4d19-a8a6-3e8c71f48f57',
-				'subject' => $subject,
-				'to' => $to,
-				'bodyHtml' => $body_html,
-				'bodyText' => $body_text,
-				'isTransactional' => false);
+		$mail = new PHPMailer; 
+		$mail->SMTPDebug = 1;                               // Enable verbose debug output
+		$mail->Debugoutput = 'html';
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'mail.hmgs.ac.tz';  // Specify main and backup SMTP servers  mail.spiknspantz.com  simba.tanzaniawebhosting.com
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = 'quran@hmgs.ac.tz';                 // SMTP username
+		$mail->Password = 'Quran2019';                           // SMTP password
+		$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = 465;                                  // TCP port to connect to  465  26 | 587 was default
+		$mail->From = 'quran@hmgs.ac.tz';
+		$mail->FromName = $fromName;
+		$mail->addAddress($to, 'Do not reply');     // Add a recipient
+		if ($cc) $mail->addAddress($cc, $cc);
+		
+		$mail->isHTML(true);                                  // Set email format to HTML
+		$mail->Subject = $subject;
+		$mail->Body    = $body_html;
 				
-				$ch = curl_init();
-				curl_setopt_array($ch, array(
-					CURLOPT_URL => $url,
-					CURLOPT_POST => true,
-					CURLOPT_POSTFIELDS => $post,
-					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_HEADER => false,
-					CURLOPT_SSL_VERIFYPEER => false
-				));
-				
-				$result=curl_exec ($ch);
-				curl_close ($ch);
-				
-				return $result;	
+		if(!$mail->send()) {
+			$serverMsg =  'Failed';
+		} else{
+			$serverMsg = 'Success';
 		}
-		catch(Exception $ex){
-			return $ex->getMessage();
-		}  
 	}
 ?>

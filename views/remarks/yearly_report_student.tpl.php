@@ -30,7 +30,7 @@
 			<? foreach ($spartners as $v=>$r) { ?>
 				<?=insertCheckboxInput($r['description'],'partner[]',$r['pid'],"partner",'Select recitation partner','normal',$r['pid'].'|'.$r['partnerid'])?>
 			<? } ?>
-			<?=insertTextInput('|Other','report[opartner]',$report['opartner'],'partner','Enter other partner','text',1,'|Other is required')?>
+			<?=insertTextInput('|Other','report[opartner]',$report['opartner'],'opartner','Enter other partner','text',1,'|Other is required')?>
 		</div>
 	</div><br>
 	<div class="row">
@@ -249,32 +249,88 @@
 	}
 
 	function validateBigQuranOptions() {
-		var fluency = $('.fluency:checked').val();
-		var tajweedRate = $('.tajweed-rate:checked').val();
-		var accuracy = $('.accuracy:checked').val();
-		var error = 0;
+		var error=0;
 
-		if (!fluency) {
-			error =1;
-			showError('fluency');
+		var checkedOptions=0;
+		$('.makhraj').each( function() {
+			var checkedInput = $(this).find('input').prop('checked');
+			if (checkedInput == true) {
+				checkedOptions++;
+			}
+		})
+
+		if (checkedOptions == 0) {
+			error = 1;
+			triggerNotificationError('Select at least 1 makhraj option');
 		} else {
-			hideError('fluency');
+			var checkedOptions=0;
+			$('.tajweed').each( function() {
+				var checkedInput = $(this).find('input').prop('checked');
+				if (checkedInput == true) {
+					checkedOptions++;
+				}
+			})
+
+			if (checkedOptions == 0) {
+				error = 1;
+				triggerNotificationError('Select at least 1 tajweed option');
+			}
 		}
 
-		if (!accuracy) {
-			error =1;
-			showError('accuracy');
-		} else {
-			hideError('accuracy');
-		}
+		return error;
+	}
 
-		if (!tajweedRate) {
-			error =1;
-			showError('tajweed-rate');
-		} else {
-			hideError('tajweed-rate');
-		}
+	function validateManualQuranOptions() {
+		var error=0;
 
+		var checkedOptions=0;
+		$('.makhraj').each( function() {
+			var checkedInput = $(this).find('input').prop('checked');
+			if (checkedInput == true) {
+				checkedOptions++;
+			}
+		})
+
+		if (checkedOptions == 0) {
+			error = 1;
+			triggerNotificationError('Select at least 1 makhraj option');
+		} else {
+			var checkedOptions=0;
+			$('.weakness').each( function() {
+				var checkedInput = $(this).find('input').prop('checked');
+				if (checkedInput == true) {
+					checkedOptions++;
+				}
+			})
+
+			if (checkedOptions == 0) {
+				error = 1;
+				triggerNotificationError('Select at least 1 recognition option');
+			}
+		}
+		
+		return error;
+	}
+
+	function validatePartnerOptions() {
+		var error=0;
+		var opartner = $('.opartner').find('input').val();
+		
+		if (!opartner) {
+			var checkedOptions=0;
+			$('.partner').each( function() {
+				var checkedInput = $(this).find('input').prop('checked');
+				if (checkedInput == true) {
+					checkedOptions++;
+				}
+			})
+
+			if (checkedOptions == 0) {
+				error = 1;
+				triggerNotificationError('Select at least 1 partner option');
+			}
+		}
+		
 		return error;
 	}
 
@@ -287,17 +343,28 @@
 	}
 	
 	function validateForm() {
+		$('.submit').hide();
+
 		var levelid = $('.levelid').val();
 		var error = 0;
 		if (levelid == 5) {
-			// error = validateBigQuranOptions();
+			error = validateBigQuranOptions();
 		} else {
-
+			error = validateManualQuranOptions();
 		}	
 		
 		if (error == 1) {
 			triggerError('Errors found');
+			$('.submit').show();
 			return false;
+		} else {
+			error = validatePartnerOptions();
+
+			if (error == 1) {
+				triggerError('Errors found');
+				$('.submit').show();
+				return false;
+			}
 		}
 	}
 

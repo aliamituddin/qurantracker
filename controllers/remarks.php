@@ -93,28 +93,33 @@ if ( $action == 'process_remarks' ) {
 }
 
 if ( $action == 'yearly_reports' ) {
+	$type = $_GET['type'];
 
-	$tData['student'] = $_GET['student'];
-	$tData['teacherid'] = $_GET['teacherid'];
-	$tData['yearid'] = $_GET['yearid'];
-	$tData['termid'] = $_GET['termid'];
+	if ($type == 'Export') {
+		$action = 'yearly_report_export';
+	} else {
+		$tData['student'] = $_GET['student'];
+		$tData['teacherid'] = $_GET['teacherid'];
+		$tData['yearid'] = $_GET['yearid'];
+		$tData['termid'] = $_GET['termid'];
 
-	if (USERTYPE == 'admin') { 
-		$tData['teachers'] = $Teachers->search();
-	}
-	
-	if ($tData['student'] || $tData['teacherid'] || $tData['yearid'] || $tData['termid']) {
-		if (USERTYPE == 'admin') {
-			$tData['reports'] = $StudentReports->search('',$tData['teacherid'],$tData['yearid'],$tData['student'],$tData['termid']);
-		} else {
-			$tData['reports'] = $StudentReports->search('',SYS_ID,$tData['yearid'],$tData['student'],$tData['termid']);
+		if (USERTYPE == 'admin') { 
+			$tData['teachers'] = $Teachers->search();
 		}
+		
+		if ($tData['student'] || $tData['teacherid'] || $tData['yearid'] || $tData['termid']) {
+			if (USERTYPE == 'admin') {
+				$tData['reports'] = $StudentReports->search('',$tData['teacherid'],$tData['yearid'],$tData['student'],$tData['termid']);
+			} else {
+				$tData['reports'] = $StudentReports->search('',SYS_ID,$tData['yearid'],$tData['student'],$tData['termid']);
+			}
+		}
+
+		$tData['terms'] = $Terms->search();
+		$tData['years'] = $Years->search();
+
+		$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
 	}
-
-	$tData['terms'] = $Terms->search();
-	$tData['years'] = $Years->search();
-
-	$data['content'] = loadTemplate($folder.'yearly_reports.tpl.php',$tData);
 }
 
 if ( $action == 'yearly_report_edit') {
@@ -145,7 +150,6 @@ if ( $action == 'yearly_report_add' ) {
 }
 
 if ( $action == 'yearly_report_save' ) {
-	
 	$id = $_POST['id'];
 
 	$miniData = $_POST['report'];
@@ -165,11 +169,11 @@ if ( $action == 'yearly_report_save' ) {
 		$id = $StudentReports->insert($miniData);
 		$teacher = $Teachers->getDetails($miniData['teacherid']);
 		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
-		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', '', "The report for $enrollment[student] has been saved", 'qadmin@hmgs.ac.tz', 'HMGS');
+		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', "", "The report for $enrollment[student] has been saved", '', 'HMGS QAdmin');
 	} else {
 		$id = $StudentReports->update($id,$miniData);
 	}
-
+	
 	$partner = $_POST['partner'];
 	$spData['sreportid'] = $id;
 	$StudentPartners->deleteWhere($spData);
@@ -321,11 +325,13 @@ if ($action == 'yearly_report_print') {
 
 if ($action == 'yearly_report_export') {
 	$data['layout'] = 'layout_excel.tpl.php';
-	$id = $_GET['id'];	
+	$yearid = $_GET['yearid'];	
+	$termid = $_GET['termid'];	
 	
 	$enrollments = $Enrollments->search();
+	
 	foreach ($enrollments as $e) {
-		$report = $StudentReports->search($e['id']);
+		$report = $StudentReports->search($e['id'],'',$yearid,'',$termid);
 		$report = $report[0];
 		if ($report['id']) {
 			$id = $report['id'];

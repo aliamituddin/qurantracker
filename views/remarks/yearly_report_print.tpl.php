@@ -8,7 +8,23 @@
     $makhrajs = $report['makhrajs'];
     $partners = $report['partners'];
     $weaknesses = $report['weaknesses'];
-    $report = $report['report'];    
+    $report = $report['report'];
+
+    foreach ($weaknesses as $v=>$r) { 
+        if ($r['id']) $wRecords[] = $r['description'];
+    }
+    if ($report['oweakness']) $wRecords[] = $report['oweakness'];
+
+    foreach ($makhrajs as $v=>$r) { 
+        if ($r['id']) $mRecords[] = $r['description'];
+    }
+    if ($report['omakhraj']) $mRecords[] = $report['omakhraj'];
+
+    foreach ($tajweeds as $v=>$r) { 
+        if ($r['id']) $tRecords[] = $r['description'];
+    }
+    if ($report['otajweed']) $tRecords[] = $report['otajweed'];
+    
 ?>
 <div style='page-break-after:always'>
     <div class='grid'>
@@ -26,7 +42,7 @@
 		</div>
 		<div class='row border bd-black border-size-2 pl-3 pr-3 pb-3 border-top-none border-bottom-none'>
             <div class='cell'>
-                <span class='report-label'>S/N: </span> <span class='ml-5'><?=$report['referenceno']?></span>
+                <span class='report-label'>S/N: </span> <span class='ml-5'><?=$report['studentid']?></span>
 			</div>
             <div class='cell'>
                 <span class='report-label'>Class: </span> <span><?=$report['grade']?> <?=$report['class']?></span> <br>
@@ -52,12 +68,7 @@
 				<div class='cell'>
 					<span class='report-label'>The student needs to work on the recognition of the following letter(s): </span>
 					<br>
-                    <? foreach ($weaknesses as $v=>$r) { ?>
-                    <span><?=($r['id'])?$r['description']:'';?></span>
-                    <? } ?>
-                    <? if ($report['oweakness']){ ?>
-                    <span><?=$report['oweakness']?></span>
-                    <? } ?>
+                    <span><?=implode(', ',$wRecords)?></span> 
 				</div>
 			</div>
 		<? } ?>
@@ -65,12 +76,7 @@
             <div class='cell'>
                 <span class='report-label'>The student requires more practice to improve the Makharij of the following letter(s): </span>
 				<br>
-                <? foreach ($makhrajs as $v=>$r) { ?>
-                <span><?=($r['id'])?$r['description']:'';?></span>
-                <? } ?>
-                <? if ($report['omakhraj']){ ?>
-                <span><?=$report['omakhraj']?></span>
-                <? } ?>
+                <span><?=implode(', ',$mRecords)?></span> 
 			</div>
 		</div>
         <? if ($report['levelid'] == 5) { ?>
@@ -78,12 +84,7 @@
 				<div class='cell'>
 					<span class='report-label'>The student requires more practice on the following Tajweed rule(s): </span>
 					<br>
-                    <? foreach ($tajweeds as $v=>$r) { ?>
-                    <span><?=($r['id'])?$r['description']:'';?></span>
-                    <? } ?>
-                    <? if ($report['otajweed']){ ?>
-                    <span><?=$report['otajweed']?></span>
-                    <? } ?>
+                    <span><?=implode(', ',$tRecords)?></span> 
 				</div>
 			</div>
 		<? } ?>

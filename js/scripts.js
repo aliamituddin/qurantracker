@@ -16,6 +16,16 @@ $(function(){
 	<? } ?>
 });
 
+function triggerNotificationError(msg) {
+	var notify = Metro.notify;
+	notify.setup({		
+		timeout: 5000,
+	});
+	notify.create(msg, "", {
+			cls: "alert"
+	});
+}
+
 function triggerError(msg) {
 	var toast = Metro.toast.create;	
 	toast(msg, null, 5000, "alert");
@@ -26,8 +36,18 @@ function triggerMessage(msg, o) {
 	toast(msg, null, 5000, "success");
 }
 
-function triggerInputError(obj) {
-	console.log(obj);
+function triggerOnFormError(obj) {
+	notifyErrorInput(obj);
+	showSubmitButton();
+}
+
+function notifyErrorInput(input){
+	var message = $(input).get(0).title;
+	triggerNotificationError(message);
+}
+
+function showSubmitButton() {
+	$('.submit').show();
 }
 
 function addClasses() {
@@ -173,10 +193,4 @@ $(document).on('submit','form.window-form',function(){
 	unmaskAllInputs();
 	return false;
 })
-
-function notifyOnErrorInput(input){
-	var message = input.data('validateHint');
-	triggerError(message);
-	// input.focus();
-}
 </script>

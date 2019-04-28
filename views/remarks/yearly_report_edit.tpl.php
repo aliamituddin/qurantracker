@@ -85,6 +85,11 @@
 			$('.bigquran-options').hide();
 		}
 	}
+
+	function hideSubmitButton() {
+		$('input[type=submit]').hide();
+		console.log('asds');
+	}
 	
 	$( function() {
 		<? if ($report['id']) { ?>

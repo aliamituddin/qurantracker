@@ -2,9 +2,7 @@
 
 <div>
 	<span class="place-right"> <a class="button" href="?module=remarks&action=yearly_report_add"> Add </a> </span>
-	<? if (USERTYPE == 'admin') { ?>
-	<span class="place-right mr-5"> <a class="button" href="?module=remarks&action=yearly_report_export"> Export </a> </span>
-	<? } ?> <br>
+	
 	<form method="GET" class='visible' >
 		<input type="hidden" name="module" value="remarks">
 		<input type="hidden" name="action" value="yearly_reports">
@@ -26,7 +24,10 @@
 					<?=insertSelect('Term','termid','','Select the term',0,0,$terms,'name|id','id|'.$termid)?>
 				</div>
 				<div class='cell colspan'> <br>
-					<input type="submit" value="Search">
+					<input type="submit" name='type' value="Search"> 
+					<? if (USERTYPE == 'admin') { ?>
+					<input type="submit" name='type' class='ml-5' value="Export">
+					<? } ?>
 				</div>
 			</div>
 		</div>

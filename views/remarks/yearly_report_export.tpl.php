@@ -9,15 +9,11 @@
             <th>Teacher</th>
             <th>Level</th>
             <th>Stage</th>
-            <th>Frequency (days)</th>
-            <th>Makhraj</th>
-            <th>Fluency</th>
-            <th>Tajweed</th>
-            <th>Accuracy</th>
+            <th>Frequency</th>           
             <th>Partners</th>
-            <th>Recognition Letters</th>
-            <th>Makhraj Letters</th>
-            <th>Tajweed Letters</th>
+            <th>Recognition</th>
+            <th>Makhraj</th>
+            <th>Tajweed</th>
             <th>Discipline</th>
             <th>Improvement</th>
             <th>Comments</th>
@@ -41,11 +37,14 @@
             <td><?=$report['level']?></td>
             <td><?=$report['stage']?></td>
             <td><?=$report['frequency']?></td>
-            <td><?=$report['makhraj']?></td>
-            <td><?=$report['fluency']?></td>
-            <td><?=$report['tajweed']?></td>
-            <td><?=$report['accuracy']?></td>
-            <td><?=implode(', ',$partners)?></td>
+            <td>
+                <? foreach ($partners as $v=>$r) { ?>
+                    <span><?=($r['id'])?$r['description']:'';?></span>
+                <? } ?>
+                <? if ($report['opartner']){ ?>
+                    <span><?=$report['opartner']?></span>
+                <? } ?>
+            </td>
             <td>
                 <? foreach ($weaknesses as $v=>$r) { ?>
                     <span><?=($r['id'])?$r['description']:'';?></span>
