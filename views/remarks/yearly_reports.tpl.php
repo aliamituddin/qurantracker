@@ -1,7 +1,7 @@
 <h2> Yearly Reports </h2>
 
 <div>
-	<span class="place-right"> <a class="button" href="?module=remarks&action=yearly_report_add"> Add </a> </span>
+	<span class="place-right"> <a class="button" href="?module=remarks&action=yearly_report_add"> Add </a> </span> <br><br> <hr>
 	
 	<form method="GET" class='visible' >
 		<input type="hidden" name="module" value="remarks">

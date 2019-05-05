@@ -169,7 +169,6 @@ if ( $action == 'yearly_report_save' ) {
 		$id = $StudentReports->insert($miniData);
 		$teacher = $Teachers->getDetails($miniData['teacherid']);
 		$enrollment = $Enrollments->getDetails($miniData['enrollid']);
-		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', "", "The report for $enrollment[student] has been saved", '', 'HMGS QAdmin');
 	} else {
 		$id = $StudentReports->update($id,$miniData);
 	}
@@ -207,6 +206,10 @@ if ( $action == 'yearly_report_save' ) {
 	}
 
 	$_SESSION['message'] = 'Student Yearly Report Saved';
+	
+	if (!$id) {
+		$error = sendEmail($teacher['email'], 'HMGS - Student Report Saved', "", "The report for $enrollment[student] has been saved", '', 'HMGS QAdmin');
+	}
 	
 	redirectBack();
 }

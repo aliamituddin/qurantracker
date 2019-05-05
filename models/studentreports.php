@@ -6,7 +6,7 @@
 		
 		function search($enrollid='',$teacherid='',$yearid='',$student='',$termid='') {
 			$sql = "Select sr.*, f.description as frequency, st.id as studentid, g.id as gradeid, c.id as classid, t.name as teacher, st.name as student, y.name as year, r.name as term, l.name as level, s.name as stage, g.name as grade, c.name as class from studentreports as sr
-					inner join frequencies as f on f.id = sr.frequencyid
+					left join frequencies as f on f.id = sr.frequencyid
 					inner join enrollments as e on e.id = sr.enrollid
 					inner join students as st on st.id = e.studentid
 					inner join teachers as t on t.id = sr.teacherid
@@ -28,7 +28,7 @@
 
 		function getDetails($id='') {
 			$sql = "Select sr.*, f.description as frequency, st.id as studentid, e.referenceno, t.name as teacher, st.name as student, y.name as year, r.name as term, l.name as level, s.name as stage, g.name as grade, c.name as class, i.description as improvement, d.description as discipline from studentreports as sr
-					inner join frequencies as f on f.id = sr.frequencyid
+					left join frequencies as f on f.id = sr.frequencyid
 					inner join enrollments as e on e.id = sr.enrollid
 					inner join students as st on st.id = e.studentid
 					inner join teachers as t on t.id = sr.teacherid
